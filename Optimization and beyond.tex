@@ -3,16 +3,19 @@
 \usepackage{hyperref}
 \usepackage{geometry}
 
-\usepackage{makeidx}
-% \usepackage{boxedminipage}
 \usepackage{fancyhdr}
+
+\usepackage{parskip}
+\usepackage{indentfirst}
+\setlength{\parindent}{15pt} 
 
 \newgeometry{top=1.5in,bottom=1.5in,left=1.2in,right=1.2in}
 \pagestyle{plain}
 
-% \newcommand{\setstyle}{
-
-% }
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}} % This actually sets \leftmark
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}} % This sets \rightmark
+\fancyhead[LE,RO]{\nouppercase{\rightmark}}
+\fancyhead[LO,RE]{\nouppercase{\leftmark}}
 
 \title{\textbf{Optimization and beyond}}
 \author{William DRIOT}
@@ -22,30 +25,40 @@
 \maketitle
 
 \tableofcontents
-\chapter{Introduction}
 
-Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. 
+\newpage
 
-This document also shows how deeply motivated I am towards the topics that are presented here.
+\input{content/Introduction.tex}
+% \input{content/ContinuousOptimization.tex}
+% \input{content/CombinatorialOptimization.tex}
+% \input{content/Algorithmics.tex}
+% \input{content/ProblemSolving.tex}
 
+\part{Continuous optimization}
 
-\pagestyle{fancy}
-\fancyhead[LE,RO]{\nouppercase{\rightmark}}
-\fancyhead[LO,RE]{\nouppercase{\leftmark}}
-\renewcommand{\chaptermark}[1]{%
-\markboth{\chaptername\ \thechapter.\ #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\chapter{Linear optimization}
 
+\section{The simplex}
+\subsection{The simplex}
+\subsection{The simplex, matrix version}
+\subsection{Duality in linear optimization}
+\section{Karmarkar's method}
 
-\chapter{Optimisation continue}
-Some text.
+\chapter{Convex optimization}
 
+\chapter{Nonlinear optimization}
 
-\section{Continuous optimization}
-\subsection{Gradient methods}
+\section{Uncontrained nonlinear optimization}
+\section{Constrained nonlinear optimization}
+\subsection{Lagrange}
+\subsection{Karush, Kuhn and Tucker theory}
+\subsection{Contrained convex optimization}
+\subsubsection{Frank and Wolfe's method}
+\subsubsection{The cutting plane method}
+\section{Lagrangian relaxation}
+\section{Gradient methods}
 \subsubsection{Fixed step gradient method}
 \subsubsection{Optimal step gradient method}
-\subsubsection{Conjugate gradient descent}
 \subsubsection{Conjugate gradient descent}
 \subsection{Méthode de Newton}
 \subsection{KKT Theory}
@@ -54,22 +67,64 @@ Some text.
 \subsection{Méthode du gradient stochastique}
 \subsection{Mirror descent}
 
-\chapter*{Optimal transport}
-Some other text. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. Throughout the years, I have learnt how to learn. And in particular, one of the strongest conclusion that I came up to is that the best way (for me) to learn, is to write down things that I have understood, clearly, with my words. Whence the idea of this report. 
+\chapter{Stochastic optimization}
 
+\section{Stochastic gradient descent}
+\subsection{Setting and method}
+\subsection{Theoretical bounds}
+\subsection{Choosing the step}
+\section{Particle SWARM optimization}
 
+\chapter{Polynomial optimization}
 
-Problèmes de combinatoire. (training problem solving skills)
-IMO 2019 SL - Problem C1
-IMO 2019 SL - Problem C2
-IMO 2019 SL - Problem C3
-IMO 2019 SL - Problem C4
+\section{Quantum noncommutative optimization}
 
+\section{Trust region algorithms}
+% Yuan, Y. "A review of trust region algorithms for optimization" in ICIAM 99: Proceedings of the Fourth International Congress on Industrial & Applied Mathematics, Edinburgh, 2000 Oxford University Press, USA.
+% Yuan, Y. "Recent Advances in Trust Region Algorithms", Math. Program., 2015
 
-\section{A subtopic}
-The end.
+\section{Miscellaneous}
 
+\subsection{The smoothed duality gap as a stopping 69riterion}
 
-\chapter*{Variations calculus}
+\part{Discrete algorithmics}
+
+\chapter{Complexity}
+
+\part{Combinatorial optimization}
+
+\part{Optimal transport}
+
+\chapter{Optimal transport : general  results}
+
+\chapter{Algorithmic approaches to optimal transport}
+
+\section{Reduction to the simplex problem}
+\section{The Eulerian point of view}
+\section{Monge-Ampère's equation and applications}
+
+\part{Problem solving}
+
+\section{International Mathematics Olympiads (IMO) problems}
+
+\subsection{IMO 2018 SL - Problem C1}
+\subsection{IMO 2018 SL - Problem C2}
+\subsection{IMO 2018 SL - Problem C3}
+\subsection{IMO 2018 SL - Problem C4}
+\subsection{IMO 2018 SL - Problem C5}
+\subsection{IMO 2018 SL - Problem C6}
+
+\subsection{IMO 2019 SL - Problem C1}
+\subsection{IMO 2019 SL - Problem C2}
+\subsection{IMO 2019 SL - Problem C3}
+\subsection{IMO 2019 SL - Problem C4}
+\subsection{IMO 2019 SL - Problem C5}
+\subsection{IMO 2019 SL - Problem C6}
+
+\section{Competitive programming problems}
+
+\section{Graph problems}
+
+\section{Combinatorics problems}
 
 \end{document}

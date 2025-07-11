@@ -8,20 +8,24 @@
 
 ### Semaine 2
 
-- Installer TeX Live ✅
 - Emprunter lives ✅
-- Layout LaTeX fixé
+- Installer TeX Live ✅
+- Layout LaTeX fixé ✅
+- Article ArXiV ✅
+  * Cheasheetiser ✅
+    + Bibliographie ✅
+    + Algorithm ✅
+    + Property (A) ✅
+    + \label \refs ✅
+  * Ajouter le résultat manquant et sa preuve ✅
 - 20 pages de contenu dimanche soir
+
+### Programme
 
 - Tunnel `ncpol3sdpa`
   * Comprendre et rédiger les exemples 
   * Notamment la ferme à mob minecraft
-
-### Programme
-
 - Décider de ce qu'on imprime
-- Upload article ArXiV
-- Semaine
 - Faire une journée ballade dans paris (avec lectures, double ou triple resto, cinéma possible)
 - Faire une journée ballade pique nique campagne (avec LiBaiHan?)
 - Fin juillet
