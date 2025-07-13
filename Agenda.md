@@ -18,7 +18,20 @@
     + Property (A) ✅
     + \label \refs ✅
   * Ajouter le résultat manquant et sa preuve ✅
-- 20 pages de contenu dimanche soir
+- Ranger chambre et faire un beau ménage ✅
+- Problème IMO 2019 SL C1 ✅
+- Problème IMO 2019 SL C3 ✅
+- Graphes : introduction ✅
+
+### Semaine 3
+
+- Optimisation linéaire : avoir fait le tour du cours
+  * 4(±) exercices avant le weekend prochain
+- Optimisation convexe : commencer
+- Complexité : Commencer à rédiger
+- Tunnel flots : brouillon uniquement, exercices, algorithme
+- Algorihtme de Jacobi : preuves
+- Fixer des deadlines à court, moyen et long terme
 
 ### Programme
 

@@ -1,13 +1,31 @@
-\documentclass[12pt]{book}
+\documentclass[12pt,openany,oneside]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\newcommand{\og}{«\:}
+\newcommand{\fg}{»}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
 
 \usepackage{hyperref}
-\usepackage{geometry}
-
+\usepackage{cite}
 \usepackage{fancyhdr}
-
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{geometry}
 \usepackage{parskip}
+
 \usepackage{indentfirst}
-\setlength{\parindent}{15pt} 
+\setlength{\parindent}{15pt}
+\setlength{\parskip}{6pt}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode} % For algorithmic environment
 
 \newgeometry{top=1.5in,bottom=1.5in,left=1.2in,right=1.2in}
 \pagestyle{plain}
@@ -39,9 +57,8 @@
 \chapter{Linear optimization}
 
 \section{The simplex}
-\subsection{The simplex}
-\subsection{The simplex, matrix version}
-\subsection{Duality in linear optimization}
+\input{content/ContinuousOptimization/Linear optimization - The simplex.tex}
+
 \section{Karmarkar's method}
 
 \chapter{Convex optimization}
@@ -75,17 +92,17 @@
 \subsection{Choosing the step}
 \section{Particle SWARM optimization}
 
-\chapter{Polynomial optimization}
+\chapter{Recent topics in optimization}
 
-\section{Quantum noncommutative optimization}
-
+\section{Polynomial optimization}
+% https://wangjie212.github.io/jiewang/research/lectures.pdf
+\section{Quantum noncommutative polynomial optimization}
+% ncpol3sdpa, examples, incluing the minecraft mobfarm
 \section{Trust region algorithms}
 % Yuan, Y. "A review of trust region algorithms for optimization" in ICIAM 99: Proceedings of the Fourth International Congress on Industrial & Applied Mathematics, Edinburgh, 2000 Oxford University Press, USA.
 % Yuan, Y. "Recent Advances in Trust Region Algorithms", Math. Program., 2015
-
-\section{Miscellaneous}
-
-\subsection{The smoothed duality gap as a stopping 69riterion}
+\subsection{The smoothed duality gap as a stopping criterion}
+\section{Jacobi's algorithm (misc)}
 
 \part{Discrete algorithmics}
 
@@ -105,26 +122,26 @@
 
 \part{Problem solving}
 
-\section{International Mathematics Olympiads (IMO) problems}
+\chapter{International Mathematics Olympiads (IMO) problems}
 
-\subsection{IMO 2018 SL - Problem C1}
-\subsection{IMO 2018 SL - Problem C2}
-\subsection{IMO 2018 SL - Problem C3}
-\subsection{IMO 2018 SL - Problem C4}
-\subsection{IMO 2018 SL - Problem C5}
-\subsection{IMO 2018 SL - Problem C6}
+\section{IMO 2018 SL - Problem C1}
+\section{IMO 2018 SL - Problem C2}
+\section{IMO 2018 SL - Problem C3}
+\section{IMO 2018 SL - Problem C4}
+\section{IMO 2018 SL - Problem C5}
+\section{IMO 2018 SL - Problem C6}
 
-\subsection{IMO 2019 SL - Problem C1}
-\subsection{IMO 2019 SL - Problem C2}
-\subsection{IMO 2019 SL - Problem C3}
-\subsection{IMO 2019 SL - Problem C4}
-\subsection{IMO 2019 SL - Problem C5}
-\subsection{IMO 2019 SL - Problem C6}
+\section{IMO 2019 SL - Problem C1}
+\section{IMO 2019 SL - Problem C2}
+\section{IMO 2019 SL - Problem C3}
+\section{IMO 2019 SL - Problem C4}
+\section{IMO 2019 SL - Problem C5}
+\section{IMO 2019 SL - Problem C6}
 
-\section{Competitive programming problems}
+\chapter{Competitive programming problems}
 
-\section{Graph problems}
-
+\chapter{Graph problems}
+% Un sujet ENS
 \section{Combinatorics problems}
 
 \end{document}
