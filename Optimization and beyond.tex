@@ -1,17 +1,17 @@
 \documentclass[12pt,openany,oneside]{book}
-
+%
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[english]{babel}
 \newcommand{\og}{«\:}
 \newcommand{\fg}{»\:}
-
+%
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsthm}
-
+%
 \usepackage{hyperref}
 \usepackage{cite}
 \usepackage{fancyhdr}
@@ -19,26 +19,26 @@
 \usepackage{svg}
 \usepackage{geometry}
 \usepackage{parskip}
-
+%
 \usepackage{indentfirst}
 \setlength{\parindent}{15pt}
 \setlength{\parskip}{6pt}
-
+%
 \usepackage{algorithm}
 \usepackage{algpseudocode} % For algorithmic environment
-
+%
 \newgeometry{top=1.5in,bottom=1.5in,left=1.2in,right=1.2in}
 \pagestyle{plain}
-
+%
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}} % This actually sets \leftmark
 \renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}} % This sets \rightmark
 \fancyhead[LE,RO]{\nouppercase{\rightmark}}
 \fancyhead[LO,RE]{\nouppercase{\leftmark}}
-
+%
 \title{\textbf{Optimization and beyond}}
 \author{William DRIOT}
 \date{2025-2026}
-
+%
 \begin{document}
 \maketitle
 
@@ -107,10 +107,8 @@
 \part{Discrete algorithmics}
 
 \chapter{Complexity theory}
-
-\section{Theory}
 \input{src/DiscreteAlgorithmics/Complexity Theory - Theory.tex}
-\section{Examples, practice and problems}
+\input{src/DiscreteAlgorithmics/Complexity Theory - Examples, practice and problems.tex}
 
 \part{Combinatorial optimization}
 

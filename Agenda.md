@@ -8,7 +8,7 @@
 
 ### Semaine 2
 
-- Emprunter lives ✅
+- Emprunter livres ✅
 - Installer TeX Live ✅
 - Layout LaTeX fixé ✅
 - Article ArXiV ✅
@@ -82,3 +82,9 @@
   * Demander "vous avez la sensation de passer beaucoup de temps à faire de l'administratif ? trop ?"
   * Demander une lettre (l'écrire à l'avance)
   * Demander pour le PhD track :O
+- Storage space management
+  * `find . | grep .git`, supprimer tous les gits qui trainent 
+  * Faire un grand git avec les archives (attention aux large files)
+- Gérer les mots de passes et recovery codes une bonne fois pour toutes
+- Vendre collection dragonball
+- Lire les output des commandes latex (*.log)(directement en CLI) et éventuellement résoudre les erreurs

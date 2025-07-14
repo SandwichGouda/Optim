@@ -19,7 +19,10 @@ optim() {
 }
 
 pdfoptim() {
-    pdflatex Optimization\ and\ beyond.tex
+    pdflatex Optimization\ and\ beyond.
+    bibtool -s -i bib/articles.bib -o bib/articles.bib -- 'sort.order = {author, year, title}'
+    bibtool -s -i bib/books.bib -o bib/books.bib -- 'sort.order = {author, year, title}'
+    bibtool -s -i bib/misc.bib -o bib/misc.bib -- 'sort.order = {author, year, title}'
     bibtex Optimization\ and\ beyond
     pdflatex Optimization\ and\ beyond.tex
     pdflatex Optimization\ and\ beyond.tex
