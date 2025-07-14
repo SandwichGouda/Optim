@@ -5,7 +5,7 @@
 \usepackage{lmodern}
 \usepackage[english]{babel}
 \newcommand{\og}{«\:}
-\newcommand{\fg}{»}
+\newcommand{\fg}{»\:}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -46,18 +46,18 @@
 
 \newpage
 
-\input{content/Introduction.tex}
-% \input{content/ContinuousOptimization.tex}
-% \input{content/CombinatorialOptimization.tex}
-% \input{content/Algorithmics.tex}
-% \input{content/ProblemSolving.tex}
+\input{src/Introduction.tex}
+% \input{src/ContinuousOptimization.tex}
+% \input{src/CombinatorialOptimization.tex}
+% \input{src/Algorithmics.tex}
+% \input{src/ProblemSolving.tex}
 
 \part{Continuous optimization}
 
 \chapter{Linear optimization}
 
 \section{The simplex}
-\input{content/ContinuousOptimization/Linear optimization - The simplex.tex}
+\input{src/ContinuousOptimization/Linear optimization - The simplex.tex}
 
 \section{Karmarkar's method}
 
@@ -106,7 +106,11 @@
 
 \part{Discrete algorithmics}
 
-\chapter{Complexity}
+\chapter{Complexity theory}
+
+\section{Theory}
+\input{src/DiscreteAlgorithmics/Complexity Theory - Theory.tex}
+\section{Examples, practice and problems}
 
 \part{Combinatorial optimization}
 
@@ -143,5 +147,8 @@
 \chapter{Graph problems}
 % Un sujet ENS
 \section{Combinatorics problems}
+
+\bibliographystyle{plain}
+\bibliography{bib/articles,bib/books,bib/misc}
 
 \end{document}
