@@ -82,6 +82,7 @@
   * Demander "vous avez la sensation de passer beaucoup de temps à faire de l'administratif ? trop ?"
   * Demander une lettre (l'écrire à l'avance)
   * Demander pour le PhD track :O
+  * Lui dire que s'il est d'accord il  sera sans doute enseignant encadrant pour mon futur stage
 - Storage space management
   * `find . | grep .git`, supprimer tous les gits qui trainent 
   * Faire un grand git avec les archives (attention aux large files)

@@ -12,37 +12,79 @@
 \usepackage{amsfonts}
 \usepackage{amsthm}
 %
-\usepackage{hyperref}
-\usepackage{cite}
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{svg}
-\usepackage{geometry}
-\usepackage{parskip}
-%
-\usepackage{indentfirst}
-\setlength{\parindent}{15pt}
-\setlength{\parskip}{6pt}
-%
 \usepackage{algorithm}
 \usepackage{algpseudocode} % For algorithmic environment
 %
+\usepackage{hyperref}
+\usepackage{cite}
+%
+\usepackage{graphicx}
+\usepackage{svg}
+%
+% \usepackage{parskip}
+% \usepackage{indentfirst}
+%
+\usepackage{tcolorbox}
+%
+\newtcolorbox{problembox}{
+    width=0.9\textwidth,
+    colback=white, % Background color
+    colframe=black, % Frame color
+    % coltitle=black, % Color of the title text
+    % colupper=red, % Color of the main text
+    % colbacktitle=blue, % Background color of the title bar
+    arc=8pt, % Rounded corners
+    boxrule=1pt, % Frame thickness
+    boxsep=3pt, % space between text and border
+    left=6pt, % Left padding
+    right=6pt, % Right padding
+    top=6pt, % Top padding
+    bottom=6pt, % Bottom padding
+}
+%
+\usepackage{geometry}
 \newgeometry{top=1.5in,bottom=1.5in,left=1.2in,right=1.2in}
+%
+\usepackage{fancyhdr} % MUST BE AFTER LOADING GEOMETRY AND GEOMETRY SETTINGS !!
+\setlength{\headheight}{15pt}
 \pagestyle{plain}
 %
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}} % This actually sets \leftmark
 \renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}} % This sets \rightmark
-\fancyhead[LE,RO]{\nouppercase{\rightmark}}
-\fancyhead[LO,RE]{\nouppercase{\leftmark}}
+\fancyhead[R]{\nouppercase{\rightmark}}
+\fancyhead[L]{\nouppercase{\leftmark}}
+%
+\newenvironment{problem}{\begin{center}\begin{problembox}}{\end{problembox}\end{center}}
+%
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{notation}{Notation}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{hypothesis}{Hypothesis}
+%
+\numberwithin{definition}{section}
+\numberwithin{theorem}{section}
+\numberwithin{corollary}{section}
+\numberwithin{proposition}{section}
+\numberwithin{notation}{section}
+\numberwithin{remark}{section}
+\numberwithin{hypothesis}{section}
 %
 \title{\textbf{Optimization and beyond}}
 \author{William DRIOT}
 \date{2025-2026}
 %
 \begin{document}
+
 \maketitle
 
 \tableofcontents
+
+\setlength{\parindent}{15pt}
+\setlength{\parskip}{6pt}
 
 \newpage
 
