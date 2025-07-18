@@ -1,8 +1,8 @@
-Complexity theory is an important domain of theoretical computer science, the most famous problem of which is probably the \og $ \mathsf P = \mathsf{NP} $ \fg problem. It asks whether or not NP problems are in P. Though we can, for many problems, proove that they \textit{are indeed} in a given problem complexity class, it is always much harder difficult to proove that a given problem is \textit{not} in some class.
+Complexity theory is an important domain of theoretical computer science, the most famous problem of which is probably the \og $ \mathsf P = \mathsf{NP} $ \fg problem. It asks whether or not $ \mathsf{NP} $ problems are in $ \mathsf P $. Though we can, for many problems, proove that they \textit{are indeed} in a given problem complexity class, it is always much harder to proove that a given problem is \textit{not} in some class.
 
 We present the general theory, investigate the definitions along with their philosophical meanings, explore different complexity classes (co-$ \mathsf{NP} $, $ \mathsf{NPC} $, $ \mathsf{NPH} $, $ \mathsf{PH} $, ...) and their relationships. Next, we consider various algorithmic problems, study the relationships and reductions between them and some algorithms to solve them.
 
-The references for this chapter are : \cite{gowers2023}, \cite{gowers2024}, \cite{hudry2024}, besides thoses cited herein.
+The references for this chapter are : \cite{charonhudry2019}, \cite{gowers2023}, \cite{gowers2024}, \cite{hudry2024}, besides thoses cited herein.
 
 \section{Theory}
 
@@ -61,7 +61,7 @@ Turing machines were introduced by A. Turing \cite{turing1936}, \cite{turing1992
 
 Let us give some examples : the sequence $ 0101010101... $ is \textit{computable} in the sense that there is an obvious pattern to it, and as such, it is possible for an algorithm, given any positive integer $ n $, to write its first $ n $ terms. This property also holds for the sequence $ 01001000100001 \dots $. However, if I choose \og random \fg infinite sequence $ S = 010010101010010101111101... $, it might be that there is no \textit{pattern} to it, or any \textit{way to describe a method to compute its $ n $-th term}. This property, \og there exists no method to describe $ S $ \fg, or more precisely, \og there exists no algorithm (that can be written in a finite amount of space) that computes $ S $ \fg, is what makes a sequence $ S $ \textit{uncomputable}.
 
-Turing machines are not the only approach to define computability. \textit{$ \lambda $-calculus} and \textit{general recursive functions} are two other approches that have been proposed. It is possible, for each of them, to define which functions are computable and which are not. We then have the following theorem.
+Turing machines are not the only approach to define computability. \textit{$ \lambda $-calculus} and \textit{general recursive functions} are two other approches that have been proposed. It is possible, for each of them, to define which functions are computable and which are not. We then have the following theorem \cite{soare1996}, \cite{church1936}, \cite{kleene1936}, \cite{turing1937} :
 
 \begin{theorem}
     The functions that are \textit{computable} respectively in the sense of Turing machines, $ \lambda $-calculus, and general recursive functions, are all the same. 
@@ -81,7 +81,7 @@ After having been defined as a computability model, Turing Machines have been us
 
 When we wish to define precisely the \emph{size} of a problem instance (that is, the total set of data describing the problem), it is important to account for all the data. For example, in the shortest path problem, one must consider not only the number of vertices or arcs, but also the weights of the arcs.
 
-As mentionned earlier, it is clear that this can always be done as a string in $ \{0,1\}^* $. More generally, the description of a problem instance can be seen as a finite string of characters belonging to a fixed alphabet \( \mathcal A \). We here discuss the importance (or, shall we say, the non-importance) of the cardinality of \( \mathcal A \) - and attempt to explain why such non-importance. Given a fixed encoding of the data, the size of an instance \( I \) is defined as the length of the character string that describes \( I \), i.e., the number of symbols from \( A \) required to describe \( I \). If \( a \) denotes the cardinality of \( \mathcal A \), then the size of \( I \) with respect to \( \mathcal A \) is denoted \( |I|_a \), or simply \( |I| \) if no ambiguity arises. Note : In this chapter, the notation \( |\cdot| \) refers to instance size, not cardinality.
+As mentionned earlier, it is clear that this can always be done as a string in $ \{0,1\}^* $. More generally, the description of a problem instance can be seen as a finite string of characters belonging to a fixed alphabet \( \mathcal A \). We here discuss the importance (or, shall we say, the non-importance) of the cardinality of \( \mathcal A \) - and attempt to explain why such non-importance. Given a fixed encoding of the data, the size of an instance \( I \) is defined as the length of the character string that describes \( I \), i.e., the number of symbols from \( \mathcal A \) required to describe \( I \). If \( a \) denotes the cardinality of \( \mathcal A \), then the size of \( I \) with respect to \( \mathcal A \) is denoted \( |I|_a \), or simply \( |I| \) if no ambiguity arises. Note : In this chapter, the notation \( |\cdot| \) refers to instance size, not cardinality.
 
 The binary alphabet \( \{0, 1\} \) is often used to encode data; in that case, we refer to \emph{binary size}. With this alphabet:
 \begin{itemize}
@@ -98,17 +98,17 @@ Thus, in binary encoding, the size of an instance is the number of bits needed t
 
 Later, we will also consider \emph{unary encoding} for representing integers. Unary encoding describes a strictly positive integer \( n \) using \( n \) ``sticks''; it can be adapted for signed integers. The unary size \( |n|_1 \) is \( n \), while the binary size \( |n|_2 \) is of order \( \log_2 n \), showing that these two sizes are not polynomially related.
 
-On the other hand, consider an alphabet \( A \) with \( a > 2 \) symbols. Then the binary size \( |I|_2 \) and the size \( |I|_a \) of a description of an instance \( I \) using \( A \) satisfy:
+On the other hand, consider an alphabet \( \mathcal A \) with \( a > 2 \) symbols. Then the binary size \( |I|_2 \) and the size \( |I|_a \) of a description of an instance \( I \) using \( \mathcal A \) satisfy:
 \[
 |I|_a < |I|_2 < \lceil \log_2(a) \cdot |I|_a \rceil,
 \]
-showing the two sizes are polynomially related. Since the set of polynomials is closed under standard operations (including composition), results obtained using binary encoding—such as membership in complexity classes \( \mathsf{P} \), \( \mathsf{NP} \), or \( \mathsf{NP} \)-completeness—also hold under any encoding using \( A \).
+showing the two sizes are polynomially related. Since the set of polynomials is closed under standard operations (including composition), results obtained using binary encoding—such as membership in complexity classes \( \mathsf{P} \), \( \mathsf{NP} \), or \( \mathsf{NP} \)-completeness—also hold under any encoding using \( \mathcal A \).
 
-Therefore, unless we explicitly discuss unary encoding, we will assume throughout this chapter that binary encoding is used: all data is encoded using 0 and 1. On a side note, \cite{}
+Therefore, unless we explicitly discuss unary encoding, we will assume throughout this chapter that binary encoding is used: all data is encoded using 0 and 1. On a side note, \cite{charonhudry2019} considers a slight variant of this encoding : it allows the usage of a third symbol, denoted $ b $ (that stands for something like \og blank \fg or \og blank space \fg), that is used as a separator symbol for the data. This is thus just another encoding using another alphabet (of cardinality 3).
 
 Unless stated otherwise, graphs will be encoded by their adjacency matrix, or by their valuation matrix if they are weighted. Consequently, the encoding of a graph of order \( n \) has size at least \( n^2 \).
 
-We can now give a precise definition of the complexity of an algorithm, via a Turing machine modeling this algorithm. Let $\Pi$ be a problem and let $I$ be an arbitrary instance of $\Pi$, of size $|I|$. Let $A$ be an algorithm solving $\Pi$, and let $M_A$ be a Turing machine associated with $A$. When we apply $A$ to $I$, $M_A$ performs a certain number of steps $\phi_A(I)$ (in other words, we apply the transition function $\tau$ of $M_A$ a number of times equal to $\phi_A(I)$); throughout this chapter, we limit ourselves to cases where $\phi_A(I)$ is finite for every instance $I$ (which excludes, for example, certain methods from Chapter 5). To define the complexity $\gamma_A$ of $A$ (or of $M_A$), we group all instances $I$ of the same size $k$ and consider the largest value of $\phi_A(I)$ over this set of instances:
+We can now give a precise definition of the complexity of an algorithm, via a Turing machine modeling this algorithm. Let $\Pi$ be a problem and let $I$ be an arbitrary instance of $\Pi$, of size $|I|$. Let $A$ be an algorithm solving $\Pi$, and let $M_A$ be a Turing machine associated with $A$. When we apply $A$ to $I$, $M_A$ performs a certain number of steps $\phi_A(I)$ (in other words, we apply the transition function $\tau$ of $M_A$ a number of times equal to $\phi_A(I)$ before halting); throughout this chapter, we limit ourselves to cases where $\phi_A(I)$ is finite for every instance $I$ (which excludes, for example, certain methods from Chapters \ref{chap:heuristics} and \ref{chap:heuristics}). To define the complexity $\gamma_A$ of $A$ (or of $M_A$), we group all instances $I$ of the same size $k$ and consider the largest value of $\phi_A(I)$ over this set of instances:
 \[
 \gamma_A(k) = \max\{\phi_A(I) \mid |I| = k\}.
 \]
@@ -125,27 +125,31 @@ when the operands are of a \textit{simple} type (integers, reals, booleans, char
 
 We then adapt what was presented above to define the complexity of an algorithm, but now based on elementary operations rather than Turing machine steps. This gives the following definition:
 
-\medskip
-\noindent\textbf{Definition 13.1.} Let $\Pi$ be a problem, let $I$ be an arbitrary instance of $\Pi$, of size $|I|$, and let $A$ be an algorithm solving $\Pi$. When we apply $A$ to $I$, $A$ performs a certain number of elementary operations $\psi_A(I)$. The (worst-case) complexity of $A$ is the function $\gamma_A$ defined from $\mathbb{N}$ to $\mathbb{N}$ by:
+\begin{definition} Let $\Pi$ be a problem, let $I$ be an arbitrary instance of $\Pi$, of size $|I|$, and let $A$ be an algorithm solving $\Pi$. When we apply $A$ to $I$, $A$ performs a certain number of elementary operations $\psi_A(I)$. The (worst-case) complexity of $A$ is the function $\gamma_A$ defined from $\mathbf{N}$ to $\mathbf{N}$ by:
 \[
 \gamma_A(k) = \max\{\psi_A(I) \mid |I| = k\}.
 \]
+\end{definition}
 
-\medskip
-This notion of complexity, based on counting elementary operations, is the one used in this book up to this point. It has the advantage of not requiring formalization of the algorithm via a Turing machine and allows for the use of more familiar concepts without affecting qualitative results. We will follow the same approach going forward: each assignment, arithmetic operation, comparison, or boolean operation on simple types counts as one unit.
+This notion of complexity, based on counting elementary operations, is the one used a bit everywhere. It has the advantage of not requiring formalization of the algorithm via a Turing machine and allows for the use of more familiar concepts without affecting qualitative results. We will follow the same approach going forward: each assignment, arithmetic operation, comparison, or boolean operation on simple types counts as one unit.
 
 If we assume that each elementary operation takes one time unit (which is a simplification: for example, $p \times q$ generally takes more time than $p + q$), the complexity remains an estimate of the computation time. It is therefore still a time complexity.
 
-\medskip
-\noindent\textbf{Definition 13.2.} An algorithm $A$ is said to be \textit{polynomial} if its complexity $\gamma_A$ can be upper bounded by a polynomial $P$ in the binary size $|I|_2$ of the instance $I$ being processed.
+\begin{definition}
+    An algorithm $A$ is said to be \textit{polynomial} if its complexity $\gamma_A$ can be upper bounded by a polynomial $P$ in the binary size $|I|_2$ of the instance $I$ being processed.
+\end{definition}
 
-\medskip
-\noindent\textbf{Definition 13.3.} An algorithm $A$ is said to be \textit{pseudo-polynomial} if its complexity $\gamma_A$ can be upper bounded by a polynomial $P$ in the unary size $|I|_1$ and the binary size $|I|_2$ of the instance $I$ being processed (or, equivalently, by a polynomial in $|I|_1$, since $|I|_2 \leq |I|_1$).
+\begin{definition}
+    An algorithm $A$ is said to be \textit{pseudo-polynomial} if its complexity $\gamma_A$ can be upper bounded by a polynomial $P$ in the unary size $|I|_1$ and the binary size $|I|_2$ of the instance $I$ being processed (or, equivalently, by a polynomial in $|I|_1$, since $|I|_2 \leq |I|_1$).
+\end{definition}
 
-\medskip
-It follows from these definitions that a polynomial algorithm is also pseudo-polynomial.
+It follows from these definitions that :
 
-Saying that an algorithm $A$ is polynomial does not mean that its complexity $\gamma_A$ is a polynomial, but only that it is bounded above by a polynomial. For example, a binary search algorithm in a sorted array of $k$ integers has complexity $\mathcal{O}(\log k)$; it is polynomial, because the binary size of the $k$ integers is at least $k$ (one bit per integer).
+\begin{proposition}
+    A polynomial algorithm is also pseudo-polynomial.
+\end{proposition}
+
+Saying that an algorithm $A$ is polynomial does not mean that its complexity $\gamma_A$ is a polynomial, but only that it is \textit{bounded above} by a polynomial. For example, a binary search algorithm in a sorted array of $k$ integers has complexity $O(\log k)$; it is polynomial, because the binary size of the $k$ integers is at least $k$ (one bit per integer).
 
 An algorithm whose complexity cannot be bounded by a polynomial is sometimes said to be \textit{exponential}, even if its complexity is not an exponential function in the strict sense. For example, a complexity of $k!$ is not bounded above by a polynomial in $k$ (binary size of the instance), even though the factorial is not an exponential.
 
@@ -153,22 +157,33 @@ Polynomial algorithms are sometimes called \textit{good algorithms} or \textit{e
 
 Moreover, an algorithm with complexity $n^{1.000001}$ is faster than another with complexity $n$ for $n < 16\,626\,517$.
 
-The complexity $\gamma_A$ is generally expressed using Landau’s notation $\mathcal{O}$ (see Appendix A.2) and is always an increasing function.
+The complexity $\gamma_A$ is generally expressed using Landau’s notation $O$ and is always an increasing function.
 
-Furthermore, algorithm complexity is often expressed in terms of characteristic parameters of the considered problem, rather than in terms of the instance size. For example, for graphs, the usual parameters are the order $n$ and the size $m$ of the graph.
+\subsection{Polynomial and non-deterministic polynomial problems}
 
-A graph encoded by its adjacency matrix or valuation matrix has a size of at least $n^2$ bits. Thus, Dijkstra's algorithm with complexity $\mathcal{O}(n^2)$ is polynomial (and even linear with respect to the size of the data).
-
-On the other hand, consider the complexity $\mathcal{O}(n \times m \times c_{\max})$ of the Ford–Fulkerson algorithm for computing a maximum flow (Section 11.3.3). This algorithm is not polynomial because the binary size $|c_{\max}|_2$ is on the order of $\log_2 c_{\max}$; therefore, $c_{\max}$ cannot be bounded by a polynomial in the binary size of the instance. The complexity then becomes $\mathcal{O}(n \times m \times 2^{|c_{\max}|_2})$, which shows the non-polynomial nature of the algorithm.
-
-However, in unary representation, we have $|c_{\max}|_1 = c_{\max}$, which allows us to conclude that the algorithm is pseudo-polynomial.
+We can now define the class $ \mathsf P $ of polynomial problems.
 
 \begin{definition}
-    A problem is said to be \textit{polynomial} (respectively \textit{pseudo-polynomial}) if there exists a polynomial (respectively pseudo-polynomial) algorithm to solve it.
+    A problem is said to be \textit{polynomial} if there exists a polynomial algorithm to solve it.
+
+    The class of polynomial problems is denoted $ \mathsf P $.
 \end{definition}
 
-As with algorithms, there is a relationship between polynomial and pseudo-polynomial problems: the former are a subset of the latter.
+In other words, $ \mathsf P $ is the set of boolean functions $ \phi $, for which there exists a Turing machine that solves $ \phi $ in a polynomial number of steps. Recall that this definition does not depend on whether we consider Turing machine steps or elementary operations because Turing machine steps and elementary operations are polynomially related. We will not repeat this consideration for each new definition of a problem class set.
 
+There is a variant of this class which contains so-called \textit{pseudo-polynomial} problems.
+
+\begin{definition}
+    A problem is said to be \textit{pseudo-polynomial} if there exists a pseudo-polynomial algorithm to solve it.
+\end{definition}
+
+There does not seem to be any usual notation for psuedo-polynomial problems. As with algorithms, there is a relationship between polynomial and pseudo-polynomial problems.
+
+\begin{proposition}
+    Polynomial problems are also pseudo-polynomial.
+\end{proposition}
+
+% An NP-complete problem with known pseudo-polynomial time algorithms is called weakly NP-complete. An NP-complete problem is called strongly NP-complete if it is proven that it cannot be solved by a pseudo-polynomial time algorithm unless P = NP. The strong/weak kinds of NP-hardness are defined analogously.
 
 \begin{definition}
     Let $A$ be an algorithm (i.e., a deterministic Turing machine). 
