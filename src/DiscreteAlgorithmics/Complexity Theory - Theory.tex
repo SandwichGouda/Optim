@@ -2,11 +2,13 @@ Complexity theory is an important domain of theoretical computer science, the mo
 
 We present the general theory, investigate the definitions along with their philosophical meanings, explore different complexity classes (co-$ \mathsf{NP} $, $ \mathsf{NPC} $, $ \mathsf{NPH} $, $ \mathsf{PH} $, ...) and their relationships. Next, we consider various algorithmic problems, study the relationships and reductions between them and some algorithms to solve them.
 
-The references for this chapter are : \cite{charonhudry2019}, \cite{gowers2023}, \cite{gowers2024}, \cite{hudry2024}, besides thoses cited herein.
+The references for this chapter are : Hudry's introductions \cite{charonhudry2019}, \cite{hudry2024}, Gowers' course \cite{gowers2023}, \cite{gowers2024}, which are based on \cite{} , besides thoses cited herein.
 
 \section{Theory}
 
 \subsection{Turing machines and complexity}
+
+\subsubsection{Decision problems}
 
 \begin{definition}
     Throughout the chapter, we will denote
@@ -40,6 +42,8 @@ In case this was not clear enough, a decision problem is a problem that asks a q
 A graph $ G = (V,E) $ can be encoded as an element of $ \{ 0,1 \}^* $ of length $ |E|^2 $ (or actually $ |E|^2 - |E| $, if one considers the mostly standard definition of a graph that disallows loops), by agreeing on a bijection between the slots and the pairs of (distinct) vertices, and placing a $ 1 $ at slots that are connected by an edge and $ 0 $ on the others.
 
 In the case of the hamiltonian path problem, $ \phi $ is the function defined on $ \{ 0,1 \}^* $ that returns \og 1 \fg on graphs that contain a hamiltonian path, and \og 0 \fg that don't. (For entries that do not represent graphs, whatever, just say that $ \phi $ outputs 0.)
+
+\subsubsection{(Deterministic) Turing machines and computability}
 
 Boolean functions are made to be processed by \textit{Turing machines}.
 
@@ -76,6 +80,8 @@ This is known as the Church-Turing thesis.
 \end{definition}
 
 Turing Machines are also an extremely robust model, in the sense that most non-corebreaking variations on their definition leave absolutely unchanged the induced set of \textit{computable functions}. For instance, it is possible to replace the infinite-length tape by a semi-infinite one, or by two (with two heads reading in parallel), or three, or any finite number. You can replace it by $k \in \mathbf N^*$ semi-infinite ones, that all meet at the same point. You can change the number of symbols to any arbitrary finite cardinality, and so on and so forth.
+
+\subsubsection{(Deterministic) Turing machines as a model for complexity}
 
 After having been defined as a computability model, Turing Machines have been used to formally define the \textit{complexity} of an algorithm. This will be done right afterwards, but we must make some other considerations first.
 
@@ -125,10 +131,11 @@ when the operands are of a \textit{simple} type (integers, reals, booleans, char
 
 We then adapt what was presented above to define the complexity of an algorithm, but now based on elementary operations rather than Turing machine steps. This gives the following definition:
 
-\begin{definition} Let $\Pi$ be a problem, let $I$ be an arbitrary instance of $\Pi$, of size $|I|$, and let $A$ be an algorithm solving $\Pi$. When we apply $A$ to $I$, $A$ performs a certain number of elementary operations $\psi_A(I)$. The (worst-case) complexity of $A$ is the function $\gamma_A$ defined from $\mathbf{N}$ to $\mathbf{N}$ by:
-\[
-\gamma_A(k) = \max\{\psi_A(I) \mid |I| = k\}.
-\]
+\begin{definition} 
+    Let $\Pi$ be a problem, let $I$ be an arbitrary instance of $\Pi$, of size $|I|$, and let $A$ be an algorithm solving $\Pi$. When we apply $A$ to $I$, $A$ performs a certain number of elementary operations $\psi_A(I)$. The (worst-case) complexity of $A$ is the function $\gamma_A$ defined from $\mathbf{N}$ to $\mathbf{N}$ by:
+    \[
+    \gamma_A(k) = \max\{\psi_A(I) \mid |I| = k\}.
+    \]
 \end{definition}
 
 This notion of complexity, based on counting elementary operations, is the one used a bit everywhere. It has the advantage of not requiring formalization of the algorithm via a Turing machine and allows for the use of more familiar concepts without affecting qualitative results. We will follow the same approach going forward: each assignment, arithmetic operation, comparison, or boolean operation on simple types counts as one unit.
@@ -159,7 +166,37 @@ Moreover, an algorithm with complexity $n^{1.000001}$ is faster than another wit
 
 The complexity $\gamma_A$ is generally expressed using Landau’s notation $O$ and is always an increasing function.
 
-\subsection{Polynomial and non-deterministic polynomial problems}
+\subsubsection{Polynomial reducibility}
+
+We conclude with the notion of (polynomial) reducibility. 
+
+\begin{definition}
+    Let $ \phi $ and $ \psi $ be two decision problems. We say that $ \gamma : \{0,1\}^* \to \{0,1\}^* $ is a \textit{reduction} from $ \phi $ to $ \psi $ if 
+    \[ 
+        \forall x \in \{0,1\}^*, \phi(x) = \psi(\gamma(x))
+    \]
+    The reduction is said to be \textit{polynomial} if it can be computed in polynomial time.
+\end{definition}
+
+\begin{definition}
+    We will denote $ \prec $ the binary relation of polynomial reducibility.
+\end{definition}
+
+In other words, $ A \prec B $ if the problem $ A $ is reducible to $ B $.
+
+\begin{proposition}
+    The binary relation $ \prec $ is reflexive and transitive : it is a preorder in the set of decision problems.
+\end{proposition}
+
+\begin{proof}
+    Taking $ \gamma (x) = x $ in the definition of polynomial reducibility yields reflexivity. If $ P $ and $ Q $ are polynomials, then $ P(Q) $ is still a polynomial, whence transitivity.
+\end{proof}
+
+The polynomial reducibility relation $ \prec $ is interpreted by saying that $ a \prec b $ if $ b $ is \textit{computationally harder} than $ a $. For instance, we trivially have $ \mathsf{3SAT} \prec \mathsf{SAT} $. We will also see in the following that $ \mathsf{SAT} \prec \mathsf{3SAT} $ : $ \mathsf{3SAT} $ is thus also computationally harder than $ \mathsf{SAT} $, which is quite surprising at first glance.
+
+\subsection{Different complexity classes}
+
+\subsubsection{The $ \mathsf P $ class}
 
 We can now define the class $ \mathsf P $ of polynomial problems.
 
@@ -177,17 +214,35 @@ There is a variant of this class which contains so-called \textit{pseudo-polynom
     A problem is said to be \textit{pseudo-polynomial} if there exists a pseudo-polynomial algorithm to solve it.
 \end{definition}
 
-There does not seem to be any usual notation for psuedo-polynomial problems. As with algorithms, there is a relationship between polynomial and pseudo-polynomial problems.
+There does not seem to be any usual notation for psuedo-polynomial problems. As with algorithms, there is a relationship between polynomial and pseudo-polynomial problems.w
 
 \begin{proposition}
     Polynomial problems are also pseudo-polynomial.
 \end{proposition}
 
-% An NP-complete problem with known pseudo-polynomial time algorithms is called weakly NP-complete. An NP-complete problem is called strongly NP-complete if it is proven that it cannot be solved by a pseudo-polynomial time algorithm unless P = NP. The strong/weak kinds of NP-hardness are defined analogously.
+\subsubsection{The $ \mathsf{NP} $ class}
+
+\subsubsection{The $ \mathsf{NPC} $ class}
 
 \begin{definition}
-    Let $A$ be an algorithm (i.e., a deterministic Turing machine). 
+    A problem $ \phi $ is said to be \textit{$ \mathsf{NP} $-hard} if
+    \[
+        \forall \psi \in \mathsf{NP}, \psi \prec \phi
+    \]
+    We denote $ \mathsf{NPH} $ the class of $ \mathsf{NP} $-hard problems.
 \end{definition}
+
+In other words, $ \mathsf{NP} $-hard problems are problems that are harder than any $ \mathsf{NP} $ problem. In other words... they are hard.
+
+\begin{definition}
+    A problem is said to be $ \mathsf{NP} $-complete if it is both $ \mathsf{NP} $ and $ \mathsf{NP} $-hard.
+
+    We denote $ \mathsf{NPC} $ the class of $ \mathsf{NP} $-complete problems.
+\end{definition}
+
+That is, $ \mathsf{NP} $-complete problems are both hard and harder than any $ \mathsf{NP} $ problem. 
+
+One quite astonishing thing about $ \mathsf{NPC} $ problems is that they exist. The first example that is given in most standard complexity theory lectures is always either $ \mathsf{SAT} $ or $ \mathsf{3SAT} $. We will later (in Section \ref{subsec:SATNP}) proove that these problems are $ \mathsf{NP} $-complete, and later on give more examples of $ \mathsf{NPC} $ problems.
 
 \subsubsection{The polynomial hierarchy}
 
@@ -202,6 +257,8 @@ There does not seem to be any usual notation for psuedo-polynomial problems. As 
 \begin{proof}
     This proof is by induction. I don't think distinguishing the cases $ k = 0 $ and $ k > 0 $ is necessary, but looking at to \cite{gowers2024}, maybe yes.
 \end{proof}
+
+\subsection{Results and inclusions between problem classes}
 
 \begin{corollary}
     If P = NP, then P = PH.
@@ -228,6 +285,12 @@ There does not seem to be any usual notation for psuedo-polynomial problems. As 
 Once $P$ and $NP$ have been defined,
 \end{proof}
 
-\begin{problem}
-    hi mom
-\end{problem}
+\subsection{$ \mathsf{NP} $ completeness}
+
+\begin{definition}
+
+\end{definition}
+
+% Si P = N P Alors .. .disjoints, ... ...
+
+\subsubsection{}
