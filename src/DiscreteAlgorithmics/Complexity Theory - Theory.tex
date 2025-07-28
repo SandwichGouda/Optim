@@ -10,7 +10,7 @@ The references for this chapter are : Hudry's introductions \cite{charonhudry201
 
 \subsubsection{Decision problems}
 
-\begin{definition}
+\begin{definition}[Boolean function]
     Throughout the chapter, we will denote
     \[
     \{0,1\}^* = \bigcup_{n=1}^\infty \{0,1\}^n
@@ -27,7 +27,7 @@ In his course on the theory of complexity, Timothy Gowers \cite{gowers2023}, \ci
 
 In case this was not clear enough, a decision problem is a problem that asks a question, the answer of which must be either \og Yes \fg or \og No \fg. Then, it becomes cristal clear that any (worthy of interest) mathematical decision problem can me encoded as a b²oolean function. For instance, the hamiltonian cycle is one of such.
 
-\begin{definition}
+\begin{definition}[Hamiltonian path]
     Let $ G = (V,E) $ be a graph. A \textit{hamiltonian cycle} or \textit{hamiltonial path} in $ G $ is a cycle in $ G $ that travels all vertices of $ G $ exactly once, and all edges of $ G $ at most once.
 \end{definition}
 
@@ -47,7 +47,7 @@ In the case of the hamiltonian path problem, $ \phi $ is the function defined on
 
 Boolean functions are made to be processed by \textit{Turing machines}.
 
-\begin{definition}
+\begin{definition}[Deterministic Turing machine]
     A \textit{deterministic Turing machine} is a triple $ (\mathcal A, \Sigma, \delta) $, where :
     \begin{itemize}
         \item $ \mathcal A $ is the \textit{alphabet} of the turing machine.
@@ -67,7 +67,7 @@ Let us give some examples : the sequence $ 0101010101... $ is \textit{computable
 
 Turing machines are not the only approach to define computability. \textit{$ \lambda $-calculus} and \textit{general recursive functions} are two other approches that have been proposed. It is possible, for each of them, to define which functions are computable and which are not. We then have the following theorem \cite{soare1996}, \cite{church1936}, \cite{kleene1936}, \cite{turing1937} :
 
-\begin{theorem}
+\begin{theorem}[Church-Turing thesis]
     The functions that are \textit{computable} respectively in the sense of Turing machines, $ \lambda $-calculus, and general recursive functions, are all the same. 
     
     In other words, these three methods give birth to the exact same set of functions. 
@@ -75,7 +75,7 @@ Turing machines are not the only approach to define computability. \textit{$ \la
 
 This is known as the Church-Turing thesis.
 
-\begin{definition}
+\begin{definition}[Computable function]
     We call \textit{computable functions}, the functions that can, equivalently, be computed either in the sense of Turing machines, $ \lambda $-calculus or general recursive functions.
 \end{definition}
 
@@ -131,7 +131,7 @@ when the operands are of a \textit{simple} type (integers, reals, booleans, char
 
 We then adapt what was presented above to define the complexity of an algorithm, but now based on elementary operations rather than Turing machine steps. This gives the following definition:
 
-\begin{definition} 
+\begin{definition}[Complexity]
     Let $\Pi$ be a problem, let $I$ be an arbitrary instance of $\Pi$, of size $|I|$, and let $A$ be an algorithm solving $\Pi$. When we apply $A$ to $I$, $A$ performs a certain number of elementary operations $\psi_A(I)$. The (worst-case) complexity of $A$ is the function $\gamma_A$ defined from $\mathbf{N}$ to $\mathbf{N}$ by:
     \[
     \gamma_A(k) = \max\{\psi_A(I) \mid |I| = k\}.
@@ -142,7 +142,7 @@ This notion of complexity, based on counting elementary operations, is the one u
 
 If we assume that each elementary operation takes one time unit (which is a simplification: for example, $p \times q$ generally takes more time than $p + q$), the complexity remains an estimate of the computation time. It is therefore still a time complexity.
 
-\begin{definition}
+\begin{definition}[]
     An algorithm $A$ is said to be \textit{polynomial} if its complexity $\gamma_A$ can be upper bounded by a polynomial $P$ in the binary size $|I|_2$ of the instance $I$ being processed.
 \end{definition}
 
@@ -164,13 +164,13 @@ Polynomial algorithms are sometimes called \textit{good algorithms} or \textit{e
 
 Moreover, an algorithm with complexity $n^{1.000001}$ is faster than another with complexity $n$ for $n < 16\,626\,517$.
 
-The complexity $\gamma_A$ is generally expressed using Landau’s notation $O$ and is always an increasing function.
+The complexity $\gamma_A$ is generally expressed using Landau's notation $O$ and is always an increasing function.
 
 \subsubsection{Polynomial reducibility}
 
 We conclude with the notion of (polynomial) reducibility. 
 
-\begin{definition}
+\begin{definition}[Polynomial reducibility]
     Let $ \phi $ and $ \psi $ be two decision problems. We say that $ \gamma : \{0,1\}^* \to \{0,1\}^* $ is a \textit{reduction} from $ \phi $ to $ \psi $ if 
     \[ 
         \forall x \in \{0,1\}^*, \phi(x) = \psi(\gamma(x))
@@ -200,11 +200,13 @@ The polynomial reducibility relation $ \prec $ is interpreted by saying that $ a
 
 We can now define the class $ \mathsf P $ of polynomial problems.
 
-\begin{definition}
+\begin{definition}[Polynomial problem]
     A problem is said to be \textit{polynomial} if there exists a polynomial algorithm to solve it.
 
     The class of polynomial problems is denoted $ \mathsf P $.
 \end{definition}
+
+Recall that we had only defined polynomial \textit{algorithms} and not \textit{problems}. Do not confuse both notions.
 
 In other words, $ \mathsf P $ is the set of boolean functions $ \phi $, for which there exists a Turing machine that solves $ \phi $ in a polynomial number of steps. Recall that this definition does not depend on whether we consider Turing machine steps or elementary operations because Turing machine steps and elementary operations are polynomially related. We will not repeat this consideration for each new definition of a problem class set.
 
@@ -222,6 +224,25 @@ There does not seem to be any usual notation for psuedo-polynomial problems. As 
 
 \subsubsection{The $ \mathsf{NP} $ class}
 
+This is the definition of $ \mathsf{NP} $ problems that is given in \cite{gowers2023} and \cite{gowers2024}.
+
+\begin{definition}
+    We say that a decision problem $ \phi $ is a \textit{non-deterministic polynomial} problem if there exists a polynomial $ P $ and a polynomial problem $ \psi \in \mathsf P $
+    \[
+        \forall x \in \{ 0,1 \}^*, \phi(x) = 1 \iff \exists y \in \{ 0,1 \}^{P(n)}, \psi(x,y) = 1
+    \]
+    We denote $ \mathsf{NP} $ the class of non-deterministic polynomial problems.
+\end{definition}
+
+This definition is equivalent to the definition of $ \mathsf{NP} $ problems using non-deterministic Turing machines \cite{hudry2024}, \cite{charonhudry2019}, \cite{gowers2023}, \cite{gowers2024}. Non-deterministic Turing machines themselves have several equivalent definitions.
+
+\begin{definition}[Non-deterministic Turing machine]
+    A non
+\end{definition}
+
+\begin{proposition}
+    The latter definition of $ \mathsf{NP} $ problems is equivalent to ...
+\end{proposition}
 \subsubsection{The $ \mathsf{NPC} $ class}
 
 \begin{definition}
@@ -242,7 +263,7 @@ In other words, $ \mathsf{NP} $-hard problems are problems that are harder than 
 
 That is, $ \mathsf{NP} $-complete problems are both hard and harder than any $ \mathsf{NP} $ problem. 
 
-One quite astonishing thing about $ \mathsf{NPC} $ problems is that they exist. The first example that is given in most standard complexity theory lectures is always either $ \mathsf{SAT} $ or $ \mathsf{3SAT} $. We will later (in Section \ref{subsec:SATNP}) proove that these problems are $ \mathsf{NP} $-complete, and later on give more examples of $ \mathsf{NPC} $ problems.
+One quite astonishing thing about $ \mathsf{NPC} $ problems is that they exist. The first example that is given in most standard complexity theory lectures is always either $ \mathsf{SAT} $ or $ \mathsf{3SAT} $. We will later (in Section \ref{subsec:SATNP}) provide further discussion on $ \mathsf{NP} $-complete problems. In particular, we will proove that these problems are both $ \mathsf{NP} $-complete, and later on give more examples of $ \mathsf{NPC} $ problems.
 
 \subsubsection{The polynomial hierarchy}
 
@@ -287,10 +308,12 @@ Once $P$ and $NP$ have been defined,
 
 \subsection{$ \mathsf{NP} $ completeness}
 
+\begin{theorem}
+    
+\end{theorem}
+
 \begin{definition}
 
 \end{definition}
 
 % Si P = N P Alors .. .disjoints, ... ...
-
-\subsubsection{}

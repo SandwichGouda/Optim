@@ -22,15 +22,6 @@
 - Problème IMO 2019 SL C1 ✅
 - Problème IMO 2019 SL C3 ✅
 - Graphes : introduction ✅
-- Rédiger
-  * Complexité
-  * Méthode de Jacobi
-  * Flots : introduction
-  * Simplexe si possible
-  * Union find
-  * Kruskal là (truc du prof voisinnages ?)
-  * Matchings (début/un peu)
-  * Problèmes restants
 
 ### Semaine 3
 
@@ -41,6 +32,17 @@
 - Tunnel flots : brouillon uniquement, exercices, algorithme
 - Algorihtme de Jacobi : preuves
 - Fixer des deadlines à court, moyen et long termeu
+- Rédiger
+  * Complexité
+  * Méthode de Jacobi
+  * Graph theory
+    + Exercises
+  * Flots : introduction
+  * Simplexe si possible
+  * Union find
+  * Kruskal là (truc du prof voisinnages ?)(chercher cours et demander à GPT)
+  * Matchings (début/un peu)
+  * Problèmes restants
 
 ### Programme
 
@@ -80,9 +82,11 @@
   * Avec livres
   * Lui tenir informé, demander stage
   * Demander "vous avez la sensation de passer beaucoup de temps à faire de l'administratif ? trop ?"
+  * "Y a-t-il de l'avenir en optimisation ? Est-ce que vous pensez qu'il y a un risque que ça puisse s'essoufler ?"
   * Demander une lettre (l'écrire à l'avance)
   * Demander pour le PhD track :O
   * Lui dire que s'il est d'accord il  sera sans doute enseignant encadrant pour mon futur stage
+  * Lui dire pour "Xiayu Bie"
 - Storage space management
   * `find . | grep .git`, supprimer tous les gits qui trainent 
   * Faire un grand git avec les archives (attention aux large files)

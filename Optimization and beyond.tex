@@ -25,7 +25,6 @@
 % \usepackage{indentfirst}
 %
 \usepackage{tcolorbox}
-%
 \newtcolorbox{problembox}{
     width=0.9\textwidth,
     colback=white, % Background color
@@ -73,10 +72,30 @@
 \numberwithin{remark}{section}
 \numberwithin{hypothesis}{section}
 %
+\renewcommand\thesubsubsection{\thesubsection.\alph{subsubsection})}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+%
 \title{\textbf{Optimization and beyond}}
 \author{William DRIOT}
 \date{2025-2026}
 %
+% Conventions for this book :
+% 1. Environments should be written this way
+%   \begin{...}
+%       ...
+%   \end{...}
+% 2. The terms defined in a definition should be in italics.
+% 3. Definition should have names : \begin{definition}[Deterministic Turing machine] ... \end{definition}
+% 4. Definition names should use singular names.
+% 5. We should comply with the rule that says that equations should be accordingly punctuated : 
+%   \[
+%     \forall x \in E, ... ,
+%   \]
+%   or
+%   \[
+%     \forall x \in E, ... .
+%   \]
 \begin{document}
 
 \maketitle
