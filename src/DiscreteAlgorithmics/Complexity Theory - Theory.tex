@@ -32,7 +32,7 @@ In case this was not clear enough, a decision problem is a problem that asks a q
 \end{definition}
 
 \begin{problem}
-    \textbf{Problem :} Hamiltonian path (HAM)
+    \textbf{Problem :} Hamiltonian path (\textsc{Ham})
 
     \textbf{Input :} A graph $ G = (V,E) $
 
@@ -50,8 +50,8 @@ Boolean functions are made to be processed by \textit{Turing machines}.
 \begin{definition}[Deterministic Turing machine]
     A \textit{deterministic Turing machine} is a triple $ (\mathcal A, \Sigma, \delta) $, where :
     \begin{itemize}
-        \item $ \mathcal A $ is the \textit{alphabet} of the turing machine.
-        \item $ \Sigma $ is the set of the machine's \textit{states}.
+        \item $ \mathcal A $ is a finite set, called the \textit{alphabet} of the Turing machine.
+        \item $ \Sigma $ is a finite set, the elements of which are called the machine's \textit{states}.
         \item $ \delta $ is the \textit{transition function}, and is a map
         \[
         \delta : X \subset \mathcal A \times \Sigma \to \mathcal A \times \Sigma \times \{ \texttt{L}, \texttt{R}\}
@@ -59,7 +59,7 @@ Boolean functions are made to be processed by \textit{Turing machines}.
     \end{itemize}
 \end{definition}
 
-Deterministic turing machines operate on an infinite tape divided into cells, each capable of holding a symbol from the alphabet $ \mathcal A $. $ \Sigma $ represents the (finite) set of internal states, one of which is designated as the initial state. The behavior of the machine is then entirely governed by the transition function $ \delta $, which specifies the machine's actions based on the current state and the symbol it reads from the tape. More precisely, $ \delta $ maps a subset of $ \mathcal A \times \Sigma $, to the set of triples $ (a, q, d) \in \mathcal A \times \Sigma \times \{ \texttt L, \texttt R \} $. Each step, the machine reads the current symbol $ x $, and according to its state $ s \in \Sigma $, it computes the output $ \delta(x,s) = (a, q, d) $. Here, $ a \in \mathcal A $ is the symbol that will replaces the current tape symbol $ x $, the machine will write it on the tape. The state will then change from $ s $ to $ q $, and the machine will move on the tape in the direction $ d \in \{ \texttt L, \texttt R\} $. This process continues until the machine reaches a symbol-state pair not in the domain of $ \delta $, at which point it halts.
+Deterministic Turing machines operate on an infinite tape divided into cells, each capable of holding a symbol from the alphabet $ \mathcal A $. $ \Sigma $ represents the (finite) set of internal states, one of which is designated as the initial state. The behavior of the machine is then entirely governed by the transition function $ \delta $, which specifies the machine's actions based on the current state and the symbol it reads from the tape. More precisely, $ \delta $ maps a subset of $ \mathcal A \times \Sigma $, to the set of triples $ (a, q, d) \in \mathcal A \times \Sigma \times \{ \texttt L, \texttt R \} $. Each step, the machine reads the current symbol $ x $, and according to its state $ s \in \Sigma $, it computes the output $ \delta(x,s) = (a, q, d) $. Here, $ a \in \mathcal A $ is the symbol that will replaces the current tape symbol $ x $, the machine will write it on the tape. The state will then change from $ s $ to $ q $, and the machine will move on the tape in the direction $ d \in \{ \texttt L, \texttt R\} $. This process continues until the machine reaches a symbol-state pair not in the domain of $ \delta $, at which point it halts.
 
 Turing machines were introduced by A. Turing \cite{turing1936}, \cite{turing1992} to propose a model for \textit{computability}. They provide a theoretical computational model that represents \textit{algorithms}. They answer the question : \textit{what do we mean exactly by an algorithm ? What is computable ?} 
 
@@ -142,11 +142,11 @@ This notion of complexity, based on counting elementary operations, is the one u
 
 If we assume that each elementary operation takes one time unit (which is a simplification: for example, $p \times q$ generally takes more time than $p + q$), the complexity remains an estimate of the computation time. It is therefore still a time complexity.
 
-\begin{definition}[]
+\begin{definition}[Polynomial algorithm]
     An algorithm $A$ is said to be \textit{polynomial} if its complexity $\gamma_A$ can be upper bounded by a polynomial $P$ in the binary size $|I|_2$ of the instance $I$ being processed.
 \end{definition}
 
-\begin{definition}
+\begin{definition}[Pseudo-polynomial algorithm]
     An algorithm $A$ is said to be \textit{pseudo-polynomial} if its complexity $\gamma_A$ can be upper bounded by a polynomial $P$ in the unary size $|I|_1$ and the binary size $|I|_2$ of the instance $I$ being processed (or, equivalently, by a polynomial in $|I|_1$, since $|I|_2 \leq |I|_1$).
 \end{definition}
 
@@ -212,11 +212,11 @@ In other words, $ \mathsf P $ is the set of boolean functions $ \phi $, for whic
 
 There is a variant of this class which contains so-called \textit{pseudo-polynomial} problems.
 
-\begin{definition}
+\begin{definition}[Pseudo-polynomial problem]
     A problem is said to be \textit{pseudo-polynomial} if there exists a pseudo-polynomial algorithm to solve it.
 \end{definition}
 
-There does not seem to be any usual notation for psuedo-polynomial problems. As with algorithms, there is a relationship between polynomial and pseudo-polynomial problems.w
+There does not seem to be any usual notation for psuedo-polynomial problems. As with algorithms, there is a relationship between polynomial and pseudo-polynomial problems.
 
 \begin{proposition}
     Polynomial problems are also pseudo-polynomial.
@@ -226,7 +226,7 @@ There does not seem to be any usual notation for psuedo-polynomial problems. As 
 
 This is the definition of $ \mathsf{NP} $ problems that is given in \cite{gowers2023} and \cite{gowers2024}.
 
-\begin{definition}
+\begin{definition}\label{def:np-problem}
     We say that a decision problem $ \phi $ is a \textit{non-deterministic polynomial} problem if there exists a polynomial $ P $ and a polynomial problem $ \psi \in \mathsf P $
     \[
         \forall x \in \{ 0,1 \}^*, \phi(x) = 1 \iff \exists y \in \{ 0,1 \}^{P(n)}, \psi(x,y) = 1
@@ -234,18 +234,280 @@ This is the definition of $ \mathsf{NP} $ problems that is given in \cite{gowers
     We denote $ \mathsf{NP} $ the class of non-deterministic polynomial problems.
 \end{definition}
 
-This definition is equivalent to the definition of $ \mathsf{NP} $ problems using non-deterministic Turing machines \cite{hudry2024}, \cite{charonhudry2019}, \cite{gowers2023}, \cite{gowers2024}. Non-deterministic Turing machines themselves have several equivalent definitions.
+This definition is equivalent to the definition of $ \mathsf{NP} $ problems using non-deterministic Turing machines \cite{hudry2024}, \cite{charonhudry2019}, \cite{gowers2023}, \cite{gowers2024}. Non-deterministic Turing machines themselves have several equivalent definitions, let us start by the one given in \cite{gowers2024}.
 
-\begin{definition}[Non-deterministic Turing machine]
-    A non
+\begin{definition}[Non-deterministic Turing machine, Definition 1]
+    A \textit{non-deterministic Turing machine} is a quadruple \( (\mathcal A, \Sigma, \delta_0, \delta_1 ) \), where :
+    \begin{itemize}
+        \item $ \mathcal A $ is a finite set, called the \textit{alphabet} of the Turing machine.
+        \item $ \Sigma $ is a finite set, the elements of which are called the machine's \textit{states}.
+        \item $ \delta_0 $ and $ \delta_1 $ are two maps
+        \[
+        \delta_0, \delta_1 : X \subset \mathcal A \times \Sigma \to \mathcal A \times \Sigma \times \{ \texttt{L}, \texttt{R}\}
+        \]
+        which are called the Turing machine's \textit{transition functions}.
+    \end{itemize}
+\end{definition}
+
+Here, the idea is that a non-deterministic Turing machine works in the same way as a deterministic one up to the following difference : when reading a symbol on the tape in a given state, the Turing machine has the choice to either \og activate \fg (or \textit{run}) the transition function $ \delta_0 $ or $ \delta_1 $. As a result, an input tape for a given Turing machine results in several possible outputs : a non-deterministic Turing machine does not output one tape, but rather, defines a way to compute several possible outputs. The core and essential idea behind NDTM is not that they should \textit{compute} anything (we already have deterministic Turing machines for that, they already define a well-established model for computability, which is robust enough to match the one provided by lambda-calculus and general recursive functions --- so in other words, they need not to be replaced), but rather, \textit{check the solution} to a problem --- this will appear clearer as we get into more details on this topic later.
+
+Another proof of \textit{robustness} of this model, is that this definition does not change by letting the number of transition functions vary from $ 2 $ to any finite number greater than $ 2 $. Of course, going from $ 2 $ to $ 1 $ changed everything --- we then roll back to deterministic Turing machines.
+
+\begin{definition}[Non-deterministic Turing machine, Definition 2]
+    A \textit{non-deterministic Turing machine} is (also) a finite tuple \( (\mathcal A, \Sigma, \delta_1, ..., \delta_n ) \), where :
+    \begin{itemize}
+        \item $ \mathcal A $ is a finite set, called the \textit{alphabet} of the Turing machine.
+        \item $ \Sigma $ is a finite set, the elements of which are called the machine's \textit{states}.
+        \item $ (\delta_i)_{1 \leq i \leq n} $ are maps
+        \[
+        \delta_i : X \subset \mathcal A \times \Sigma \to \mathcal A \times \Sigma \times \{ \texttt{L}, \texttt{R}\}
+        \]
+        which are the Turing machine's \textit{transition functions}.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Non-deterministic Turing machine, Definition 3]
+    A \textit{non-deterministic Turing machine} is (also) a finite tuple \( (\mathcal A, \Sigma, \delta) \), where :
+    \begin{itemize}
+        \item $ \mathcal A $ is a finite set, called the \textit{alphabet} of the Turing machine.
+        \item $ \Sigma $ is a finite set, the elements of which are called the machine's \textit{states}.
+        \item $ \delta $ is a map
+        \[
+        \delta : X \subset \mathcal A \times \Sigma \to 2^{\mathcal A \times \Sigma \times \{ \texttt{L}, \texttt{R}\} }
+        \]
+        which is the Turing machine's \textit{transition function}.
+    \end{itemize}
+\end{definition}
+
+This time, the Turing machine is allowed to \og choose \fg any of the outputs of the transition function.
+
+This model represents what an algorithm is able to do when working with an oracle. An oracle in algorithmics is an theoretical entity that is assumed to answer questions, or just give away any kind of information in general. In particular, regarding the definition of the $ \mathsf{NP} $ class : Turing machines are machines that can solve problems by having an oracle giving them the solution : all there's left for them to check is to proove that the solution is correct or not. The class of $ \mathsf{NP} $ is the class of problems for which it is possible to check that a given solution works in polynomial time. Non-deterministic Turing machines are then the ones that will \og solve \fg them in polynomial time - the oracle corresponds to who gives the solution.
+
+\begin{definition}[$ \mathsf{NP} $]
+    The class $ \mathsf{NP} $ of \textit{non-deterministic polynomial} (decision) problems, is the class of decision problems for which if the answer is \og yes \fg, it can be answered in polynomial time by a non-deterministic Turing machine.
 \end{definition}
 
 \begin{proposition}
-    The latter definition of $ \mathsf{NP} $ problems is equivalent to ...
+    The latter definition of $ \mathsf{NP} $ problems is equivalent to the following : we have
+    \begin{multline*}
+        \mathsf{NP} = \{ \phi : \{ 0,1 \}^* \to \{ 0,1 \}, \exists \psi \in \mathsf P, \exists r \in \mathbf R[X], \\
+         \forall x \in \{ 0,1 \}^*, \phi(x) = 1 \iff \exists y \in \{ 0,1 \}^{r(n)}, \psi(x,y) = 1 \}
+    \end{multline*}
 \end{proposition}
-\subsubsection{The $ \mathsf{NPC} $ class}
+
+In other words, and looking back at definition \ref{def:np-problem}, $ \mathsf{NP} $ problems are the ones for which it is possible to check that the answer is \og yes \fg by checking that a solution works, in polynomial time. Here, $ x $ encodes the input of the problem and $ y $ the solution to the problem. The polynomial $ r $ is quite crucial in this definition : the solution must have a polynomially big encoding in the size of the input encoding, otherwise, it wouldn't make much sense to allow solutions to be exponentially big but treated in polynomial time.
+
+\begin{proposition}
+    \textsc{Ham} belongs to $ \mathsf{NP} $.
+\end{proposition}
+
+\begin{proof}
+    Let $ G = (V,E) $ be a graph that contains a hamiltonian path. This hamiltonian cycle clearly has a (an encoding of) \og size \fg that is (can be bounded by a) polynomial in the size of (the encoding of) the input $ x = G $. More over, the algorithm ($ \phi $, to remain consistent in out notations) that checks whether or not a given path is hamiltonian is easily polynomial in time : the number of edges and vertices are clearly polynomial in the size of the input, and it is clear that checking self-avoidance and covering is also polynomial in time. Considering the last definition of non-deterministic polynomial problems, this achieves the proof that \textsc{Ham} $ \in \mathsf{NP} $.
+\end{proof}
+
+\subsubsection{The $ \mathsf{coNP} $ class}
+
+It is worth noting that the answers \og yes \fg and \og no \fg play substantially assymetric roles in the definition of the $ \mathsf{NP} $ : whence the definition of the $ \mathsf{coNP} $ class.
+
+\begin{definition}[$ \mathsf{coNP} $]
+     The $ \mathsf{coNP} $ class is the class of problems for which, if the answer is \og no \fg, it is possible to answer it in polynomial time using a non-deterministic Turing machine.
+\end{definition}
+
+In other words, 
+
+\begin{proposition}
+    We have 
+    \[
+        \mathsf{coNP} = \{ 1 - \phi, \phi \in \mathsf{NP} \}.
+    \]
+\end{proposition}
+
+\begin{proposition}
+    We also have
+    \[
+        \mathsf{coNP} = \{ \phi, \exists \psi \in \mathsf P, \exists r \in \mathbf R[X], (\phi(x) = 1 \iff \forall y \in \{ 0,1 \}^{r(|x|)}, \psi(x,y) = 1 ) \},
+    \]
+    or, in a perhaps clearer way, 
+    \[
+        \mathsf{coNP} = \{ \phi, \exists \psi \in \mathsf P, \exists r \in \mathbf R[X], (\phi(x) = 0 \iff \exists y \in \{ 0,1 \}^{r(|x|)}, \psi(x,y) = 0 ) \}.
+    \]
+\end{proposition}
+
+\begin{example}
+    Consider the \textsc{Ham} problem : its \og co \fg version would be
+
+    \begin{problem}
+        \textbf{Problem :} $ \mathsf{co} $-\textsc{Ham}
+
+        \textbf{Input :} A finite graph $ G $
+
+        \textbf{Output :} \og Yes \fg is there is no hamiltonial path in $ G $ and \fg No \og otherwise. In other words, an answer to the question \og Does $ G $ \fg contain no hamiltonian path ?
+    \end{problem}
+
+    In the last form of the definition of $ \mathsf{co-NP} $, $ \psi $ would be the algotithm that takes as input a candidate hamiltonian path, and that answers \og No \fg of the candidate is a hamiltonian path in $ G $, and \og Yes \fg otherwise.
+
+    As a result : $ \phi(x) $ is $ 1 $ if and only if, there exists no hamiltonian path : in other words, if and only if \textit{for all} candidate $ y $, $ \psi(x,y) $ is $ 1 $. And, $ \phi(x) $ is $ 0 $ if and only if, there exists a hamiltonian path : in other words, if and only if \textit{there exists} a candidate $ y $, for which $ \psi(x,y) $ is $ 0 $.
+\end{example}
+
+We may also do the same construction with polynomial problems : we have said that $ \mathsf P $ was the class of polynomial problems which were decidable in polynomial time (with a deterministic Turing machine). There is a \og similar \fg assymetry between the answers \og yes \fg and \og no \fg in the sense that we could have defined $ \mathsf P $ as the class of problems for which it is possible to know if the answer is \og yes \fg in polynomial (deterministic) time, and then define :
+
+\begin{definition}[$ \mathsf{coP} $]
+    The class $ \mathsf{coP} $ is the class of polynomial problems for which it is possible to know if the answer is \og no \fg in polynomial deterministic time.
+\end{definition}
+
+But, it would then be clear that 
+
+\begin{proposition}
+    We have $ \mathsf P = \mathsf{coP} $.
+\end{proposition}
+
+\begin{proof}
+    Consider a problem for which it is possible to know if the answer is \og yes \fg in polynomial time. Then, we would know if the answer is \og no \fg in this same polynomial time. Conversely, if it is possible to know in polynomial time if the answer is \og no \fg, then it is possible to know if the answer is \og yes \fg in polynomial time.
+\end{proof}
+
+\begin{proposition}
+    We also have $ \mathsf P \subset \mathsf{coNP} $, or if we prefer $ \mathsf{coP} \subset \mathsf{coNP} $.
+\end{proposition}
+
+\begin{proof}
+    We have $ \mathsf P = \mathsf{coP} $. If it is possible for a determinstic Turing machine to answer in polynomial time \og Yes \fg, or equivalently \og No \fg, to a given decision problem $ \phi $, then it is definitely possible, if the answer is \og No \fg, for a non-deterministic one, to answer \og No \fg. This prooves $ \mathsf{coP} \subset \mathsf{coNP} $.
+\end{proof}
+
+\subsubsection{The polynomial hierarchy}
+
+We will now define the so-called \textit{polynomial hierarchy}. It is a generalization of $ \mathsf P $ and $ \mathsf{NP} $ problems.
+
+\begin{notation}
+    From now on, the variable $ r $ will denote a polynomial, and we will omit the (heavy) \og $ \exists r \in \mathbf R[X] $ \fg for the (lighter) $ \exists r $. In other words, in the following, any occurence of $ \exists r $ stands for \og there exists a polynomial $ r $ \fg.
+
+    We will also contract the \og $ \phi : \{ 0,1 \}^* \to \{ 0,1 \} $ \fg's to simple $ \phi $'s.
+\end{notation}
 
 \begin{definition}
+    Set
+    \[
+        \mathsf \Sigma_0 = \mathsf \Pi_0 = \mathsf P,
+    \]
+    or, if we prefer,
+    \[
+        \mathsf \Sigma_0 = \mathsf P, \qquad \mathsf \Pi_0 = \mathsf{coP},
+    \]
+    and
+    \[
+        \mathsf \Sigma_1 = \mathsf{NP}, \qquad \mathsf \Pi_1 = \mathsf{coNP}.
+    \]
+    Then, inductively,
+    \[
+        \mathsf \Sigma_{k+1} = \{ \phi, \exists \psi \in \mathsf \Pi_k, \exists r, (\phi(x) = 1 \iff \exists y \in \{ 0,1 \}^{r(|x|)}, \psi(x,y) = 1) \},
+    \]
+    and
+    \[
+        \mathsf \Pi_{k+1} = \{ \phi, \exists \psi \in \mathsf \Sigma_k, \exists r, (\phi(x) = 1 \iff \forall y \in \{ 0,1 \}^{r(|x|)}, \psi(x,y) = 1) \},
+    \]
+    or, maybe more clearly,
+    \[
+        \mathsf \Pi_{k+1} = \{ \phi, \exists \psi \in \mathsf \Sigma_k, \exists r, (\phi(x) = 0 \iff \exists y \in \{ 0,1 \}^{r(|x|)}, \psi(x,y) = 0) \}.
+    \]
+\end{definition}
+
+In other words, the $ \mathsf \Sigma_{k+1} $'s and the $ \mathsf \Pi_{k+1} $'s are constructed from the $ \mathsf \Sigma_k $'s and the $ \mathsf \Pi_k $'s in the same way as $ \mathsf{NP} $ is constructed from $ \mathsf P $ and $ \mathsf{coNP} $ is constructed from $ \mathsf{coP} $.
+
+\begin{definition}
+    We also define, for all $ k \ge 0 $,
+    \[
+        \Delta_k = \mathsf \Sigma_k \cap \mathsf \Pi_k.
+    \]
+\end{definition}
+
+This \og hierarchy \fg is called as such in the sense that :
+
+\begin{proposition}
+    For all $ k \ge 0 $, we have
+    \[
+        \mathsf \Sigma_k \subset \mathsf \Sigma_{k+1},
+    \]
+    and
+    \[
+        \mathsf \Pi_k \subset \mathsf \Pi_{k+1}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    We have already shown that $ \mathsf P \subset \mathsf{NP} $, and that $ \mathsf{coP} \subset \mathsf{coNP} $ : this prooves $ \mathsf \Sigma_0 \subset \mathsf \Sigma_1 $, and $ \mathsf \Pi_0 \subset \mathsf \Pi_1 $.
+
+    Let $ k \ge 0 $ and assume $ \mathsf \Sigma_k \subset \mathsf \Sigma_{k+1} $, as well as $ \mathsf \Pi_k \subset \mathsf \Pi_{k+1} $.
+
+    Let $ \phi \in \mathsf \Sigma_{k+1} $. Then there exists $ \psi \in \mathsf \Pi_k $ such that the rest of the definition of $ \mathsf \Sigma_{k+1} $ holds. By assumption, we then have $ \psi \in \mathsf \Pi_{k+1} $, and the rest of the definition of $ \mathsf \Sigma_{k+2} $ is the same as in $ \mathsf \Sigma_{k+1} $ and does not depend on $ k $. So, $ \phi \in \mathsf \Sigma_{k+1} $.
+
+    Similarly (or shall we say, symetrically), $ \mathsf \Sigma_k \subset \mathsf \Sigma_{k+1} $ yields $ \mathsf \Pi_{k+1} \subset \mathsf \Pi_{k+2} $. We have prooven the result.
+\end{proof}
+
+\begin{definition}[Polynomial hierarchy]
+    We set
+    \[
+        \mathsf{PH} = \bigcup_{n=0}^\infty (\mathsf \Sigma_k \cup \mathsf \Pi_k).
+    \]
+    This class of problems is called the \textit{polynomial hierarchy}.
+\end{definition}
+
+Although we strongly believe that this hierarchy is a \textit{real} one, in the sense that each \og layer \fg actually brings new functions to the latter, no one was able to proove it to this day. In particular, we strongly believe that the polynomial hierarchy does not \textit{collapse}.
+
+\begin{proposition}
+    Let $ p \ge 0 $.
+
+    If $ \mathsf \Sigma_p = \mathsf \Pi_p $, then
+    \[
+        \forall k \ge p, \mathsf \Sigma_k = \mathsf \Pi_k.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Let $ p \ge 0 $ and assume that $ \Sigma $
+\end{proof}
+
+\subsubsection{The $ \mathsf{EXPTIME} $ and $ \mathsf{NEXPTIME} $ classes}
+
+We will likely not discuss these classes too much, but here they are.
+
+\begin{definition}[$ \mathsf{EXPTIME} $ and $ \mathsf{NEXPTIME} $]
+    We say that $ \phi \in \mathsf{EXPTIME} $ if $ \phi $ can be computed in time at most $ \exp(P(|x|)) $, where $ P $ is some polynomial, using a deterministic Turing machine.
+
+    We say that $ \phi \in \mathsf{NEXPTIME} $ if $ \phi $ can be computed in time at most $ \exp(P(|x|)) $, where $ P $ is some polynomial, using a non-deterministic Turing machine.
+\end{definition}
+
+The definition uses a polynomial $ P $ and a bound $ \exp(P(|x|)) $, because it is quite the only possibility that would not depend on the choice of an encoding for $ x $, and the choice of a definition for deterministic and non-deterministic Turing machines.
+
+\subsubsection{The $ \mathsf{PSPACE} $ class}
+
+If time is an important resource in algorithmics, so is space.
+
+\begin{definition}[$ \mathsf{PSPACE} $]
+    We say that $ \phi \in \mathsf{PSPACE} $ if there exists a polynomial $ P $ such that for any input $ x $, the head of the Turing machine does not go outside the slots of index in $ [-p(|x|),p(|x|)] $.
+\end{definition}
+
+In other words, the space (memory allocated) to treating the problem is polynomial in the size of the input. Ass we will see later, this class of problems contains many other ones, including the whole polynomial hierarchy !
+
+\subsubsection{The $ \mathsf L $ and $ \mathsf{NL} $ classes}
+
+As in \cite{gowers2024}, we do not dive into too much details in this definition.
+
+\begin{definition}[$ \mathsf L $]
+    The class $ \mathsf{L} $, or $ \mathsf{LOGSPACE} $, is the class of problems such that there exists a deterministic Turing machine with two tapes, one in \og reading-only \fg mode (in other words, the Turing machine cannot write on it) that contains the input $ x $, and a second one, on which the Turing machine will write on at most $ O(\log(|x|)) $ slots.
+\end{definition}
+
+In other words, these are problems that require, to solve, at any given time, an at most logarithmic space of memory. For instance, adding two numbers is in $ \mathsf{LOGSPACE} $ : that's why we can do this on paper with our brains !
+
+It is necessary for this definition to consider a reading-only tape, because saying that \og $ \mathsf{LOGSPACE} $ is the class of problems that require an at most logarithmic amount of space to be treated \fg would be problematic because the input $ x $ itself requires more than $ O(\log(|x|)) $ space on the tape. For that reason, we set it separately on a read-only tape. In our analogy : it is easy for humans to add arbitrary sized-numbers on paper using their brain, because they do not require to know the whole of them at each step, only a small portion of it.
+
+We will later proove that $ \mathsf L \subset \mathsf P $, but it is still an open problem to know whether or not $ \mathsf L = \mathsf P $.
+
+\begin{definition}[$ \mathsf NL $]
+    The class $ \mathsf{NL} $, or $ \mathsf{NLOGSPACE} $, is the class of problems such that there exists a non-deterministic Turing machine with two tapes, one in \og reading-only \fg mode (in other words, the Turing machine cannot write on it) that contains the input $ x $, and a second one, on which the Turing machine will write on at most $ O(\log(|x|)) $ slots.
+\end{definition}
+
+\subsubsection{The $ \mathsf{NPC} $ class}
+
+\begin{definition}[$ \mathsf{NPH} $ problem]
     A problem $ \phi $ is said to be \textit{$ \mathsf{NP} $-hard} if
     \[
         \forall \psi \in \mathsf{NP}, \psi \prec \phi
@@ -255,7 +517,7 @@ This definition is equivalent to the definition of $ \mathsf{NP} $ problems usin
 
 In other words, $ \mathsf{NP} $-hard problems are problems that are harder than any $ \mathsf{NP} $ problem. In other words... they are hard.
 
-\begin{definition}
+\begin{definition}[$ \mathsf{NP} $-completeness]
     A problem is said to be $ \mathsf{NP} $-complete if it is both $ \mathsf{NP} $ and $ \mathsf{NP} $-hard.
 
     We denote $ \mathsf{NPC} $ the class of $ \mathsf{NP} $-complete problems.
@@ -265,25 +527,34 @@ That is, $ \mathsf{NP} $-complete problems are both hard and harder than any $ \
 
 One quite astonishing thing about $ \mathsf{NPC} $ problems is that they exist. The first example that is given in most standard complexity theory lectures is always either $ \mathsf{SAT} $ or $ \mathsf{3SAT} $. We will later (in Section \ref{subsec:SATNP}) provide further discussion on $ \mathsf{NP} $-complete problems. In particular, we will proove that these problems are both $ \mathsf{NP} $-complete, and later on give more examples of $ \mathsf{NPC} $ problems.
 
-\subsubsection{The polynomial hierarchy}
+\begin{remark}
+    In \cite{gowers2024} are presented several other classes of complexity, but we have here already gone far too far away from our original goal of deep diving in combinatorial optimization. Let us mention them briefly.
+    \begin{itemize}
+        \item so
+    \end{itemize}
+\end{remark}
+
+\subsection{Results and inclusions between problem complexity classes}
+
+We start by the most important inclusion.
 
 \begin{proposition}
-    Let $ k \ge 0 $.
-    If $ \Sigma_k = \Pi_k $, then
-    \[
-        \forall p \ge k, \Sigma_p = \Pi_p.
-    \]
+    We have $ \mathsf P \subset \mathsf{NP} $.
 \end{proposition}
 
 \begin{proof}
-    This proof is by induction. I don't think distinguishing the cases $ k = 0 $ and $ k > 0 $ is necessary, but looking at to \cite{gowers2024}, maybe yes.
+    Considering the third definition of non-deterministic Turing machines, a deterministic Turing machine can be seen as a non-deterministic with a transition function $ \delta $ that only outputs singletons. As a result, deterministic Turing machines are a special case of non-deterministic ones. Consequently, $ \mathsf P \subset \mathsf{NP} $.
 \end{proof}
 
-\subsection{Results and inclusions between problem classes}
+This is an easy inclusion, the converse of which is astoninshingly hard --- it is, as we all know, one of the \textit{millenium problems}. Though, as we will see later, it is quite clear that $ \mathsf P \neq \mathsf{NP} $ is the only possible option.
+
+
 
 \begin{corollary}
     If P = NP, then P = PH.
 \end{corollary}
+
+This  
 
 \begin{proof}
     We apply the previous result for $ k = 0 $.
