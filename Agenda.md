@@ -31,7 +31,7 @@
 - Complexité : Commencer à rédiger
 - Tunnel flots : brouillon uniquement, exercices, algorithme
 - Algorihtme de Jacobi : preuves
-- Fixer des deadlines à court, moyen et long termeu
+- Fixer des deadlines à court, moyen et long terme
 - Rédiger
   * Complexité
   * Méthode de Jacobi
