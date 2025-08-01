@@ -21,24 +21,22 @@
 \usepackage{graphicx}
 \usepackage{svg}
 %
+\usepackage{subcaption}
+%
 % \usepackage{parskip}
 % \usepackage{indentfirst}
 %
-\usepackage{tcolorbox}
-\newtcolorbox{problembox}{
-    width=0.9\textwidth,
-    colback=white, % Background color
-    colframe=black, % Frame color
-    % coltitle=black, % Color of the title text
-    % colupper=red, % Color of the main text
-    % colbacktitle=blue, % Background color of the title bar
-    arc=8pt, % Rounded corners
-    boxrule=1pt, % Frame thickness
-    boxsep=3pt, % space between text and border
-    left=6pt, % Left padding
-    right=6pt, % Right padding
-    top=6pt, % Top padding
-    bottom=6pt, % Bottom padding
+\usepackage[most]{tcolorbox}
+\newtcolorbox{problem}[1][]{
+  enhanced,
+  attach boxed title to top left={yshift=-3mm, yshifttext=-1mm, xshift=0.05\textwidth},
+  colback=white,         % default background (white for most document classes)
+  colframe=black,        % black frame
+  colbacktitle=white,    % white background for title area
+  coltitle=black,        % black text in title
+  fonttitle=\bfseries,   % bold title font
+  after skip=1em,
+  title=#1
 }
 %
 \usepackage{geometry}
@@ -53,7 +51,6 @@
 \fancyhead[R]{\nouppercase{\rightmark}}
 \fancyhead[L]{\nouppercase{\leftmark}}
 %
-\newenvironment{problem}{\begin{center}\begin{problembox}}{\end{problembox}\end{center}}
 \newenvironment{examples}{\textbf{Examples.}\begin{itemize}}{\end{itemize}}
 %
 \theoremstyle{definition}
@@ -129,44 +126,44 @@
 
 \chapter{Nonlinear optimization}
 
-\section{Uncontrained nonlinear optimization}
-\section{Constrained nonlinear optimization}
-\subsection{Lagrange}
-\subsection{Karush, Kuhn and Tucker theory}
-\subsection{Contrained convex optimization}
-\subsubsection{Frank and Wolfe's method}
-\subsubsection{The cutting plane method}
-\section{Lagrangian relaxation}
-\section{Gradient methods}
-\subsubsection{Fixed step gradient method}
-\subsubsection{Optimal step gradient method}
-\subsubsection{Conjugate gradient descent}
-\subsection{Méthode de Newton}
-\subsection{KKT Theory}
-\subsection{Le Lagrangien}
-\section{Optimisation continue stochastique}
-\subsection{Méthode du gradient stochastique}
-\subsection{Mirror descent}
+\section{Uncontrained nonlinear optimization}-
+\section{Constrained nonlinear optimization}-
+\subsection{Lagrange}-
+\subsection{Karush, Kuhn and Tucker theory}-
+\subsection{Contrained convex optimization}-
+\subsubsection{Frank and Wolfe's method}-
+\subsubsection{The cutting plane method}-
+\section{Lagrangian relaxation}-
+\section{Gradient methods}-
+\subsubsection{Fixed step gradient method}-
+\subsubsection{Optimal step gradient method}-
+\subsubsection{Conjugate gradient descent}-
+\subsection{Méthode de Newton}-
+\subsection{KKT Theory}-
+\subsection{Le Lagrangien}-
+\section{Optimisation continue stochastique}-
+\subsection{Méthode du gradient stochastique}-
+\subsection{Mirror descent}-
 
 \chapter{Stochastic optimization}
 
-\section{Stochastic gradient descent}
-\subsection{Setting and method}
-\subsection{Theoretical bounds}
-\subsection{Choosing the step}
-\section{Particle SWARM optimization}
+\section{Stochastic gradient descent}-
+\subsection{Setting and method}-
+\subsection{Theoretical bounds}-
+\subsection{Choosing the step}-
+\section{Particle SWARM optimization}-
 
 \chapter{Recent topics in optimization}
 
-\section{Polynomial optimization}
+\section{Polynomial optimization}-
 % https://wangjie212.github.io/jiewang/research/lectures.pdf
-\section{Quantum noncommutative polynomial optimization}
+\section{Quantum noncommutative polynomial optimization}-
 % ncpol3sdpa, examples, incluing the minecraft mobfarm
-\section{Trust region algorithms}
+\section{Trust region algorithms}-
 % Yuan, Y. "A review of trust region algorithms for optimization" in ICIAM 99: Proceedings of the Fourth International Congress on Industrial & Applied Mathematics, Edinburgh, 2000 Oxford University Press, USA.
 % Yuan, Y. "Recent Advances in Trust Region Algorithms", Math. Program., 2015
-\subsection{The smoothed duality gap as a stopping criterion}
-\section{Jacobi's algorithm (misc)}
+\subsection{The smoothed duality gap as a stopping criterion}-
+\section{Jacobi's algorithm (misc)}-
 
 \part{Discrete algorithmics}
 
@@ -176,8 +173,8 @@
 
 \part{Combinatorial optimization}
 
-\chapter{Heuristics}\label{chap:heuristics}
-\chapter{Meta-heuristics}\label{chap:meta-heuristics}
+\chapter{Heuristics}\label{chap:heuristics}-
+\chapter{Meta-heuristics}\label{chap:meta-heuristics}-
 
 \part{Optimal transport}
 
@@ -185,33 +182,36 @@
 
 \chapter{Algorithmic approaches to optimal transport}
 
-\section{Reduction to the simplex problem}
-\section{The Eulerian point of view}
-\section{Monge-Ampère's equation and applications}
+\section{Reduction to the simplex problem}-
+\section{The Eulerian point of view}-
+\section{Monge-Ampère's equation and applications}-
 
 \part{Problem solving}
 
 \chapter{International Mathematics Olympiads (IMO) problems}
 
-\section{IMO 2018 SL - Problem C1}
-\section{IMO 2018 SL - Problem C2}
-\section{IMO 2018 SL - Problem C3}
-\section{IMO 2018 SL - Problem C4}
-\section{IMO 2018 SL - Problem C5}
-\section{IMO 2018 SL - Problem C6}
+\section{IMO 2018 SL - Problem C1}-
+\section{IMO 2018 SL - Problem C2}-
+\section{IMO 2018 SL - Problem C3}-
+\section{IMO 2018 SL - Problem C4}-
+\section{IMO 2018 SL - Problem C5}-
+\section{IMO 2018 SL - Problem C6}-
 
-\section{IMO 2019 SL - Problem C1}
-\section{IMO 2019 SL - Problem C2}
-\section{IMO 2019 SL - Problem C3}
+\section{IMO 2019 SL - Problem C1}-
+\section{IMO 2019 SL - Problem C2}-
+\section{IMO 2019 SL - Problem C3}-
 \section{IMO 2019 SL - Problem C4}
-\section{IMO 2019 SL - Problem C5}
-\section{IMO 2019 SL - Problem C6}
+\input{src/ProblemSolving/IMO Problems - IMO 2019 SL, Problem C4.tex}
+\section{IMO 2019 SL - Problem C5}-
+\section{IMO 2019 SL - Problem C8}
+\input{src/ProblemSolving/IMO Problems - IMO 2019 SL, Problem C8.tex}
+\section{IMO 2019 SL - Problem C9}-
 
 \chapter{Competitive programming problems}
 
 \chapter{Graph problems}
 % Un sujet ENS
-\section{Combinatorics problems}
+\section{Combinatorics problems}-
 
 \bibliographystyle{plain}
 \bibliography{bib/articles,bib/books,bib/misc}

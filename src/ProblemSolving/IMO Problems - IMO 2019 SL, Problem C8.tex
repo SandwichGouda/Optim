@@ -1,0 +1,38 @@
+\begin{problem}[IMO 2019 SL - Problem C8]
+Alice has a map of Wonderland, a country consisting of $n \ge 2$ towns. For every pair of towns, there is a narrow road going from one town to the other. One day, all the roads are declared to be “one way” only. Alice has no information on the direction of the roads, but the King of Hearts has offered to help her. She is allowed to ask him a number of questions. For each question in turn, Alice chooses a pair of towns and the King of Hearts tells her the direction of the road connecting those two towns.
+
+Alice wants to know whether there is at least one town in Wonderland with at most one outgoing road. Prove that she can always find out by asking at most $4n$ questions.
+\end{problem}
+
+\subsection*{Solution.}
+
+We will show Alice needs to ask at most $4n - 7$ questions. Her strategy has the following phases. In what follows, $S$ is the set of towns that Alice, so far, does not know to have more than one outgoing road (so initially $|S| = n$).
+
+\subsubsection*{Phase 1}
+Alice chooses any two towns, say $A$ and $B$. Without loss of generality, suppose that the King of Hearts’ answer is that the road goes from $A$ to $B$.
+
+At the end of this phase, Alice has asked 1 question.
+
+\subsubsection*{Phase 2}
+During this phase there is a single (variable) town $T$ that is known to have at least one incoming road but not yet known to have any outgoing roads. Initially, $T$ is $B$. Alice does the following $n - 2$ times: she picks a town $X$ she has not asked about before, and asks the direction of the road between $T$ and $X$. If it is from $X$ to $T$, $T$ is unchanged; if it is from $T$ to $X$, $X$ becomes the new choice of town $T$, as the previous $T$ is now known to have an outgoing road.
+
+At the end of this phase, Alice has asked a total of $n - 1$ questions. The final town $T$ is not yet known to have any outgoing roads, while every other town has exactly one outgoing road known. The undirected graph of roads whose directions are known is a tree.
+
+\subsubsection*{Phase 3}
+During this phase, Alice asks about the directions of all roads between $T$ and another town she has not previously asked about, stopping if she finds two outgoing roads from $T$. This phase involves at most $n - 2$ questions. If she does not find two outgoing roads from $T$, she has answered her original question with at most $2n - 3 \leq 4n - 7$ questions, so in what follows we suppose that she does find two outgoing roads, asking a total of $k$ questions in this phase, where $2 \leq k \leq n - 2$ (and thus $n \geq 4$ for what follows).
+
+For every question where the road goes towards $T$, the town at the other end is removed from $S$ (as it already had one outgoing road known), while the last question resulted in $T$ being removed from $S$. So at the end of this phase, $|S| = n - k + 1$, while a total of $n + k - 1$ questions have been asked. Furthermore, the undirected graph of roads within $S$ whose directions are known contains no cycles. Every town in $S$ has exactly one outgoing road known.
+
+\subsubsection*{Phase 4}
+During this phase, Alice repeatedly picks any pair of towns in $S$ for which she does not know the direction of the road between them. Because every town in $S$ has exactly one outgoing road known, this always results in the removal of one of those two towns from $S$. Because there are no cycles in the graph of roads of known direction within $S$, this can continue until there are at most 2 towns left in $S$.
+
+If it ends with $t$ towns left, $n - k + 1 - t$ questions were asked in this phase, so a total of $2n - t$ questions have been asked.
+
+\subsubsection*{Phase 5}
+During this phase, Alice asks about all the roads from the remaining towns in $S$ that she has not previously asked about. She has definitely already asked about any road between those towns (if $t = 2$). She must also have asked in one of the first two phases about at least one other road involving one of those towns. So she asks at most $t(n - t) - 1$ questions in this phase.
+
+At the end of this phase, Alice knows whether any town has at most one outgoing road.
+
+If $t = 1$, at most $3n - 3 \leq 4n - 7$ questions were needed in total, while if $t = 2$, at most $4n - 7$ questions were needed in total.
+
+\end{document}

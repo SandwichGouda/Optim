@@ -31,7 +31,7 @@ In case this was not clear enough, a decision problem is a problem that asks a q
     Let $ G = (V,E) $ be a graph. A \textit{hamiltonian cycle} or \textit{hamiltonial path} in $ G $ is a cycle in $ G $ that travels all vertices of $ G $ exactly once, and all edges of $ G $ at most once.
 \end{definition}
 
-\begin{problem}
+\begin{problem}[Hamiltonian Path Problem]
     \textbf{Problem :} Hamiltonian path (\textsc{Ham})
 
     \textbf{Input :} A graph $ G = (V,E) $
@@ -336,15 +336,15 @@ In other words,
 \begin{example}
     Consider the \textsc{Ham} problem : its \og co \fg version would be
 
-    \begin{problem}
+    \begin{problem}[$ \mathsf{co} $-\textsc{Ham} Problem]
         \textbf{Problem :} $ \mathsf{co} $-\textsc{Ham}
 
         \textbf{Input :} A finite graph $ G $
 
-        \textbf{Output :} \og Yes \fg is there is no hamiltonial path in $ G $ and \fg No \og otherwise. In other words, an answer to the question \og Does $ G $ \fg contain no hamiltonian path ?
+        \textbf{Output :} \og Yes \fg if there is no hamiltonian path in $ G $ and \og No \fg otherwise. In other words, an answer to the question \og Does $ G $ \fg contain no hamiltonian path ?
     \end{problem}
 
-    In the last form of the definition of $ \mathsf{co-NP} $, $ \psi $ would be the algotithm that takes as input a candidate hamiltonian path, and that answers \og No \fg of the candidate is a hamiltonian path in $ G $, and \og Yes \fg otherwise.
+    In the last form of the definition of $ \mathsf{coNP} $, $ \psi $ would be the algotithm that takes as input a candidate hamiltonian path, and that answers \og No \fg of the candidate is a hamiltonian path in $ G $, and \og Yes \fg otherwise.
 
     As a result : $ \phi(x) $ is $ 1 $ if and only if, there exists no hamiltonian path : in other words, if and only if \textit{for all} candidate $ y $, $ \psi(x,y) $ is $ 1 $. And, $ \phi(x) $ is $ 0 $ if and only if, there exists a hamiltonian path : in other words, if and only if \textit{there exists} a candidate $ y $, for which $ \psi(x,y) $ is $ 0 $.
 \end{example}
@@ -512,7 +512,7 @@ In other words, $ \mathsf{NP} $-hard problems are problems that are harder than 
 
 That is, $ \mathsf{NP} $-complete problems are both hard and harder than any $ \mathsf{NP} $ problem. 
 
-One quite astonishing thing about $ \mathsf{NPC} $ problems is that they exist. The first example that is given in most standard complexity theory lectures is always either $ \mathsf{SAT} $ or $ \mathsf{3SAT} $. We will later (in Section \ref{subsec:SATNP}) provide further discussion on $ \mathsf{NP} $-complete problems. In particular, we will proove that these problems are both $ \mathsf{NP} $-complete, and later on give more examples of $ \mathsf{NPC} $ problems.
+One quite astonishing thing about $ \mathsf{NPC} $ problems is that they exist. The first example that is given in most standard complexity theory lectures is always either $ \mathsf{SAT} $ or $ \mathsf{3SAT} $. We will later provide further discussion on $ \mathsf{NP} $-complete problems. In particular, we will proove that these problems are both $ \mathsf{NP} $-complete, and later on give more examples of $ \mathsf{NPC} $ problems.
 
 \begin{remark}
     In \cite{gowers2024} are presented several other classes of complexity, but we have here already gone far too far away from our original goal of deep diving in combinatorial optimization. Let us just briefly mention that the $ \mathsf{RP} $ (for Random Polynomial) and $ \mathsf{BPP} $ (for Bounded (error) Probabililistic Polynomual) classes were introduced, and that these classes aim at modeling the complexity of random algorithms.
@@ -524,9 +524,24 @@ One quite astonishing thing about $ \mathsf{NPC} $ problems is that they exist. 
     We refer to \cite{sipser1996} and \cite{arora2009} for further discussion on this topic, in particular to \cite{wikiproba} for an introduction to probabilistic Turing machines that were constructed to formally and properly deal with this topic.
 \end{remark}
 
+Since we're at it, let us mention the following result regarding the $ \mathsf{BPP} $ class.
+
+\begin{theorem}[Sipser, Lautemann, 1983]
+    We have
+    \[
+        \mathsf{BPP} \subset \Delta_2 = \mathsf \Sigma_2 \cap \mathsf \Pi_2
+    \]
+\end{theorem}
+
+\begin{proof}
+    The proof is in \cite{sipser1983} and \cite{lautemann1983}. In 1983, Sipser \cite{sipser1983} showed that $ \mathsf{BPP} $ is contained in the polynomial time hierarchy. P. Gács showed that $ \mathsf{BPP} $ is actually contained in $ \mathsf \Sigma_2 \cap \mathsf \Pi_2 $. Lautemann contributed by giving a simple proof of $ \mathsf{BPP} $ \cite{lautemann1983} membership in $ \mathsf \Sigma_2 \cap \mathsf \Pi_2 $, also in 1983.
+\end{proof}
+
 \subsection{Results and inclusions between problem complexity classes}
 
-We start by the most important inclusion.
+\subsubsection{$ \mathsf{P} \subset \mathsf{NP} $}
+
+We begin with the most important inclusion.
 
 \begin{proposition}
     We have $ \mathsf P \subset \mathsf{NP} $.
@@ -535,6 +550,8 @@ We start by the most important inclusion.
 \begin{proof}
     Considering the third definition of non-deterministic Turing machines, a deterministic Turing machine can be seen as a non-deterministic with a transition function $ \delta $ that only outputs singletons. As a result, deterministic Turing machines are a special case of non-deterministic ones. Consequently, $ \mathsf P \subset \mathsf{NP} $.
 \end{proof}
+
+\subsubsection{The collapsing of the polynomial hierarchy}
 
 This is an easy inclusion, the converse of which is astoninshingly hard---it is, as we all know, one of the \textit{millenium problems}. Though, as we will see later, it is quite clear that $ \mathsf P \neq \mathsf{NP} $ is the only possible option.
 
@@ -597,6 +614,8 @@ If $ \mathsf P = \mathsf{PH} $, (which implies $ \mathsf{P} = \mathsf{NP} $ by t
 
 In this case, we say that the polynomial hierarchy \og collapses from its $p$-th level \fg. Again, we stringly believe that this does not happen !
 
+\subsubsection{$ \mathsf{NP} \subset \mathsf{PSPACE} $}
+
 \begin{proposition}
     We have
     \[
@@ -623,6 +642,48 @@ In this case, we say that the polynomial hierarchy \og collapses from its $p$-th
         \phi(x) = 1 \iff \exists y \in \{ 0,1 \}^{r(|x|)}, \psi(x,y) = 1
     \]
     The algorithm that tests all $y$'s of size less than $ r(|x|) $ in lexicographic order (using $ \psi $) and returns $ 1 $ if and only if $ \psi $ returned $ 1 $ at some point (and $ 0 $ otherwise, i.e., if all such $ y $'s all returned $ 0 $ after having been checked by $ \psi $), does not take more than polynomial space, precisely because $ y $ has size $ r(|x|) $, $ r $ is a polynomial, and because $ \psi \in \mathsf P $ and $ \mathsf P \subset \mathsf{PSPACE} $. It suffices, between each $ y $, to erase everything, so as to remain in polynomial size. As a result, $ \phi \in \mathsf{PSPACE} $ and the proof is concluded.
+\end{proof}
+
+\subsubsection{$ \mathsf{PSPACE} \subset \mathsf{EXPTIME} $}
+
+\begin{proposition}
+    We have 
+    \[
+        \mathsf{PSPACE} \subset \mathsf{EXPTIME}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Let $ \phi \in \mathsf{PSPACE} $. Consider a Turing machine that computes $ \phi $ using an at most polynomial amount of space.
+
+    Then the number of possible configurations of this Turing machine is bounded by $ 2^{r(|x|)} $ where $ r $ is some polynomial. This is because there is only a finite number of states (and symbols) allowed.
+
+    But, observe that if a Turing machine attains the same configuration twice, it will loop and run forever, as Turing machines are deterministic and their computations are entirely described by their configurations.
+
+    By assumption, our algorithm halts. As a result, it cannot run for more than $ 2^{r(|x|)} $ steps. This prooves the result.
+\end{proof}
+
+As a result, something than can be computed in polynomial space is computed in not more than exponential time !
+
+\subsubsection{$ \mathsf{NL} \subset \mathsf P $}
+
+\begin{proposition}
+    We have
+    \[
+        \mathsf{NL} \subset \mathsf P.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Given a non-deterministic Turing machine, its \textit{configuration graph} is the oriented graph, the vertices of which are the possible configuration of the Turing machine, and the edges of which connect two vertices if and only if the first one can yield to the second one (of course, assuming that the non-deterministicness to choose such fate).
+
+    The number of configurations is at most $ 2^{O(\log(n)) \times n \times | \mathcal A | \times O(\log(n))} $, which is at most polynomial in the size $ n $ of the input !
+
+    The Turing machine outputs $ 1 $ of and only if there is a path between the initial configuration and a final one that ouputs \og Yes \fg.
+
+    But, the problem that asks whether or not, in a oriented graph, there exists a path between two vertices, is in $ \mathsf P $ !
+
+    This concludes the proof.
 \end{proof}
 
 \subsection{$ \mathsf{NP} $ completeness}
