@@ -1,0 +1,56 @@
+\begin{problem}[IMO 2019 SL - Problem C1]
+    The infinite sequence $a_0, a_1, a_2, \ldots$ of (not necessarily different) integers has the following properties: 
+    \[
+    0 \leq a_i \leq i \quad \text{for all integers } i \geq 0,
+    \]
+    and
+    \[
+    \binom{k}{a_0} + \binom{k}{a_1} + \cdots + \binom{k}{a_k} = 2^k
+    \quad \text{for all integers } k \geq 0.
+    \]
+    Prove that all integers $N \geq 0$ occur in the sequence (that is, for all $N \geq 0$, there exists $i \geq 0$ with $a_i = N$).
+\end{problem}
+
+\section*{Solution}
+
+We prove by induction on $k$ that every initial segment of the sequence, $a_0, a_1, \ldots, a_k$, consists of the following elements (counted with multiplicity, and not necessarily in order), for some $\ell \geq 0$ with $2\ell \leq k+1$:
+\[
+0, 1, \ldots, \ell - 1, 0, 1, \ldots, k - \ell.
+\]
+
+For $k = 0$ we have $a_0 = 0$, which is of this form. Now suppose that for $k = m$ the elements $a_0, a_1, \ldots, a_m$ are 
+\[
+0, 0, 1, 1, 2, 2, \ldots, \ell - 1, \ell - 1, \ell, \ell + 1, \ldots, m - \ell - 1, m - \ell
+\]
+for some $\ell$ with $0 \leq 2\ell \leq m + 1$. It is given that
+\[
+\binom{m+1}{a_0} + \binom{m+1}{a_1} + \cdots + \binom{m+1}{a_m} + \binom{m+1}{a_{m+1}} = 2^{m+1},
+\]
+which becomes
+
+\begin{multline*}
+\left( \binom{m+1}{0} + \binom{m+1}{1} + \cdots + \binom{m+1}{\ell - 1} \right) \\
++ \left( \binom{m+1}{0} + \binom{m+1}{1} + \cdots + \binom{m+1}{m - \ell} \right)
++ \binom{m+1}{a_{m+1}} = 2^{m+1}.
+\end{multline*}
+
+Or, using $\binom{m+1}{i} = \binom{m+1}{m+1 - i}$, that
+
+\begin{multline*}
+\left( \binom{m+1}{0} + \binom{m+1}{1} + \cdots + \binom{m+1}{\ell - 1} \right) \\
++ \left( \binom{m+1}{m+1} + \binom{m+1}{m} + \cdots + \binom{m+1}{\ell+1} \right)
++ \binom{m+1}{a_{m+1}} = 2^{m+1}.
+\end{multline*}
+
+On the other hand, it is well known that
+\[
+\sum_{i=0}^{m+1} \binom{m+1}{i} = 2^{m+1},
+\]
+and so, by subtracting, we get
+\[
+\binom{m+1}{a_{m+1}} = \binom{m+1}{\ell}.
+\]
+
+From this, using the fact that the binomial coefficients $\binom{m+1}{i}$ are increasing for $i \leq \frac{m+1}{2}$ and decreasing for $i \geq \frac{m+1}{2}$, we conclude that either $a_{m+1} = \ell$ or $a_{m+1} = m + 1 - \ell$. In either case, $a_0, a_1, \ldots, a_{m+1}$ is again of the claimed form, which concludes the induction.
+
+As a result of this description, any integer $N \geq 0$ appears as a term of the sequence $a_i$ for some $0 \leq i \leq 2N$.
