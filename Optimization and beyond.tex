@@ -28,6 +28,7 @@
 %
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.15}
+\usetikzlibrary{patterns}
 \usepackage{mathrsfs}
 %
 \usepackage[most]{tcolorbox}
@@ -48,13 +49,16 @@
 \newgeometry{top=1.5in,bottom=1.5in,left=1.2in,right=1.2in}
 %
 \usepackage{fancyhdr} % MUST BE AFTER LOADING GEOMETRY AND GEOMETRY SETTINGS !!
-\setlength{\headheight}{15pt}
+\setlength{\headheight}{30pt}
 \pagestyle{plain}
 %
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}} % This actually sets \leftmark
 \renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}} % This sets \rightmark
-\fancyhead[R]{\nouppercase{\rightmark}}
-\fancyhead[L]{\nouppercase{\leftmark}}
+%
+\fancyhead[L]{\nouppercase{\leftmark} \\
+             \hfill \nouppercase{\rightmark}
+}
+\fancyhead[R]{}
 %
 \newenvironment{examples}{\textbf{Examples.}\begin{itemize}}{\end{itemize}}
 %
@@ -120,10 +124,11 @@
 
 \section{The problem}
 \input{src/ContinuousOptimization/Linear optimization - The problem.tex}
+\section{The polyhedron of constraints - a bit of geometry}
+\input{src/ContinuousOptimization/Linear optimization - The polytope of constraints - a bit of geometry.tex}
 \section{Dantzig's Simplex algorithm}-
 \section{Duality in Linear optimization}-
-
-
+\section{Integer optimization}-
 
 \chapter{Convex optimization}
 
