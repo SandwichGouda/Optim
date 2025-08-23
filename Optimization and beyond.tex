@@ -15,8 +15,8 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode} % For algorithmic environment
 %
-\usepackage{hyperref}
 \usepackage{cite}
+\usepackage{hyperref}
 %
 \usepackage{graphicx}
 \usepackage{svg}
@@ -24,9 +24,14 @@
 \usepackage{subcaption}
 %
 % \usepackage{parskip}
-% \usepackage{indentfirst}
+\usepackage{indentfirst}
+%
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
 %
 \usepackage[most]{tcolorbox}
+%
 \newtcolorbox{problem}[1][]{
   enhanced,
   attach boxed title to top left={yshift=-3mm, yshifttext=-1mm, xshift=0.05\textwidth},
@@ -108,19 +113,17 @@
 \newpage
 
 \input{src/Introduction.tex}
-% \input{src/ContinuousOptimization.tex}
-% \input{src/CombinatorialOptimization.tex}
-% \input{src/Algorithmics.tex}
-% \input{src/ProblemSolving.tex}
 
 \part{Continuous optimization}
 
 \chapter{Linear optimization}
 
-\section{The simplex}
-\input{src/ContinuousOptimization/Linear optimization - The simplex.tex}
+\section{The problem}
+\input{src/ContinuousOptimization/Linear optimization - The problem.tex}
+\section{Dantzig's Simplex algorithm}-
+\section{Duality in Linear optimization}-
 
-\section{Karmarkar's method}
+
 
 \chapter{Convex optimization}
 
@@ -164,6 +167,9 @@
 % Yuan, Y. "Recent Advances in Trust Region Algorithms", Math. Program., 2015
 \subsection{The smoothed duality gap as a stopping criterion}-
 \section{Jacobi's algorithm (misc)}-
+
+\part{Continuous algorithmics}
+\subsection{Miscellaneous algorithms}
 
 \part{Discrete algorithmics}
 
@@ -211,9 +217,10 @@
 
 \chapter{Competitive programming problems}
 
-\chapter{Graph problems}
+\chapter{Graph theory}
+\section{Theory}-
+\section{Problems}-
 % Un sujet ENS
-\section{Combinatorics problems}-
 
 \bibliographystyle{plain}
 \bibliography{bib/articles,bib/books,bib/misc}

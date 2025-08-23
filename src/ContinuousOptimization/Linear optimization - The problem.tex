@@ -1,0 +1,82 @@
+% The references for this chapter are \cite{hurlbert2009}, \cite{dantzig1997}, \cite{dantzig2002}, \cite{chvatal1983}, as well as \cite{karmarkar1984}.
+
+\subsection{Reduction to standard form}
+
+Usual introductions to the simplex algorithm start the following way : consider a company that has $ n $ products to sell. It shall produce nonnegative (not necessarily integral) amounts $ x_1,...,x_n $ of each product. To do so, the company makes use of $ m $ machines, each can respectively run $ b_1, ..., b_m $ minutes per month. Each product must pass though each machine, during an amount proportional to the quantity that must be produced : for each $ 1 \le j \le n $ and each $ 1 \le i \le m $, producing an amount $ x_j $ of the $ j $-th product requires machine $ i $ to run $ a_{ij}x_j $ minutes. So, the amounts $ x_j $ must satisfy the contraints
+\[
+    \forall i \in \{ 1,...,m \}, \sum_{j=1}^n a_{ij} x_j \leqslant b_i.
+\]
+Recall that the produced amounts can only be nonnegative, so we must also have
+\[
+    \forall j \in \{ 1,...,n \}, x_j \geqslant 0.
+\]
+Finally, the $ j $-th product will be sold at cost $ c_j $. The company then wants to maximize its profit
+\[
+    \sum_{j=1}^n c_j x_j.
+\]
+The motivates the Simplex problem.
+
+\begin{problem}[Linear optimization problem]
+    \textbf{Given} real numbers $ (a_{ij})_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}} $, $ (b_j)_{1 \leq j \leq n} $, $ (c_i)_{1 \leq i \leq m} $,
+
+    \textbf{Maximize} over the real numbers $ x_1, ..., x_n $, the quantity
+    \[
+        \sum_{i=1}^n c_i x_i,
+    \]
+
+    \textbf{Under the constraints}
+    \[
+        \forall i \in \{ 1, ..., m \}, \sum_{j=1}^n a_{ij} x_j \leqslant b_i,
+    \]
+    \[
+        \forall j \in \{ 1, ..., m \}, x_j \geqslant 0.
+    \]
+\end{problem}
+
+This problem can be reformulated in its (obviously equivalent) matrix form
+
+\begin{problem}[Linear optimization problem]
+    \textbf{Given} a matrix $ A \in \mathbf R^{m \times n} $ and vectors $ b \in \mathbf R^m $, $ c \in \mathbf R^n $,
+
+    \textbf{Maximize} over the vector $ x \in \mathbf R^n $, the linear form
+    \[
+        c^\top x,
+    \]
+
+    \textbf{Under the constraints}
+    \[
+        Ax \leqslant b,
+    \]
+    \[
+        x \geqslant 0.
+    \]
+\end{problem}
+
+Here, we have used the notation $ x \leqslant y $ to denote the condition $ x_i \leqslant y_i $ for all $ i \in \{ 1, ..., d \} $.
+
+More generally, linear optimization finds its interest in optimizing linear functions over linear constraint. This essentially means that the function that has to be optimized is linear, and since optimizing vectors does not really make sense so far, the function essentially ought to be a linear form. Furthermore, the constraint must be linear, in the sense that they must be written $ g_i(x) \leqslant b_i $, where $ g_i $ are linear, and real-valued---hence, linear forms.
+
+Note also that the constraints are nonstrict inequalities. Allowing strict inequalities would yield the constraints polyhedron to be non-closed, hence non-compact, and as such, there could be no solution. At any rate, we believe that it is of no use to optimize on non-closed domains---in most cases, taking the doesn't change much and yields the same result with the benefit of having the theoretical guarantee that an optimizer exists (if the region is bounded, i.e., compact).
+
+The above form of linear optimization problems is called \textit{standard form}. When we are dealing an optimization problem the objective function and constraint functions of which are all linear, it will often not be in standard form in the beginning. It is important to reformulate them and rewrite them this way, in order for Dantzig's Simplex algorithm to work. This is done by applying, for instance, a couple of the following changes:
+
+\begin{itemize}
+    \item If the problem asks for minimization instead of maximization, maximize the opposite of the objective function.
+    
+    \item If the inequalities are not in the right direction, multiply by $ -1 $. 
+
+    \item Equality constraints $ \sum_{j=1}^n a_{ij}x_j = b_i $ ($ Ax = b $) are just two in equality constraints $ \sum_{j=1}^n a_{ij}x_j \leqslant b_i $ ($ Ax \leqslant b $) and $ \sum_{j=1}^n (-a_{ij})x_j \leqslant -b_i $ ($ -Ax \leqslant -b $)
+
+    \item Replace constraints of the form $ x \geqslant \alpha $ by $ y := x - \alpha \geqslant 0$ to match the positivity constraint of the standard form.
+
+    \item Replace constraints of the form $ x \leqslant \beta $ by $ y := x - \beta \leqslant 0$ to match the positivity constraint of the standard form.
+
+    \item Exchange twice-constrained variables $ \alpha \leqslant x \beta $ by $ y := x - \alpha \geqslant $, adding the constraint $ y \leqslant \beta - \alpha $ (which is equivalent to adding a row with $ 0 $'s and a $ 1 $ at the right position in $ A $, as well as a $ \beta - \alpha $ on the same row in the vector $ b $). If there are several such constraints, their intersection is a constraint of the same form (intersections of real-line segments remain segments).
+
+    \item Unconstrained variables $ x $ are a difference of two constrained variables $ x = x^+ - x^- $ with $ x^+, x^- \geqslant 0 $.
+\end{itemize}
+
+Using these tricks, all linear programming problems can be reduced to standard form. As a result, developing an algorithm that solves a linear programming problem in standard problem is sufficient to solve them all.
+
+\subsection{The polyhedron of constraints - a bit of geometry}
+
