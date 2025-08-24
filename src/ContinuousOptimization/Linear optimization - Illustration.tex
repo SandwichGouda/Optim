@@ -1,0 +1,500 @@
+We now provide some examples that illustrate the method and some of its specificities (Dantzig's first and second rules, Bland's rule...).
+
+% Replace \leqslant by \leqslant
+% Replace \ge by \geqslant
+
+\begin{example}
+    Let us start by illustrating the method on the following example.
+    \[
+        \text{Maximize :} z = 3x_1 + 2x_2 + 4x_3
+    \]
+    \[
+        \text{subject to :}
+        \left\{
+        \begin{aligned}
+        x_1 + x_2 + 2x_3 &\leqslant 4,\\
+        2x_1 + 3x_3 &\leqslant 5,\\
+        2x_1 + x_2 + 3x_3 &\leqslant 7 \\
+        x_1 \geqslant 0,\ x_2 \geqslant 0,\ x_3 &\geqslant 0
+        \end{aligned}
+        \right.
+    \]
+
+    Introduce the slack variables for the problem. We obtain the first dictionary:
+    \[
+        \begin{aligned}
+        x_4 &= 4 - x_1 - x_2 - 2x_3,\\
+        x_5 &= 5 - 2x_1 - 3x_3,\\
+        x_6 &= 7 - 2x_1 - x_2 - 3x_3. \\
+        \hline
+        z &= 3x_1 + 2x_2 + 4x_3,\\
+        \end{aligned}
+    \]
+    Each of the three nonbasic variables being a candidate to enter the basis, let us seek the one whose growth from \(0\) increases the value of the objective function (currently equal to \(0\)) the most (Dantzig’s second criterion). If \(x_1\) enters the basis, since its increase is bounded by \(5/2\), the objective function increases by \(15/2\). If \(x_2\) enters the basis, the objective increases by \(8\). Finally, if it is \(x_3\), the objective increases by \(20/3\). We therefore choose to bring in \(x_2\). The basic variable \(x_4\) most tightly restricts the increase of \(x_2\); it leaves the basis. We obtain the new dictionary:
+    \[
+        \begin{aligned}
+        x_2 &= 4 - x_1 - 2x_3 - x_4,\\
+        x_5 &= 5 - 2x_1 - 3x_3,\\
+        x_6 &= 3 - x_1 - x_3 + x_4,\\
+        \hline
+        z &= 8 + x_1 - 2x_4.
+        \end{aligned}
+    \]
+    This time, we no longer have a choice of entering variable, since only \(x_1\) has a positive coefficient in \(z\), and \(x_5\) leaves the basis. The new dictionary is:
+    \[
+        \begin{aligned}
+        x_1 &= \tfrac{5}{2} - \tfrac{3}{2}x_3 - \tfrac{1}{2}x_5,\\
+        x_2 &= \tfrac{3}{2} - \tfrac{1}{2}x_3 - x_4 + \tfrac{1}{2}x_5,\\
+        x_6 &= \tfrac{1}{2} + \tfrac{1}{2}x_3 + x_4 + \tfrac{1}{2}x_5,\\
+        \hline
+        z &= \tfrac{21}{2} - \tfrac{3}{2}x_3 - 2x_4 - \tfrac{1}{2}x_5.
+        \end{aligned}
+    \]
+    This dictionary is the last, since there is no longer any nonbasic variable whose coefficient in \(z\) is strictly positive. The sought maximum of \(z\) is therefore \(21/2\) and it is obtained for the following values of the variables: \(x_1 = 5/2,\ x_2 = 3/2,\ x_3 = 0\).
+\end{example}
+
+\begin{example}
+    We now illustrate the first Dantzig rule on the following example.
+    \[
+        \text{Maximize :} z = 5x_1 + 6x_2 + 9x_3 + 8x_4
+    \]
+    \[
+        \text{subject to :}
+        \left\{
+        \begin{aligned}
+        x_1 + 2x_2 + 3x_3 + x_4 &\leqslant 5,\\
+        x_1 + x_2 + 2x_3 + 3x_4 &\leqslant 3,\\
+        x_1 \ge 0,\ x_2 \ge 0,\ x_3 \ge 0,\ x_4 &\ge 0.
+        \end{aligned}
+        \right.
+    \]
+
+    Introduce the slack variables. We obtain the first dictionary:
+    \[
+        \begin{aligned}
+        x_5 &= 5 - x_1 - 2x_2 - 3x_3 - x_4,\\
+        x_6 &= 3 - x_1 - x_2 - 2x_3 - 3x_4,\\
+        \hline
+        z &= 5x_1 + 6x_2 + 9x_3 + 8x_4.
+        \end{aligned}
+    \]
+
+    According to the chosen criterion for selecting an entering variable, it \(x_3\) that first enters the basis. The leaving variable is \(x_6\). The new dictionary is:
+    \[
+        \begin{aligned}
+        x_3 &= 1.5 - 0.5x_1 - 0.5x_2 - 1.5x_4 - 0.5x_6,\\
+        x_5 &= 0.5 + 0.5x_1 - 0.5x_2 + 3.5x_4 + 1.5x_6,\\
+        \hline
+        z &= 13.5 + 0.5x_1 + 1.5x_2 - 5.5x_4 - 4.5x_6.
+        \end{aligned}
+    \]
+    If we again choose the entering variable with the largest coefficient, it is \(x_2\). The leaving variable is \(x_5\). We obtain the dictionary below:
+    \[
+        \begin{aligned}
+        x_2 &= 2.4 - 0.4x_1 - 1.4x_3 - 0.6x_5 + 0.2x_6,\\
+        x_4 &= 0.2 - 0.2x_1 - 0.2x_3 + 0.2x_5 - 0.4x_6,\\
+        \hline
+        z &= 16 + x_1 - x_3 - 2x_5 - 2x_6.
+        \end{aligned}
+    \]
+    Finally, variable \(x_1\) enters the basis and \(x_4\) leaves. The last dictionary is:
+    \[
+        \begin{aligned}
+        x_1 &= 1 - x_3 - 5x_4 + x_5 - 2x_6,\\
+        x_2 &= 2 - x_3 + 2x_4 - x_5 + x_6,\\
+        z &= 17 - 2x_3 - 5x_4 - x_5 - 4x_6.
+        \end{aligned}
+    \]
+    All coefficients of \(z\) are negative or zero: the basis \(\{x_1,x_2\}\) is therefore optimal, with \(x_1=1\) and \(x_2=2\).
+\end{example}
+
+\begin{example}
+    We now illustrate Datzig's second rule on the same example as before. Now consider, with the following table, the four possibilities for the choice of the entering variable:
+    \begin{center}
+        \begin{tabular}{lcccc}
+        \hline
+        entering variable & \(x_1\) & \(x_2\) & \(x_3\) & \(x_4\) \\
+        \hline
+        maximum increase of the variable & \(3\) & \(2.5\) & \(1.5\) & \(1\) \\
+        corresponding increase of \(z\) & \(15\) & \(15\) & \(13.5\) & \(8\) \\
+        \hline
+        \end{tabular}
+    \end{center}
+
+    Dantzig's second criterion leads to choosing \(x_1\) or \(x_2\). Let us, for example, bring in \(x_1\) (the conclusion will be the same if \(x_2\) is chosen here); then it is \(x_5\) that leaves; the new dictionary is:
+    \[
+        \begin{aligned}
+        x_1 &= 3 - x_2 - 2x_3 - 3x_4 - x_6,\\
+        x_5 &= 2 - x_2 - x_3 + 2x_4 + x_6,\\
+        \hline
+        z &= 15 + x_2 - x_3 - 7x_4 - 5x_6.
+        \end{aligned}
+    \]
+    Only \(x_2\) is a candidate to enter the basis; \(x_5\) leaves; we obtain the same dictionary as above with the same conclusion.
+
+    We note that, with the first strategy for choosing the entering variable, the number of steps is four, whereas with the second strategy this number is two. In this particular case, the second strategy is quicker.
+\end{example}
+
+\begin{example}
+    We now illustrate a case where cycling occurs in linear programming.
+    
+    This example is taken from V. Chvátal’s book (\cite{chvatal1983}). One can show that we must have \(n\ge 3\) and \(m\ge 3\) for cycling to be possible.
+    When there are several candidate variables to enter the basis or to leave it, we first consider the strategy that consists in taking the candidate with the largest coefficient in \(z\) (Dantzig’s first criterion); and, in case of a choice for a leaving variable, take the candidate of smallest index.
+    \[
+        \begin{aligned}
+        x_5 &= -0.5x_1 + 5.5x_2 + 2.5x_3 - 9x_4,\\
+        x_6 &= -0.5x_1 + 1.5x_2 + 0.5x_3 - x_4,\\
+        x_7 &= 1 - x_1,\\
+        \hline
+        z &= 10x_1 - 57x_2 - 9x_3 - 24x_4.
+        \end{aligned}
+    \]
+    Bring in \(x_1\) and let \(x_5\) leave. After the first iteration:
+    \[
+        \begin{aligned}
+        x_1 &= 11x_2 + 5x_3 - 18x_4 - 2x_5,\\
+        x_6 &= -4x_2 - 2x_3 + 8x_4 + x_5,\\
+        x_7 &= 1 - 11x_2 - 5x_3 + 18x_4 - 2x_5,\\
+        \hline
+        z &= 53x_2 + 41x_3 - 204x_4 - 20x_5.
+        \end{aligned}
+    \]
+    Bring in \(x_2\) and let \(x_6\) leave. After the second iteration:
+    \[
+        \begin{aligned}
+        x_2 &= 0.5x_3 + 2x_4 + 0.25x_5 - 0.25x_6,\\
+        x_1 &= 0.5x_3 + 4x_4 + 0.75x_5 - 2.75x_6,\\
+        x_7 &= 1 + 0.5x_3 - 4x_4 - 0.75x_5 - 2.75x_6,\\
+        \hline
+        z &= 14.5x_3 - 98x_4 - 6.75x_5 - 13.25x_6.
+        \end{aligned}
+    \]
+    Bring in \(x_3\) and let \(x_1\) leave. After the third iteration:
+    \[
+        \begin{aligned}
+        x_3 &= -2x_1 + 8x_4 + 1.5x_5 - 5.5x_6,\\
+        x_2 &= x_1 - 2x_4 - 0.5x_5 + 2.5x_6,\\
+        x_7 &= 1 - x_1,\\
+        \hline
+        z &= -29x_1 + 18x_4 + 15x_5 - 93x_6.
+        \end{aligned}
+    \]
+    Bring in \(x_4\) and let \(x_2\) leave. After the fourth iteration:
+    \[
+        \begin{aligned}
+        x_4 &= 0.5x_1 - 0.5x_2 - 0.25x_5 + 1.25x_6,\\
+        x_3 &= 2x_1 - 4x_2 - 0.5x_5 + 4.5x_6,\\
+        x_7 &= 1 - x_1,\\
+        \hline
+        z &= -20x_1 - 9x_2 + 10.5x_5 - 70.5x_6.
+        \end{aligned}
+    \]
+    Bring in \(x_5\) and let \(x_3\) leave. After the fifth iteration:
+    \[
+        \begin{aligned}
+        x_5 &= 4x_1 - 8x_2 - 2x_3 + 9x_6,\\
+        x_4 &= -0.5x_1 + 1.5x_2 + 0.5x_3 - x_6,\\
+        x_7 &= 1 - x_1,\\
+        \hline
+        z &= 22x_1 - 93x_2 - 21x_3 + 24x_6.
+        \end{aligned}
+    \]
+    Bring in \(x_6\) and let \(x_4\) leave. After the sixth iteration:
+    \[
+        \begin{aligned}
+        x_5 &= -0.5x_1 + 5.5x_2 + 2.5x_3 - 9x_4,\\
+        x_6 &= -0.5x_1 + 1.5x_2 + 0.5x_3 - x_4,\\
+        x_7 &= 1 - x_1,\\
+        \hline
+        z &= 10x_1 - 57x_2 - 9x_3 - 24x_4.
+        \end{aligned}
+    \]
+
+    We recover the starting dictionary: we observe that cycling occurs. One may note that applying Dantzig’s second criterion instead of the first for choosing entering variables does not avoid cycling either, since the steps just performed are compatible with that criterion.
+
+    Let us now apply Bland’s rule: in case of a choice for an entering or leaving variable, take the candidate of smallest index. Bland’s rule gives the same first five iterations, but not the sixth. We resume the previous calculations after the fifth iteration:
+    \[
+        \begin{aligned}
+        x_5 &= 4x_1 - 8x_2 - 2x_3 + 9x_6,\\
+        x_4 &= -0.5x_1 + 1.5x_2 + 0.5x_3 - x_6,\\
+        x_7 &= 1 - x_1,\\
+        \hline
+        z &= 22x_1 - 93x_2 - 21x_3 + 24x_6.
+        \end{aligned}
+    \]
+    Bring in \(x_1\) (instead of \(x_6\)) and let \(x_4\) leave. After the sixth iteration:
+    \[
+        \begin{aligned}
+        x_1 &= 3x_2 + x_3 - 2x_4 - 2x_6,\\
+        x_5 &= 4x_2 + 2x_3 - 8x_4 + x_6,\\
+        x_7 &= 1 - 3x_2 - x_3 + 2x_4 + 2x_6,\\
+        \hline
+        z &= -27x_2 + x_3 - 44x_4 - 20x_6.
+        \end{aligned}
+    \]
+
+    Bring in \(x_3\) and let \(x_7\) leave. After the seventh iteration:
+    \[
+        \begin{aligned}
+        x_3 &= 1 - 3x_2 + 2x_4 + 2x_6 - x_7,\\
+        x_1 &= 1 \\
+        x_5 &= 2 - 2x_2 - 4x_4 + 5x_6 - 2x_7,\\
+        \hline
+        z &= 1 - 30x_2 - 42x_4 - 18x_6 - 2x_7.
+        \end{aligned}
+    \]
+    All the coefficients in \(z\) are non-positive, the method stops. We observe that applying Bland’s rule avoided cycling.
+\end{example}
+
+\begin{example}
+    \item Consider the problem below.
+    \[
+        \text{Maximize :} z = 5x_1 + 3x_2
+    \]
+    \[
+        \text{subject to :}
+        \left\{
+        \begin{aligned}
+        -4x_1 + 5x_2 &\leqslant -10,\\
+        5x_1 + 2x_2 &\leqslant 10,\\
+        3x_1 + 8x_2 &\leqslant 12,\\
+        x_1 \ge 0,\ x_2 &\ge 0.
+        \end{aligned}
+        \right.
+    \]
+
+    We will now show, using the simplex algorithm, that this problem admits no feasible solution.
+
+    The auxiliary problem is then, in standard form:
+    \[
+        \text{Maximize : } w = -x_0
+    \]
+    \[
+        \text{subject to :}
+        \left\{
+        \begin{aligned}
+            -4x_1 + 5x_2 - x_0 &\leqslant -10,\\
+            5x_1 + 2x_2 &\leqslant 10,\\
+            3x_1 + 8x_2 &\leqslant 12,\\
+            x_0 \ge 0,\ x_1 \ge 0,\ x_2 &\ge 0.
+        \end{aligned}
+        \right.
+    \]
+    We deduce the initial dictionary:
+    \[
+        \begin{aligned}
+        x_3 &= -10 + x_0 + 4x_1 - 5x_2,\\
+        x_4 &= 10 - 5x_1 - 2x_2,\\
+        x_5 &= 12 - 3x_1 - 8x_2,\\
+        \hline
+        w &= -x_0.
+        \end{aligned}
+    \]
+    This dictionary is not feasible, but we immediately pass to a feasible dictionary by bringing in \(x_0\) and removing \(x_3\). We obtain the dictionary below:
+    \[
+        \begin{aligned}
+        &x_0 = 10 - 4x_1 + 5x_2 + x_3,\\
+        &x_4 = 10 - 5x_1 - 2x_2,\\
+        &x_5 = 12 - 3x_1 - 8x_2, \\
+        \hline
+        &w = -10 + 4x_1 - 5x_2 - x_3.
+        \end{aligned}
+    \]
+    Now bring in \(x_1\) and let \(x_4\) leave; we obtain:
+    \[
+        \begin{aligned}
+        x_1 &= 2 - \tfrac{2}{5}x_2 - \tfrac{1}{5}x_4,\\
+        x_0 &= 2 + \tfrac{33}{5}x_2 + x_3 + \tfrac{4}{5}x_4,\\
+        x_5 &= 6 - \tfrac{34}{5}x_2 + \tfrac{3}{5}x_4,\\
+        \hline
+        w &= -2 - \tfrac{33}{5}x_2 - x_3 - \tfrac{4}{5}x_4.
+        \end{aligned}
+    \]
+    There is no longer any entering variable; the maximum of \(w\) is \(-2\) and is therefore not zero: the studied problem admits no feasible solution.
+\end{example}
+
+\begin{example}
+    Now consider the problem below (which differs from the previous one only by a sign in the first constraint). 
+    We solve ut using the two-phase method derived from the simplex algorithm.
+    \[
+        \text{Maximize :} z = 5x_1 + 3x_2
+    \]
+    \[
+        \text{subject to :}
+        \left\{
+        \begin{aligned}
+        -4x_1 - 5x_2 &\leqslant -10,\\
+        5x_1 + 2x_2 &\leqslant 10,\\
+        3x_1 + 8x_2 &\leqslant 12,\\
+        x_1 \ge 0,\ x_2 &\ge 0.
+        \end{aligned}
+        \right.
+    \]
+    Similarly as before, the auxiliary problem is written
+
+    \[
+        \text{Maximize :} w = -x_0
+    \]
+    \[
+        \text{subject to :}
+        \left\{
+        \begin{aligned}
+        -4x_1 - 5x_2 - x_0 &\leqslant -10,\\
+        5x_1 + 2x_2 &\leqslant 10,\\
+        3x_1 + 8x_2 &\leqslant 12,\\&
+        x_1 \ge 0,\ x_2 \ge 0,\ x_0 &\ge 0.
+        \end{aligned}
+        \right.
+    \]
+    We obtain the following initial dictionary:
+    \[
+        \begin{aligned}
+        x_3 &= -10 + x_0 + 4x_1 + 5x_2,\\
+        x_4 &= 10 - 5x_1 - 2x_2,\\
+        x_5 &= 12 - 3x_1 - 8x_2,\\
+        \hline
+        w &= -x_0.
+        \end{aligned}
+    \]
+    This dictionary is not feasible but, here again, we immediately pass to a feasible dictionary by bringing in \(x_0\) and removing \(x_3\). We obtain the dictionary below:
+    \[
+        \begin{aligned}
+        x_0 &= 10 - 4x_1 - 5x_2 + x_3,\\
+        x_4 &= 10 - 5x_1 - 2x_2,\\
+        x_5 &= 12 - 3x_1 - 8x_2,\\
+        \hline
+        w &= -10 + 4x_1 + 5x_2 - x_3.
+        \end{aligned}
+    \]
+    Now bring in \(x_1\) and let \(x_4\) leave; we obtain:
+    \[
+        \begin{aligned}
+        x_1 &= 2 - \tfrac{2}{5}x_2 - \tfrac{1}{5}x_4,\\
+        x_0 &= 2 - \tfrac{17}{5}x_2 + x_3 + \tfrac{4}{5}x_4,\\
+        x_5 &= 6 - \tfrac{34}{5}x_2 + \tfrac{3}{5}x_4,\\
+        \hline
+        w &= -2 + \tfrac{17}{5}x_2 - x_3 - \tfrac{4}{5}x_4.
+        \end{aligned}
+    \]
+    Here \(x_2\) is the entering variable while \(x_0\) leaves. The dictionary obtained is:
+    \[
+        \begin{aligned}
+        x_2 &= \tfrac{10}{17} + \tfrac{5}{17}x_3 + \tfrac{4}{17}x_4 - \tfrac{5}{17}x_0,\\
+        x_1 &= \tfrac{30}{17} - \tfrac{2}{17}x_3 - \tfrac{5}{17}x_4 + \tfrac{2}{17}x_0,\\
+        x_5 &= 2 - 2x_3 - x_4 + 2x_0,\\
+        \hline
+        w &= -x_0.
+        \end{aligned}
+    \]
+    The maximum of the auxiliary problem is \(0\): the initial problem is feasible. We can now begin the second phase of the method. To obtain a feasible dictionary for the initial problem, we take up the last dictionary above, from which we remove the variable \(x_0\) and in which we replace the function \(w\) by the function \(z\) expressed using the nonbasic variables, that is, \(x_3\) and \(x_4\). We obtain the dictionary below:
+    \[
+        \begin{aligned}
+        x_2 &= \tfrac{10}{17} + \tfrac{5}{17}x_3 + \tfrac{4}{17}x_4,\\
+        x_1 &= \tfrac{30}{17} - \tfrac{2}{17}x_3 - \tfrac{5}{17}x_4,\\
+        x_5 &= 2 - 2x_3 - x_4,\\
+        \hline
+        z &= \tfrac{180}{17} + \tfrac{5}{17}x_3 - \tfrac{13}{17}x_4.
+        \end{aligned}
+    \]
+    Variable \(x_3\) now enters the basis while variable \(x_5\) leaves. The dictionary becomes:
+    \[
+        \begin{aligned}
+        x_3 &= 1 - \tfrac{1}{2}x_4 - \tfrac{1}{2}x_5,\\
+        x_2 &= \tfrac{15}{17} + \tfrac{3}{34}x_4 - \tfrac{5}{34}x_5,\\
+        x_1 &= \tfrac{28}{17} - \tfrac{4}{17}x_4 + \tfrac{1}{17}x_5,\\
+        \hline
+        z &= \tfrac{185}{17} - \tfrac{31}{34}x_4 - \tfrac{5}{34}x_5.
+        \end{aligned}
+    \]
+    This last dictionary is optimal; the optimal solution is therefore given by:
+    \begin{itemize}
+    \item \(x_1 = 28/17,\ x_2 = 15/17\) for the decision variables;
+    \item \(x_3 = 1,\ x_4 = x_5 = 0\) for the slack variables;
+    \item \(z^\star = 185/17\) for the objective function.
+    \end{itemize}
+\end{example}
+
+\begin{example}
+    Consider a linear optimization problem with a single constraint, defined by:
+    \[
+        \text{Maximize :} \sum_{j=1}^n u_j x_j
+    \]
+    \[
+        \text{subject to :} \forall 1\le j \le n, \sum_{j=1}^n p_j x_j \leqslant P \text{ and } x_j \geqslant 0
+    \]
+    All the coefficients \(u_j\) and \(p_j\) as well as \(P\) are assumed strictly positive. We will show that the variable corresponding to the largest ratio \(u_j/p_j\) is entering and that, by bringing it into the basis, one reaches the maximum of the objective function in a single iteration. We will then express this maximum as a function of the various coefficients.
+
+    Without loss of generality (renumbering variables if necessary), suppose that variable \(x_1\) corresponds to the largest ratio \(u_j/p_j\): \(j\ge 1 \Rightarrow u_j/p_j \le u_1/p_1\). Since \(u_1\) is, by hypothesis, positive, the variable \(x_1\) is entering and we therefore exchange it with the unique basic variable, which corresponds to the single constraint, \(x_{n+1}\). We had:
+    \[
+    x_{n+1} = P - \sum_{j=1}^n p_j x_j,
+    \]
+    and, after the exchange, we obtain:
+    \[
+    x_1 = \frac{1}{p_1}\Bigl(P - \sum_{j=2}^n p_j x_j - x_{n+1}\Bigr).
+    \]
+    Substituting this value into the objective function yields:
+    \[
+    z = \frac{u_1}{p_1}P - \sum_{j=2}^n\Bigl(u_1\frac{p_j}{p_1} - u_j\Bigr)x_j - \frac{u_1}{p_1}x_{n+1},
+    \]
+    or, equivalently,
+    \[
+    z = \frac{u_1}{p_1}P + \sum_{j=2}^n\Bigl(u_j - u_1\frac{p_j}{p_1}\Bigr)x_j - \frac{u_1}{p_1}x_{n+1}.
+    \]
+    Given the adopted numbering, the coefficients of all the variables that appear in the expression of \(z\) are negative or zero. We have therefore determined the maximum value of \(z\) in one iteration, and this maximum value is equal to \(\dfrac{u_1}{p_1}P\): this amounts to saturating the constraint with the variable for which the ratio \(u_j/p_j\) is maximum.
+\end{example}
+
+\begin{example}
+    Consider a system \((S')\) of \(m\) inequalities in \(n\) variables of the following form:
+    \[
+    \forall 1 \le i \le m,\ \sum_{j=1}^n a_{ij} x_j \leqslant b_i.
+    \]
+    We show that the simplex algorithm can be used know whether such a system admits solutions and, if so, to determine one.
+
+    If all the $b_i$ are nonnegative, the zero solution works. Otherwise, checking whether the system $(S)$ has solutions is equivalent to asking whether the following linear program $(P)$ is feasible (the objective function is irrelevant here; this is why it is not specified):
+    \[
+    \text{Maximize :} z
+    \]
+
+    \[
+    \text{subject to :} \sum_{j=1}^{n} a_{ij} x_j \le b_i \quad (1 \le i \le m), \qquad x_j \in \mathbb{R} \quad (1 \le j \le n).
+    \]
+    Indeed, every solution of $(S)$ is a feasible solution of $(P)$, and vice versa. We can therefore solve the problem by applying to $(P)$ Phase I of the two-phase method after replacing each variable $x_j$ by $x_j^{+}-x_j^{-}$ with $x_j^{+}\ge 0$ and $x_j^{-}\ge 0$, so as to obtain the standard form of $(P)$.
+
+    We now apply this method to the following system:
+    \[
+    \begin{aligned}
+        -x_1 + 2x_2 &\le -1,\\
+        x_1 - x_2 &\le -2.
+    \end{aligned}
+    \]
+
+    For the program $(P)$ in standard form is:
+    \[
+        \text{Maximize :} z
+    \]
+    \[
+        \text{subject to :}
+        \left\{
+        \begin{aligned}
+            -x_1^{+} + x_1^{-} + 2x_2^{-} - x_2^{+} &\leqslant -1,\\
+            x_1^{+} - x_1^{-} - x_2^{+} + x_2^{+} &\leqslant -2,\\
+            x_1^{+},\,x_1^{-},\,x_2^{+},\,x_2^{-} &\geqslant 0.
+        \end{aligned}
+        \right.
+    \]
+    We write the auxiliary problem, which yields for initial dictionary:
+    \begin{align*}
+        x_3 &= -1 + x_0 + x_1^{+} - x_1^{-} - 2x_2^{-} + 2x_2^{+},\\
+        x_4 &= -2 + x_0 - x_1^{+} + x_1^{-} + x_2^{-} - x_2^{+},\\
+        \hline
+        w   &= -x_0.
+    \end{align*}
+
+    After three iterations (a first forced pivot, exchanging $x_0$ and $x_4$, and a second one exchanging $x_1^{-}$ with $x_3$, then $x_2^{+}$ with $x_0$), we get that the solution is $x_1^{+}=0$, $x_1^{-}=5$, $x_2^{+}=0$, $x_2^{-}=3$. Consequently,
+    \[
+    x_1 = x_1^{+} - x_1^{-} = -5
+    \qquad\text{and}\qquad
+    x_2 = x_2^{+} - x_2^{-} = -3
+    \]
+    form a feasible solution of the original system.
+\end{example}
