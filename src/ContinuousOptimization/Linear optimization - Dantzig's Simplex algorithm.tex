@@ -1,10 +1,261 @@
 We now describe the classical algorithm to solve linear programming problems, namely, Dantzig's simplex algorithm, often referred to as the Simplex algorithm.
 
-We must first provide some definition. Consider a linear optimization problem in standard form :
+\subsection{Definitions}
 
+We must first provide some definition. Consider a linear optimization problem in standard form : 
+\[
+    \max_{x_1, ..., x_n \in \mathbf R}\sum_{i=1}^n c_i x_i,
+\]
+subject to the constraints
+\[
+    \forall i \in \{ 1, ..., m \}, \sum_{j=1}^n a_{ij} x_j \leqslant b_i,
+\]
+\[
+    \forall j \in \{ 1, ..., m \}, x_j \geqslant 0.
+\]
+(as previously mentionned, standard form is essential when coming to deal with the algorithmic aspects of linear programming).
 
+\begin{definition}
+    Any $n$-tuple $(x_1,\dots,x_n)$ satisfying these constraints is called a \emph{feasible solution}.
+    If a problem admits feasible solutions, it is said to be \emph{feasible}.
+    If it admits no feasible solution, it is said to be \emph{infeasible} (or \emph{not feasible}).
+\end{definition}
 
-Kamakar's method exists. Brief overview
+\begin{definition}
+    The function
+    \[
+    z = \sum_{j=1}^n c_j x_j
+    \]
+    is called the \emph{objective function}.
+    The variables $x_1,\dots,x_n$ are called \emph{decision variables} (or choice variables, main variables, or initial variables).
+    We introduce the \emph{slack variables} $x_{n+1},\dots,x_{n+m}$.
+\end{definition}
 
+\begin{remark}
+A solution $(x_1,\dots,x_{n+m})$ is \emph{feasible} if and only if all its components are nonnegative, that is
+\[
+   \forall\,k\in\{1,2,\dots,n+m\},\quad x_k \ge 0 .
+\]
+A feasible solution that maximizes the objective function is called an \emph{optimal solution}.
+\end{remark}
 
-The simplex's name is not on a simplex
+\begin{definition}
+    If a problem admits feasible solutions and the objective function can take arbitrarily large values, the problem is said to be \emph{feasible and unbounded}.
+\end{definition}
+
+\begin{remark}
+    Thus, there are three types of problems:
+    \begin{enumerate}
+        \item feasible and unbounded problems;
+        \item feasible and bounded problems;
+        \item infeasible problems.
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    A \emph{dictionary} is a system of linear equations relating the variable
+    \[
+        x_1,\dots,x_n,x_{n+1},\dots,x_{n+m}
+    \]
+    and $z$, and satisfying the following two properties:
+    \begin{itemize}
+        \item the equations of the dictionary \emph{uniquely} express the objective function $z$ and $m$ of the $n+m$ variables in terms of the other $n$;
+        \item the dictionary is \emph{equivalent} to the system defining the slack variables and the objective function, namely
+    \[
+        \begin{array}{@{}rcl@{}}   
+        x_{n+i} &=&b_i - \sum\limits_{j=1}^n a_{ij}x_j \quad (i=1,\dots,m),\\
+        \hline z &=& \sum\limits_{j=1}^n c_j x_j .
+        \end{array}
+    \]
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Basis]\label{def:base}
+    A \emph{basis} is a set of $m$ variables (called \emph{basic variables} or \emph{in the basis}) that can be uniquely and affinely expressed in terms of the $n$ other variables (called \emph{non-basic variables}), this expression being equivalent to the $m$ equality constraints defining the $m$ slack variables.
+\end{definition}
+
+\begin{remark}
+    Thus, a basis defines a dictionary, and conversely.
+\end{remark}
+
+\begin{definition}
+    Once a basis is fixed, the associated \emph{basic solution} is obtained by assigning the value $0$ to all the non-basic variables.
+\end{definition}
+
+\begin{remark}
+    Geometrically, a solution that is both basic and feasible corresponds to a \emph{vertex} of the constraint polytope. 
+    
+    The simplex algorithm aims at determining an optimal solution among the basic feasible solutions, that is, among the vertices of the constraint polytope.
+\end{remark}
+
+\subsection{Description of an iteration}
+
+To describe one iteration of the simplex algorithm, we define two subsets forming a partition of the set of indices:
+
+\begin{itemize}
+  \item $J \subset \{1,2,\dots,n+m\}$ is the set of indices of the $n$ non-basic variables, with $|J|=n$ (often, initially, has $J=\{1,2,\dots,n\}$);
+  \item $I = \{1,2,\dots,n+m\} \setminus J$ is the set of indices of the $m$ basic variables.
+\end{itemize}
+
+The current dictionary is described by the equalities (the symbols “$\,'\,$” distinguish the current dictionary from the initial one):
+\[
+   \forall i \in I, \quad x_i' = b_i' + \sum_{j \in J} a_{ij}' x_j,
+   \qquad 
+   z = z' + \sum_{j \in J} c_j' x_j .
+\]
+
+We assume the dictionary is feasible: $\forall i \in I, \ b_i' \geq 0$. The step of the Simplex algorithm are then the following :
+
+\begin{enumerate}
+  \item \textbf{Optimal case:}  
+  If all the coefficients $c_j'$ are non-positive, the algorithm terminates.  
+  Setting the non-basic variables to zero then yields an optimal solution.
+
+  \item \textbf{Non-optimal case:}  
+  Otherwise:
+  \begin{itemize}
+    \item Choose an \emph{entering variable} $x_{j_0}$ among the non-basic variables with $c_{j_0}'>0$.  
+    Several selection rules are possible:
+    \begin{itemize}
+      \item \emph{Dantzig's first rule:} choose the variable with the largest $c_j'$;
+      \item \emph{Dantzig's second rule:} choose the variable leading to the greatest increase in $z$.
+    \end{itemize}
+
+    \item Determine the \emph{leaving variable} $x_{i_0}$, i.e., the basic variable that most restricts the growth of $x_{j_0}$.  
+    For this, consider the ratios
+    \[
+       - \frac{b_i'}{a_{ij_0}'}
+    \]
+    for $i \in I$ with $a_{ij_0}' < 0$.  
+    The index $i_0$ corresponds to the smallest of these ratios.  
+    In case of a tie, one may choose arbitrarily, but prefeably, according to Bland's rule, which we will explain later.
+
+    \item Solve for $x_{j_0}$ in the current expression of $x_{i_0}$.
+
+    \item Substitute this new expression for $x_{j_0}$ into $z$ and into the equations of the other basic variables.  
+    This yields the \emph{new current dictionary}, from which the next iteration is applied.
+  \end{itemize}
+\end{enumerate}
+
+\begin{remark}
+    When moving from the current dictionary to the next dictionary, we are guaranteed that the latter is feasible, due to the choice of the leaving variable. In other words, we move from one basic feasible solution to another basic feasible solution, or equivalently, from one vertex of the constraint polytope to another vertex of this polytope. It is therefore unnecessary to verify this property when obtaining the new dictionary.
+\end{remark}
+
+\begin{remark}
+  A variable that enters the basis may leave it in the next iteration. Conversely, a variable that leaves the basis cannot immediately re-enter it in the following iteration (but it may re-enter the basis at a later stage).
+\end{remark}
+
+\subsection{Degeneracy and cycling}
+
+\begin{definition}
+A \emph{basic feasible solution} with one or more basic variables equal to zero is said to be \emph{degenerate}. A basis whose associated basic solution is degenerate is itself said to be \emph{degenerate}.
+\end{definition}
+
+\begin{example}
+    Consider the following (non-degenerate) dictionary:
+    \[
+        \begin{array}{@{}rcl@{}}
+        x_4 &=& 1 - 2x_3 ,\\
+        x_5 &=& 3 - 2x_1 + 4x_2 - 6x_3 ,\\
+        x_6 &=& 2 + x_1 - 3x_2 - 4x_3 ,\\
+        \hline z   &=& 2x_1 - x_2 + 8x_3 .
+        \end{array}
+    \]
+
+    Let us choose to bring $x_3$ into the basis. The constraints $x_4 \ge 0$, $x_5 \ge 0$, and $x_6 \ge 0$ all impose the bound $0.5$ as the limit to the growth of $x_3$. Each of the three variables $x_4, x_5, x_6$ is therefore a candidate to leave the basis.
+
+    If we choose $x_4$, we obtain the new dictionary:
+    \[
+        \begin{array}{@{}rcl@{}}
+        x_3 &=& 0.5 - 0.5x_4 ,\\
+        x_5 &=& -2x_1 + 4x_2 + 3x_4 ,\\
+        x_6 &=& x_1 - 3x_2 + 2x_4 ,\\
+        \hline z   &=& 4 + 2x_1 - x_2 - 4x_4 .
+        \end{array}
+    \]
+
+    In the basic solution associated with this dictionary, $x_5$ and $x_6$ take the value $0$. Since at least one of the basic variables is zero, this basic solution is \emph{degenerate}.
+
+    If we perform another iteration starting from this dictionary, choosing to bring $x_1$ into the basis (the only variable with a positive coefficient in $z$), the constraint $x_5 \ge 0$ imposes $x_1 \le 0$. Thus, the largest value assignable to $x_1$ is $0$, and the value of $z$ will not increase during this iteration.
+\end{example}
+
+The drawback of such degenerate iterations is that they may induce a disastrous phenomenon for the convergence of the algorithm: \emph{cycling}.
+
+\begin{definition}
+    We say that \emph{cycling} occurs when, after a finite number of iterations, a dictionary is repeated.
+\end{definition}
+
+\begin{remark}
+    In fact, because of the independence of the non-basic variables, a dictionary that has already been encountered reappears as soon as we recover the same partition of the $m+n$ variables into basic variables and non-basic variables.
+\end{remark}
+
+\begin{remark} 
+    Consider an iteration consisting of moving from a dictionary $D_1$ to a dictionary $D_2$ with an entering variable $x$. Suppose that the value of the objective function $z$ in the basic solution associated with $D_2$ is the same as in the basic solution associated with $D_1$. This is only possible if $x$ has the value zero in the basic solutions associated with both $D_1$ and $D_2$. Consequently, none of the variable values change during the iteration. If, throughout a sequence of dictionaries, the value of the objective function $z$ does not increase, no variable changes; geometrically, one remains at the same vertex of the polytope, and the movements in the considered directions are, in fact, of zero amplitude.
+\end{remark}
+
+Cycling can always be avoided by applying the \emph{least index rule} (Bland's rule, \cite{bland1977}): whenever there is a choice for the entering variable or the leaving variable, we always choose the one with the smallest index among the candidate variables. 
+
+\begin{theorem}[Bland's Theorem]\label{thm:bland}
+    Cycling cannot occur when, at each iteration starting from a degenerate dictionary, the entering and leaving variables are chosen as those with the smallest index among the candidate variables.
+\end{theorem}
+
+The effectiveness of Bland's rule (i.e., the proof of Theorem\ref{thm:bland}), is given in \cite{bland1977}, as well as in \cite{charonhudry2019}. Unfortunately, both sources, even the first one, which is the original paper the theorem was prooven into, were not able to entirely give the sense of a fully convincing proof. We of course highly trust the litterature and experts as to the fact that the result is true, simply, some details are not proven in these sources---we onsider that they can act as exercises. Even \cite{hurlbert2009} does not proove the result and leaves it as a \og Workout \fg, as he likes to call them. The journey to advanced topics in the field optimization is still long and we have chosen not to invest an unknown amount of $ h \in [1-10] $ hours in filling the holes. Consequently, the proof we will give, which is that of \cite{charonhudry2019}, contains unproven claims.
+
+\begin{proof}
+    Suppose that, while applying Bland's rule, the same dictionary $D_0$ is encountered twice at the end of a sequence of iterations having produced the dictionaries $D_0, D_1, \dots, D_k = D_0$. All these dictionaries must necessarily be degenerate.
+
+    We call a variable \emph{versatile} if, during these iterations, it is sometimes basic and sometimes non-basic (note that versatile variables necessarily exist when cycling occurs). Let $t$ be the greatest index among the versatile variables.
+
+    In the sequence of dictionaries $D_0, D_1, \dots, D_k, D_1, \dots, D_0$, there must necessarily exist a dictionary $D'$ in which $x_t$ is leaving (that is, it is basic in $D'$ but not in the dictionary thereafter), and a dictionary $D''$ in which $x_t$ is entering. Let $x_s$ be the variable that enters the basis when $x_t$ leaves $D'$ (i.e., $x_s$ is not basic in $D'$ but is in the dictionary thereafter). The variable $x_s$ is versatile, hence $s < t$.
+
+    Let $I$ denote the set of indices of the basic variables of $D'$. The dictionary $D'$ can be written in the form:
+    \[
+        \begin{array}{@{}rcl@{}}
+        \forall i \in I, \quad x_i = b_i' - \sum\limits_{j \notin I} a_{ij}' x_j, \\
+        \hline z = z^* + \sum\limits_{j \notin I} c_j' x_j .
+        \end{array}
+    \]
+
+    Since the variable $x_s$ is entering, we have $c'_s > 0$. As Bland's rule is applied, we have, for $j \notin I$ with $j < s$, $c'_j \leqslant 0$. Since $x_t$ is leaving in $D'$, it follows that $a'_{ts} > 0$.
+
+    The last row of $D''$ can be written as:
+    \[
+    z = z^* + \sum_{k=1}^{n+m} c''_k x_k ,
+    \]
+    where $c''_k$ is zero if $x_k$ is basic and $c''_t > 0$.
+
+    For any solution $(x_1, \dots, x_{n+m})$ of the system of constraints, since the value of $z^*$ does not change during cycling, we have:
+    \[
+    z^* + \sum_{j \notin I} c'_j x_j = z^* + \sum_{k=1}^{n+m} c''_k x_k .
+    \]
+
+    If we define a particular solution of the system of constraints by setting all the non-basic variables in $D'$ equal to zero except $x_s$, and giving $x_s$ some arbitrary value $x^*_s$ (the values of the other variables are then completely determined), the above equality becomes:
+    \[
+    c'_s x^*_s = c''_s x^*_s + \sum_{i \in I} c''_i (b'_i - a'_{is} x^*_s) ,
+    \]
+    or equivalently,
+    \[
+    \left(c'_s - c''_s + \sum_{i \in I} c''_i a'_{is}\right) x^*_s = \sum_{i \in I} c''_i b'_i .
+    \]
+
+    Since this equality holds for any value of $x^*_s$, it follows that
+    \[
+    c'_s - c''_s + \sum_{i \in I} c''_i a'_{is} = 0 .
+    \]
+
+    Now, since it is $x_t$ that enters the basis in $D''$ and not $x_s$, because we have $s < t$, we must have $c''_s < 0$. But we already observed that $c'_s > 0$, hence there exists an index $r \in I$ such that $c''_r a'_{rs} < 0$.
+
+    By definition of $r$, the variable $x_r$ was basic in $D'$, and since $c''_r \neq 0$, it is not basic in $D''$. We deduce that $x_r$ is a versatile variable, and therefore $r \leqslant t$.
+
+    Moreover, since $c''_r$ and $a'_{ts}$ are positive, their product is also positive, and thus $r$ cannot equal $t$, hence $r < t$.
+
+    Since $x_t$ enters the basis in $D''$ while $r < t$, this means that $x_r$ is not entering in $D''$, and therefore we cannot have $c''_r > 0$; consequently, we must have $a'_{rs} > 0$.
+
+    From the earlier remark, all versatile variables remain zero throughout the cycling process. Since $x_r$ is versatile, it is zero in the basic solution associated with $D'$. Consequently, we have $b'_r = 0$.
+
+    Therefore, the variable $x_r$ was also a candidate to leave the basis of $D'$, just like $x_t$. By choosing $x_t$ with $t > r$, we did not apply the least index rule, a contradiction.
+\end{proof}
+
+\textbf{Remark.} It is unnecessary to apply Bland's rule when the dictionary is not degenerate.
+
+Let us conclude by saying that, although it is the most classically taught one, Dantzig's algorithm is by no means the only method that has been developed for linear optimization problems ! Several algorithms exist, but, most are historical though, and not as efficient. Dantzig's method was the first method to be efficient and that applied in all cases. Only Karmarkar's interior-point method \cite{karmarkar1984} can compete with it.

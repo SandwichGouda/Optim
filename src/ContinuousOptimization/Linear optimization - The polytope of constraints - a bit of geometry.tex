@@ -26,6 +26,12 @@ This theorem is sometimes referred to as the Minkowki-Weyl theorem. But, not tha
 
 We do not here provide a proof for this theorem, as the proof is a bit long and not very interesting in our opinion. It can be found in this bachelor thesis \cite{chappell2019}, it is also the Corollary 13.6 of Section 13.5 in Chapter 13 of the more standard reference \cite{jantosciak1979}. Though the proof requires to formally investigate (in particular, define properly) the notions of \textit{face} and \textit{vertice} of a $ n $-dimensional polytope, it appears clear to us that a small drawing is much more enlightening. Interestingly, a generalization to infinite-dimensional spaces can be found in \cite{LeRomer2023}.
 
+\begin{remark}
+    Let us now introduce and discuss the notion of \emph{polytope}. It is important to note the following point : as explained in \cite{boydvandenberghe2004}, the difference of usage between the words \og \emph{polyhedron} \fg and \og \emph{polytope} \fg is not very standard. In both cases, Theorem~\ref{thm:polytopes-are-intersections-of-closed-halfspaces} applies, but the only difference is the following : some authors refer to polytopes as bounded versions of polyhedra, which are then allowed to be unbounded, while some do the opposite, i.e., define polyhedra as bounded polytopes.
+
+    We will here only refer to polytopes, 
+\end{remark}
+
 \begin{definition}[Convex polytope]
     A region $ A \subset \mathbf R^n $ is a \textit{convex polytope} if it satisfies one of the equivalent conditions of Theorem~\ref{thm:polytopes-are-intersections-of-closed-halfspaces}
 \end{definition}
@@ -131,13 +137,13 @@ Let's get back to the link with linear optimization.
     \[
         H_i^{A,b} := \{ x \in \mathbf R^n, \sum_{j=1}^n a_{ij} x_j \leqslant b_i \} 
     \]
-    is clearly, by definition, an affine half-space (defined by the affine hyperplane with equation $ \sum\limits _{j=1}^na_{ij} x_j \leqslant b_i $).
+    is clearly, by definition, an affine half-space (defined by the affine hyperplane with equation $ \sum\limits _{j=1}^na_{ij} x_j = b_i $).
 
     Clearly, we have
     \[
         Ax \leqslant b \iff x \in \bigcap_{i=1}^m H_i^{A,b}
     \]
-    when the result, given Theorem \ref{thm:polytopes-are-intersections-of-closed-halfspaces}.
+    whence the result, given Theorem \ref{thm:polytopes-are-intersections-of-closed-halfspaces}.
 
     The fact that it is convex comes from the fact that any intersection of convex regions remains convex, or by the fact that Theorem~\ref{thm:polytopes-are-intersections-of-closed-halfspaces} implies that the condition is equivalent to being a convex hull (which, needless to say, are convex).
 \end{proof}
