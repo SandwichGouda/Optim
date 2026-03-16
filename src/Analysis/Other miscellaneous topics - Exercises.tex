@@ -1,9 +1,84 @@
 \section{Exercises}
 
 \begin{exercise}
-    Let $ E $ be a finite-dimentional vector space over the algebraically closed field $ \mathbf K $. Let $ u $ and $ n $ be endomorphisms of this space. Assume $ n $ is nilpotent. Show that $ \det(u+n) = \det(u) $.
+    Let $ E $ be a finite-dimensional vector space. Let $ u $ and $ v $ be endomorphisms of this space.
+    
+    Assume that the characte polynomials of $ u $ and $ v $ are split on the base field of $ E $, and that $ u $ and $ v $ commute.
+
+    Show that $ u $ and $ v $ are can be triangularized in a same common basis of $ E $.
 \end{exercise}
 
 \begin{solution}
+    We proceed by induction on the dimension $ n $ of $ E $.
+
+    If $ n = 1 $, $ u $ and $ v $ are trivially triangular in any basis.
+
+    Assume that the result holds for any endomorphisms $ u $ and $ v $ that commute and whose characteristic polynomials are split on the base field of $ E $, on any $ k $-dimensional vector space $ E $ for all $ 1 \leq k \leq n $.
+
+    Consider a $ (n+1) $-dimensional space on the same field, and $ u,v $ two commuting endomorphisms on that space.
+
+    Since the characteristic polynomial of $ u $ is split, we can introduce an eigenvalue $ \lambda $ and an eigenvector $ x \neq 0 $ of $ u $.
+
+    Since $ u $ and $ v $ commute, the eigenspace $ E_\lambda(u) $ is stabilized by $ v $.
+
+    The characteristic polynomial of the induced endomorphism $ \tilde v $ on $ E_\lambda(u) $ is still split, since it divides that of $ v $ by a classical lemma.
+
+    We can hence find an eigenvector $ y $ of $ \tilde v $. It will, by definition (and construction) be a common eignenvector of both $ u $ and $ v $.
+
+    We obtain that the matrices of $ u $ and $ v $ in a basis adapted to the decomposition $ E = \mathrm{Span}(y) \oplus F $ write as
     
+    \[
+        \left(
+            \begin{array}{cc}
+                a \quad * \\
+                0 \quad A
+            \end{array}
+        \right)
+    \]
+    
+    and 
+
+    \[
+        \left(
+            \begin{array}{cc}
+                b \quad * \\
+                0 \quad B
+            \end{array}
+        \right)
+    \]
+
+    where \og 0 \fg denotes a column of zeros of height $ n - 1 $, $ a $ a scalar and $ A $ a $ (n-1) $-sized matrix.
+
+    The characteristic polynomials of the residual matrices $ A $ and $ B $ divide those of $ u $ and $ v $, so are also split on the base field of $ E $. They also commute since by composing $ u $ and $ v $ by the appropriate projections (onto the linear complement of the line spanned by the common eigenvector, parallel to this line).
+
+    Hence, $ A $ and $ B $ are co-triangularized, and by block matrix multiplication, we obtain a common triangular matrix for $ u $ and $ v $.
+\end{solution}
+
+\begin{remark}
+    This argument can be extended to any family $ (u_i)_{i \in I} $ of commuting endomorphisms.
+\end{remark}
+
+\begin{exercise}
+    Let $ E $ be a finite-dimensional vector space over the field of complex numbers. Let $ u $ and $ n $ be endomorphisms of this space. Assume $ n $ is nilpotent.
+    
+    Show that $ \det(u+n) = \det(u) $.
+\end{exercise}
+
+\begin{solution}
+    First proof : using the last exercise, they can be co-triangularized in a common basis. The result then trivially follows.
+
+    Second proof :
+    Assume first that $ u $ is invertible.
+
+    Then, $ \det(u+n) = \det(u)\det(\mathrm{Id} + n \circ u^{-1}) $.
+
+    Of course, $ u \circ n = n \circ u $ yields $ u^{-1} \circ n = n \circ u^{-1} $. Hence, $ n \circ u^{-1} $ is nilpotent. We can triangularize it in some basis of $ E $. Then, it is clear, by writing the matrix of $ \mathrm{Id} + n \circ u^{-1} $ in that base that its determinant is $ 1^n = 1 $. Hence, $ \det(u+n) = \det(u) $.
+
+    Now, proceed for the general case.
+
+    It is clear that for all $ t \in \mathbf R $, $ u_t = u + t\mathrm{Id} $ still commutes with $ n $.
+
+    The set $ E = \{ t \in \mathbf R, \det(u_t) = 0 \} $ is finite since it corresponds to the set of eigenvalues of $ -u $.
+
+    The equality $ \det(u_t+n) = \det(u_t) $ is true on $ E $. By continuity of the determinant, since the the complement set of $ E $ is finite, it is true on the real line.
 \end{solution}
