@@ -1,0 +1,64 @@
+In this chapter we focus on convex functions, and hence on convex optimization.
+
+\section{General results}
+
+We start with general results that are of use and form the basis of the theory of convex analysis.
+
+\subsection{Definition}
+
+\begin{definition}[Convexity for sets]
+    Let $ A $ be a subset of $ \mathbf R^n $.
+    
+    Then, $ A $ is said to be \textit{convex} if
+    \[
+        \forall a \in A, \forall b \in A, \forall \lambda \in [0,1] (1-\lambda)a + \lambda b \in A
+    \]
+\end{definition}
+
+\begin{remark}
+    We have just defined \textit{convexity for sets}. 
+    
+    This notion is to be distinguished from the notion of convexity for \textit{functions}.
+\end{remark}
+
+\begin{remark}
+    We will follow the convention of \cite{boydvandenberghe2004}, and often refer to the set $ \mathrm{dom}(f) $ on which $ f $ is defined (we define $ \mathrm{dom} f $ as such).
+\end{remark}
+
+\begin{definition}[Convexity for a function]
+    Let $ f $ be a real valued function defined on $ \mathbf R^n $. 
+
+    We say that $ f $ is \textit{convex} if $ \mathrm{dom} f $ is convex and if
+
+    \[
+        \forall a,b \in \mathrm{dom} f, \forall \lambda \in [0,1], f(\lambda a + (1-\lambda)b) \leqslant \lambda f(a) + (1-\lambda) f(b)
+    \]
+\end{definition}
+
+\begin{definition}[Epigraph]
+    The epigraph of a real-values function is
+
+    \[ \mathrm{Epi}(f) = \{ (x,y) \in \mathrm{dom}(f) \times \mathbb R, f(x) \geqslant y \}\]
+\end{definition}
+
+\begin{proposition}
+    A function is convex if and only if its epigraph is convex.
+\end{proposition}
+
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\subsection{The one-dimensional case}
+
+In this section, $ f $ is defined on an open interval $ I $ of $ \mathbf R $. We have the following, which is of the uttermost importance.
+
+\begin{theorem}[Three-slopes inequality]
+    For all $ a < b < c $ in $ I $,
+
+    \[
+        \frac{f(b) - f(a)}{b-a} \leqslant \frac{f(c)-f(a)}{c-a} \leqslant \frac{f(c)-f(b)}{c-b}
+    \]
+\end{theorem}
+
+% First order, <∇f(x) - ∇f(y),x-y> >= 0

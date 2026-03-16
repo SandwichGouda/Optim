@@ -61,6 +61,7 @@
 \fancyhead[R]{}
 %
 \newenvironment{examples}{\textbf{Examples.}\begin{itemize}}{\end{itemize}}
+\newenvironment{solution}{\textit{Solution.}}{}
 %
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
@@ -71,6 +72,7 @@
 \newtheorem{remark}{Remark}
 \newtheorem{hypothesis}{Hypothesis}
 \newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
 %
 \numberwithin{definition}{section}
 \numberwithin{theorem}{section}
@@ -130,16 +132,17 @@
 \input{src/ContinuousOptimization/Linear optimization - Dantzig's Simplex algorithm.tex}
 \section{Illustration}
 \input{src/ContinuousOptimization/Linear optimization - Illustration.tex}
-\section{Duality in Linear optimization}-
+\section{Duality in Linear optimization}\label{sec:duality-lin-prog}-
 \section{Integer optimization}-
 
 \chapter{Convex optimization}
+\input{src/ContinuousOptimization/Convex optimization - General results.tex}
 
 \chapter{Nonlinear optimization}
 
 \section{Uncontrained nonlinear optimization}-
 \section{Constrained nonlinear optimization}-
-\subsection{Lagrange}-
+\subsection{the Lagrangian operator}-
 \subsection{Karush, Kuhn and Tucker theory}-
 \subsection{Contrained convex optimization}-
 \subsubsection{Frank and Wolfe's method}-
@@ -149,22 +152,18 @@
 \subsubsection{Fixed step gradient method}-
 \subsubsection{Optimal step gradient method}-
 \subsubsection{Conjugate gradient descent}-
-\subsection{Méthode de Newton}-
-\subsection{KKT Theory}-
-\subsection{Le Lagrangien}-
-\section{Optimisation continue stochastique}-
-\subsection{Méthode du gradient stochastique}-
-\subsection{Mirror descent}-
-
-\chapter{Stochastic optimization}
+\subsubsection{Mirror descent}-
+\subsection{Newton's method}-
+\subsubsection{Second-order optimality}
 
 \section{Stochastic gradient descent}-
+
 \subsection{Setting and method}-
 \subsection{Theoretical bounds}-
 \subsection{Choosing the step}-
 \section{Particle SWARM optimization}-
 
-\chapter{Recent topics in optimization}
+\chapter{Recent and other topics in optimization}
 
 \section{Polynomial optimization}-
 % https://wangjie212.github.io/jiewang/research/lectures.pdf
@@ -173,22 +172,30 @@
 \section{Trust region algorithms}-
 % Yuan, Y. "A review of trust region algorithms for optimization" in ICIAM 99: Proceedings of the Fourth International Congress on Industrial & Applied Mathematics, Edinburgh, 2000 Oxford University Press, USA.
 % Yuan, Y. "Recent Advances in Trust Region Algorithms", Math. Program., 2015
-\subsection{The smoothed duality gap as a stopping criterion}-
-\section{Jacobi's algorithm (misc)}-
+\section{The smoothed duality gap}-
 
-\part{Continuous algorithmics}
-\subsection{Miscellaneous algorithms}
+\part{Analysis}
+
+\chapter{Differential calculus}
+\input{src/Analysis/Differential Calculus - Basics.tex}
+\input{src/Analysis/Differential Calculus - The Mean Value Inequality.tex}
+\input{src/Analysis/Differential Calculus - The Inverse Function Theorem.tex}
+\input{src/Analysis/Differential Calculus - The Implicit Function Theorem.tex}
+\input{src/Analysis/Differential Calculus - Brouwer's Fixed Point Theorem.tex}
+\input{src/Analysis/Differential Calculus - The Lagrange Multiplier Theorem.tex}
+\input{src/Analysis/Differential Calculus - Exercises.tex}
+\chapter{Differential calculus for optimizations}
+\chapter{Topology}
+\chapter{Differential geometry}
+\chapter{Other miscellaneous topics}
+\input{src/Analysis/Other miscellaneous topics - Jacobi's algorithm.tex}
+\input{src/Analysis/Other miscellaneous topics - Exercises.tex}
 
 \part{Discrete algorithmics}
 
 \chapter{Complexity theory}
 \input{src/DiscreteAlgorithmics/Complexity Theory - Theory.tex}
 \input{src/DiscreteAlgorithmics/Complexity Theory - Examples, practice and problems.tex}
-
-\part{Combinatorial optimization}
-
-\chapter{Heuristics}\label{chap:heuristics}-
-\chapter{Meta-heuristics}\label{chap:meta-heuristics}-
 
 \part{Optimal transport}
 
@@ -204,31 +211,14 @@
 
 \chapter{International Mathematics Olympiads (IMO) problems}
 
-\section{IMO 2018 SL - Problem C1}-
-\section{IMO 2018 SL - Problem C2}-
-\section{IMO 2018 SL - Problem C3}-
-\section{IMO 2018 SL - Problem C4}-
-\section{IMO 2018 SL - Problem C5}-
-\section{IMO 2018 SL - Problem C6}-
-
 \section{IMO 2019 SL - Problem C1}
 \input{src/ProblemSolving/IMO Problems - IMO 2019 SL, Problem C1.tex}
-\section{IMO 2019 SL - Problem C2}-
 \section{IMO 2019 SL - Problem C3}
 \input{src/ProblemSolving/IMO Problems - IMO 2019 SL, Problem C3.tex}
 \section{IMO 2019 SL - Problem C4}
 \input{src/ProblemSolving/IMO Problems - IMO 2019 SL, Problem C4.tex}
-\section{IMO 2019 SL - Problem C5}-
 \section{IMO 2019 SL - Problem C8}
 \input{src/ProblemSolving/IMO Problems - IMO 2019 SL, Problem C8.tex}
-\section{IMO 2019 SL - Problem C9}-
-
-\chapter{Competitive programming problems}
-
-\chapter{Graph theory}
-\section{Theory}-
-\section{Problems}-
-% Un sujet ENS
 
 \bibliographystyle{plain}
 \bibliography{bib/articles,bib/books,bib/misc}

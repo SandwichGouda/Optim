@@ -114,7 +114,7 @@ Therefore, unless we explicitly discuss unary encoding, we will assume throughou
 
 Unless stated otherwise, graphs will be encoded by their adjacency matrix, or by their valuation matrix if they are weighted. Consequently, the encoding of a graph of order \( n \) has size at least \( n^2 \).
 
-We can now give a precise definition of the complexity of an algorithm, via a Turing machine modeling this algorithm. Let $\Pi$ be a problem and let $I$ be an arbitrary instance of $\Pi$, of size $|I|$. Let $A$ be an algorithm solving $\Pi$, and let $M_A$ be a Turing machine associated with $A$. When we apply $A$ to $I$, $M_A$ performs a certain number of steps $\phi_A(I)$ (in other words, we apply the transition function $\tau$ of $M_A$ a number of times equal to $\phi_A(I)$ before halting); throughout this chapter, we limit ourselves to cases where $\phi_A(I)$ is finite for every instance $I$ (which excludes, for example, certain methods from Chapters \ref{chap:heuristics} and \ref{chap:heuristics}). To define the complexity $\gamma_A$ of $A$ (or of $M_A$), we group all instances $I$ of the same size $k$ and consider the largest value of $\phi_A(I)$ over this set of instances:
+We can now give a precise definition of the complexity of an algorithm, via a Turing machine modeling this algorithm. Let $\Pi$ be a problem and let $I$ be an arbitrary instance of $\Pi$, of size $|I|$. Let $A$ be an algorithm solving $\Pi$, and let $M_A$ be a Turing machine associated with $A$. When we apply $A$ to $I$, $M_A$ performs a certain number of steps $\phi_A(I)$ (in other words, we apply the transition function $\tau$ of $M_A$ a number of times equal to $\phi_A(I)$ before halting); throughout this chapter, we limit ourselves to cases where $\phi_A(I)$ is finite for every instance $I$. To define the complexity $\gamma_A$ of $A$ (or of $M_A$), we group all instances $I$ of the same size $k$ and consider the largest value of $\phi_A(I)$ over this set of instances:
 \[
 \gamma_A(k) = \max\{\phi_A(I) \mid |I| = k\}.
 \]
@@ -488,7 +488,7 @@ It is necessary for this definition to consider a reading-only tape, because say
 
 We will later proove that $ \mathsf L \subset \mathsf P $, but it is still an open problem to know whether or not $ \mathsf L = \mathsf P $.
 
-\begin{definition}[$ \mathsf NL $]
+\begin{definition}[$ \mathsf{NL} $]
     The class $ \mathsf{NL} $, or $ \mathsf{NLOGSPACE} $, is the class of problems such that there exists a non-deterministic Turing machine with two tapes, one in \og reading-only \fg mode (in other words, the Turing machine cannot write on it) that contains the input $ x $, and a second one, on which the Turing machine will write on at most $ O(\log(|x|)) $ slots.
 \end{definition}
 

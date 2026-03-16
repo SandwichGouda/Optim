@@ -10,10 +10,12 @@ We must first provide some definition. Consider a linear optimization problem in
 \]
 subject to the constraints
 \[
-    \forall i \in \{ 1, ..., m \}, \sum_{j=1}^n a_{ij} x_j \leqslant b_i,
-\]
-\[
-    \forall j \in \{ 1, ..., m \}, x_j \geqslant 0.
+    \left\{
+        \begin{array}{l}
+            \forall i \in \{ 1, ..., m \}, \sum_{j=1}^n a_{ij} x_j \leqslant b_i, \\
+            \forall j \in \{ 1, ..., m \}, x_j \geqslant 0.
+        \end{array}
+    \right.
 \]
 (as previously mentionned, standard form is essential when coming to deal with the algorithmic aspects of linear programming).
 
@@ -30,7 +32,15 @@ subject to the constraints
     \]
     is called the \emph{objective function}.
     The variables $x_1,\dots,x_n$ are called \emph{decision variables} (or choice variables, main variables, or initial variables).
-    We introduce the \emph{slack variables} $x_{n+1},\dots,x_{n+m}$.
+\end{definition}
+
+We introduce the \emph{slack variables} $ x_{n+1},\dots,x_{n+m} $.
+
+\begin{definition}
+    Given a linear optimization problem in standard form, the \textit{slack variables} (associated to this problem) are the variables defined by
+    \[
+        \forall i \in \{ 1, ..., m \}, x_{n+i} = b_i - \sum_{j=1}^n a_{ij}x_j.
+    \]
 \end{definition}
 
 \begin{remark}
@@ -95,11 +105,11 @@ A feasible solution that maximizes the objective function is called an \emph{opt
 To describe one iteration of the simplex algorithm, we define two subsets forming a partition of the set of indices:
 
 \begin{itemize}
-  \item $J \subset \{1,2,\dots,n+m\}$ is the set of indices of the $n$ non-basic variables, with $|J|=n$ (often, initially, has $J=\{1,2,\dots,n\}$);
+  \item $J \subset \{1,2,\dots,n+m\}$ is the set of indices of the $n$ non-basic variables, with $|J|=n$ (often, initially, one has $J=\{1,2,\dots,n\}$);
   \item $I = \{1,2,\dots,n+m\} \setminus J$ is the set of indices of the $m$ basic variables.
 \end{itemize}
 
-The current dictionary is described by the equalities (the symbols “$\,'\,$” distinguish the current dictionary from the initial one):
+We will describe the current dictionary by the equalities (the symbols “$\,'\,$” distinguish the current dictionary from the initial one):
 \[
    \forall i \in I, \quad x_i' = b_i' + \sum_{j \in J} a_{ij}' x_j,
    \qquad 
@@ -259,3 +269,162 @@ The effectiveness of Bland's rule (i.e., the proof of Theorem\ref{thm:bland}), i
 \end{proof}
 
 \textbf{Remark.} It is unnecessary to apply Bland's rule when the dictionary is not degenerate.
+
+\subsection{Finding a feasible dictionnary}
+
+If the $ b_i $'s in the problem are all non-negative, the zero solution always works and the initial dictionnary is feasible. This is all very nice and convenient, but need not always be the case. We now present the method to find a feasible initial dictionnary for to a given linear optimization problem. In particular, this method allows to decide whether or not the problem is feasible or not. 
+
+We will rely on an example. Suppose we want to solve the following problem, written in standard form.
+\[
+    \text{Maximize :} z = x_1 - x_2 + x_3
+\]
+\[
+    \text{subject to :}
+    \left\{
+    \begin{aligned}
+        2x_1 - x_2 + 2x_3 &\le 4,\\
+        2x_1 - 3x_2 + x_3 &\le -5,\\
+        -x_1 + x_2 - 2x_3 &\le -1,\\
+        x_1 \ge 0,\ x_2 \ge 0,\ x_3 &\ge 0.
+    \end{aligned}
+    \right.
+\]
+We introduce the following auxiliary problem.
+\[
+    \text{Minimize :} x_0
+\]
+\[
+    \text{subject to :}
+    \left\{
+    \begin{aligned}
+        2x_1 - x_2 + 2x_3 &\le 4 + x_0,\\
+        2x_1 - 3x_2 + x_3 &\le -5 + x_0,\\
+        -x_1 + x_2 - 2x_3 &\le -1 + x_0,\\
+        x_0 \ge 0,\ x_1 \ge 0,\ x_2 \ge 0,\ x_3 &\ge 0.
+    \end{aligned}
+    \right.
+\]
+More generally, one obtains the auxiliary problem by adding \(x_0\) to the \(b_i\)'s and minimizing \(x_0\). If the initial problem is the following:
+\[
+    \text{Maximize :} z=\sum_{j=1}^n c_j x_j
+\]
+\[
+    \text{subject to :}
+    \left\{
+    \begin{aligned}
+        \forall i\in\{1,2,\dots,m\},\quad \sum_{j=1}^n a_{ij}x_j &\le b_i,\\
+        \forall j\in\{1,2,\dots,n\},\quad x_j &\ge 0,
+    \end{aligned}
+    \right.
+\]
+then the auxiliary problem is:
+\[
+    \text{Minimize :} x_0
+\]
+\[
+    \text{subject to :}
+    \left\{
+    \begin{aligned}
+        \forall i\in\{1,2,\dots,m\},\quad \sum_{j=1}^n a_{ij}x_j &\le b_i + x_0,\\
+        \forall j\in\{1,2,\dots,n\},\quad x_j &\ge 0.
+    \end{aligned}
+    \right.
+\]
+One can interpret this as increasing the resources by an amount \(x_0\). It is obvious that if \(x_0\) is large enough, the new resources all become positive or zero. The auxiliary problem is therefore always feasible.
+
+We easily establish the following:
+
+\begin{proposition}
+    The initial problem is feasible if and only if the auxiliary problem admits \(0\) as the optimal value of the objective function.
+
+    Moreover, if the auxiliary problem admits \(0\) as the optimal value, any optimal solution of the auxiliary problem yields a feasible solution of the initial problem, by \og forgetting \fg \(x_0\) (which equals \(0\) in this case).
+\end{proposition}
+
+\begin{remark}
+    One may restrict oneself to adding \(x_0\) to the right-hand sides of those inequalities whose right-hand side is negative, as is done in Example~\ref{ex:add-xzero-to-neg-only}.
+\end{remark}
+
+Let us return to the example and, after putting the problem into standard form, write the dictionary defining the slack variables of the auxiliary problem:
+\[
+    \begin{aligned}
+    x_4 &= 4 - 2x_1 + x_2 - 2x_3 + x_0,\\
+    x_5 &= -5 - 2x_1 + 3x_2 - x_3 + x_0,\\
+    x_6 &= -1 + x_1 - x_2 + 2x_3 + x_0,\\
+    \hline
+    w &= -x_0.
+    \end{aligned}
+\]
+This dictionary is not feasible since, when we assign the value \(0\) to the nonbasic variables \(x_1, x_2, x_3, x_0\), the slack variables \(x_5\) and \(x_6\) take negative values. However, we can, in one iteration, move to a feasible dictionary. It suffices to bring \(x_0\) into the basis and to remove from the basis the variable that is \og the most negative \fg (here \(x_5\)). We obtain:
+\[
+    \begin{aligned}
+    x_0 &= 5 + 2x_1 - 3x_2 + x_3 + x_5,\\
+    x_4 &= 9 - 2x_2 - x_3 + x_5,\\
+    x_6 &= 4 + 3x_1 - 4x_2 + 3x_3 + x_5,\\
+    \hline
+    w &= -5 - 2x_1 + 3x_2 - x_3 - x_5.
+    \end{aligned}
+\]
+
+In this dictionary, \(x_2\) is the entering variable. Let us determine the leaving variable:
+\[
+    \begin{aligned}
+    x_0 \ge 0 \ \Rightarrow\ x_2 &\le 5/3,\\
+    x_4 \ge 0 \ \Rightarrow\ x_2 &\le 9/2,\\
+    x_6 \ge 0 \ \Rightarrow\ x_2 &\le 1.
+    \end{aligned}
+\]
+It is \(x_6\) that leaves the basis. The new dictionary is then:
+\[
+    \begin{aligned}
+    x_2 &= 1 - 0.75\,x_1 - 0.75\,x_3 + 0.25\,x_5 - 0.25\,x_6,\\
+    x_0 &= 2 - 0.25\,x_1 - 1.25\,x_3 + 0.25\,x_5 + 0.75\,x_6,\\
+    x_4 &= 7 - 1.5\,x_1 - 2.5\,x_3 + 0.5\,x_5 + 0.5\,x_6,\\
+    \hline
+    w = -2 + 0.25\,x_1 + 1.25\,x_3 - 0.25\,x_5 - 0.75\,x_6.
+    \end{aligned}
+\]
+
+At the next step, let \(x_3\) enter the basis: \(x_0\) leaves, giving the dictionary of the auxiliary problem:
+\[
+    \begin{aligned}
+    x_3 &= 1.6 - 0.2\,x_1 + 0.2\,x_5 + 0.6\,x_6 - 0.8\,x_0,\\
+    x_2 &= 2.2 + 0.6\,x_1 + 0.4\,x_5 + 0.2\,x_6 - 0.6\,x_0,\\
+    x_4 &= 3 - x_1 - x_6 + 2x_0,\\
+    \hline
+    w &= -x_0.
+    \end{aligned}
+\]
+
+We see that the initial problem had a feasible solution given by \(x_1 = 0,\ x_2 = 2.2,\ x_3 = 1.6\). As indicated above, because of the equivalence between dictionaries, one deduces a feasible dictionary for the initial problem by \og forgetting \fg \(x_0\) and choosing as basic variables \(x_3, x_2, x_4\), expressed above as functions of \(x_1, x_5, x_6\). It suffices to express \(z\) as a function of the same variables.
+
+For the initial problem we obtain the dictionary:
+\[
+    \begin{aligned}
+    x_3 &= 1.6 - 0.2\,x_1 + 0.2\,x_5 + 0.6\,x_6,\\
+    x_2 &= 2.2 + 0.6\,x_1 + 0.4\,x_5 + 0.2\,x_6,\\
+    x_4 &= 3 - x_1 - x_6,\\
+    \hline
+    z &= -0.6 + 0.2\,x_1 - 0.2\,x_5 + 0.4\,x_6.
+    \end{aligned}
+\]
+
+We can now start from this feasible dictionary to determine the maximum of \(z\) by applying the simplex algorithm once more. This method is known as the two-phase method. In Section~\ref{sec:duality-lin-prog}, we will see that for certain problems where the origin is not feasible (because some \(b_i\) are negative), when all the \(c_j\) coefficients are negative, one can use the problem called the “dual,” which makes it possible to solve only one problem instead of two. Such a problem is said to be dual-feasible.
+
+\subsection{Complexity}
+
+The complexity of an iteration arises essentially from updating the coefficients describing the dictionary. More precisely, letting \(n\) denote the number of decision variables and \(m\) the number of constraints:
+
+\begin{itemize}
+  \item checking whether or not we have reached the final dictionary is done in \(O(n)\);
+  \item determining an entering variable (if there is one) is done:
+  \begin{itemize}
+    \item in \(O(n)\) if we adopt the first encountered entering variable;
+    \item in \(O(n)\) if we apply Dantzig’s first criterion;
+    \item in \(O(nm)\) if we apply Dantzig’s second criterion;
+    \item in \(O(n)\) if we apply Bland’s rule;
+  \end{itemize}
+  \item then, determining the leaving variable is done in \(O(m)\);
+  \item finally, computing the coefficients of the new dictionary is done in \(O(nm)\).
+\end{itemize}
+
+The complexity of an iteration is therefore \(O(nm)\). Now, Bland’s theorem shows that the number of iterations is bounded above by the number of possible dictionaries. A dictionary being defined by a bipartition of the \(n+m\) variables into \(n\) nonbasic variables and \(m\) basic variables, the number of dictionaries is bounded above by \(\binom{n+m}{m}\). The complexity of the simplex algorithm can therefore be bounded above by a function \(O\!\big(nm\binom{n+m}{m}\big)\). One notes that this complexity cannot be bounded above by a polynomial in \(n\) and \(m\) (more in-depth studies make it possible to reduce this upper bound, but without obtaining a polynomial bound in \(n\) and \(m\); in \cite{kleeminty1972}, V.\ Klee and G.\ Minty designed families of instances, whose polyhedron is called the Klee--Minty cube, for which the simplex algorithm has exponential complexity).

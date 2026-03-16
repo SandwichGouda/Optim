@@ -1,0 +1,43 @@
+\section{Exercises}
+
+\begin{exercise}
+    We consider functional spaces real-valued functions defined on the real line.
+    Show that the inclusions
+        \[
+            \mathcal C^0 \subset \mathcal D^0 \subset \mathcal C^1 \subset \mathcal D^1 \subset \mathcal C^2 \subset ... \subset D^n \subset \mathcal C^n \subset ...
+        \]
+    Are all strict.
+\end{exercise}
+
+\begin{solution}
+    The non-inclusion $ D^0 \not\subset \mathcal C^0 $ is given by any variant of the absolute-value function $ |\cdot | $ the infamous Weierstrass function $ W $ \cite{weierstrassfunction}.
+
+    The non-inclusions $ D^n \not\subset \mathcal C^n $ are obtained by considering the recursive sequence
+
+    \[
+        \left\{
+            \begin{array}{c}
+                w_0 = W \\
+                w_{n+1} : x \mapsto \int_0^x w_n(t) \mathrm d t
+            \end{array}
+        \right.
+    \]
+
+    The non-inclusion $ D^0 \not\subset C^1 $ is obtained by considering functions of the form $ f : x \mapsto x^\alpha \sin(\frac{1}{x^\beta}) $.
+
+    A simple computation leads to the fact that taking $ (\alpha, \beta) = (2,1) $ yields $ f'(x) = 2x \sin(\frac 1 x) - \cos(\frac 1 x) $ for all $ x \in \mathbf R^* $.
+
+    This function cannot be extended as a continuous function on $ \mathbf R $. As a result, the original function is not $ \mathcal C^1 $ class on the whole real line.
+
+    The remaining non-inclusions $ D^n \not\subset C^n $ are obtained by considering the iterates
+
+    \[
+        \left\{
+            \begin{array}{c}
+                f_0 = f \\
+                f_{n+1} : x \mapsto \int_0^x f_n(t) \mathrm d t
+            \end{array}
+        \right.
+    \]
+\qed
+\end{solution}

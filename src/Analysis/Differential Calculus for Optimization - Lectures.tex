@@ -1,0 +1,101 @@
+In this chapter, we develop some lemmas and tools that revolve around differential calculus, that are aimed specificially at being used in optimization theory.
+
+\section{The Fenchel-Legendre conjugate function}
+
+The Fenchel-Legendre conjugate function is a tool that is often used in optimization, especially in duality theory.
+
+\begin{definition}[Fenchel-Legendre Conjugate]
+    Let $ f : \mathcal X \to [-\infty, +\infty] $. The \textit{Fenchel-Legendre conjugate} of $ f $ is the function $ f^* : \mathcal X \to [-\infty, +\infty] $ defined by
+
+    \[ 
+        f^* : \phi \in \mathcal X \mapsto \sup_{x \in \mathcal X} \langle \phi, x \rangle - f(x) \in [-\infty, +\infty]
+    \]
+\end{definition}
+
+\begin{proposition}
+    Notice that
+
+    \[
+        \inf_{\mathcal X} f = - f^*(0)
+    \]
+\end{proposition}
+
+\begin{remark}
+    One can have the intuition that, in the differentiable case, if the maximum is attained in the definition of $ f^* $ at point $ x_0 $, then $ \phi = \nabla f(x_0) $, and $ f^*(\phi) = \langle \nabla f(x_0), x_0 \rangle - f(x_0) $.
+
+    This fact is true, among many others. The Fenchel-Legendre conjugate is always convex and l.s.c. 
+
+    The Fenchel-Legendre conjugation also preserves the property of being a quatratic function, and is involutive under some conditions : $ f = f^{**} $ !
+
+    We also have an important inequality which is the Fenchel-Young inequality. We will develop these topics later down below as soon as the time comes.
+\end{remark}
+
+\section{Lemmas and exercises}
+
+We here develop some lemmas, exercises and interesting ideas that revolve around differential calculus applied to optimization.
+
+\begin{proposition}[First order characterization of convexity]
+    Let $ f : \mathbf R^n \to \mathbf R $ be a differentiable function.
+
+    Then, $ f $ is convex if and only if
+
+    \[
+        \forall x \in \mathbf R^n, \forall y \in \mathbf R^n, f(y) \geqslant f(x) + \langle \nabla f(x), y - x \rangle
+    \]
+\end{proposition}
+
+\begin{remark}
+    The last theorem is the $n$-dimensional equivalent to the one-dimentional fact \og the graph of a convex lies above the slope of all its tangents \fg. This is further discussed in the following proposition: it shows that the tangent hyperplane to a function graph surface at a given point is the graph of the differential at that point, which confirms the intuition that the last proposition is indeed the right generalization of the aforementionned one-dimensional fact.
+\end{remark}
+
+\begin{definition}[Tangent vector]
+    Let $ F $ be a finite-dimentional vector space over the field of real numbers, and let $ X $ be a subset of $ F $. 
+
+    A vector $ v \in F $ is said to be \textit{tangent} to $ X $ at $ x \in F $ if there exists a path
+    \[
+        \gamma : ]-\varepsilon, \varepsilon[ \to X
+    \]
+    (with $ \varepsilon > 0 $) that is differentiable at $ 0 $, such that $ \gamma(0) = a $ and $ \gamma'(0) = v $.
+
+    The set of tangent vectors is denoted $ T_X(x) $ or $ \mathcal T_X(x) $.
+\end{definition}
+
+\begin{remark}
+    Note that in particular, if $ v $ is tangent to $ X $ at $ x $, then $ x \in X $.
+\end{remark}
+
+\begin{proposition}
+    Let $ f : \mathbf R^n \to \mathbf R $ be a function differentiable at $ a \in \mathbf R^n $.
+    
+    Then the set of tangent vectors to the graph
+    \[
+        \Gamma(f) = \{ (x,y) \in \mathbf R^n \times \mathbf R \}
+    \]
+    at a point $ a $ is the graph of the differential of $ f $ at $ a $. In other words,
+
+    \[
+        T_{\Gamma(f)}(a) = \Gamma(\mathrm d f_a)
+    \]
+\end{proposition}
+
+\begin{proof}
+    Let $ v $ be a tangent vector to the graph (surface) $ \Gamma(f) $ at $ (a, f(a)) \in \Gamma(f) $.
+
+    Then, there exists $ \gamma : t \in ]-\varepsilon, \varepsilon[ \mapsto (x(t), f(x(t))) $ differentiable at $ 0 $, such that $ \gamma(0) = (a,f(a)) $ and $ \gamma'(0) = v $. We hence have $ x(0) = a $.
+
+    By a standard calculus proposition, we have $ \gamma'(0) = (x'(0),\mathrm df_{x(0)}(x'(0))) = (x'(0), \langle \nabla f(a), x'(0) \rangle) $, which is also equal to $ v $.
+
+    To proove our result, it remains to show that $ v \in \Gamma(\mathrm d f_a) $. However, $ \mathrm d f_a $ is the map $ h \mapsto \langle \nabla f(a), h \rangle $ : whence the result.
+\end{proof}
+
+\begin{remark}
+    The fact
+    \[
+        f(a+h) = f(a) + \langle \nabla f(a), h \rangle + o(h)
+    \]
+    also shows that the hyperplane defined by the equation
+    \[
+        x_{n+1} = f(a_1,...,a_n) + \sum_{i=1}^n \frac{\partial f}{\partial x_i}(a)(x_i-a_i)
+    \]
+    is the affine hyperplane tangent to the surface (the graph) of $ f $ at $ a $.
+\end{remark}

@@ -246,7 +246,7 @@ We now provide some examples that illustrate the method and some of its specific
     All the coefficients in \(z\) are non-positive, the method stops. We observe that applying Bland’s rule avoided cycling.
 \end{example}
 
-\begin{example}
+\begin{example}\label{ex:add-xzero-to-neg-only}
     \item Consider the problem below.
     \[
         \text{Maximize :} z = 5x_1 + 3x_2
@@ -280,6 +280,8 @@ We now provide some examples that illustrate the method and some of its specific
         \end{aligned}
         \right.
     \]
+    Some sources explain that the auxiliary problem is crafted by adding $x_0$ on each line of the right-hand side, but there is a variant that consists in adding only a $x_0$ to the lines that have a negative right-hand side (i.e., $b_i$). We choose to illustrate using this variant. 
+    
     We deduce the initial dictionary:
     \[
         \begin{aligned}

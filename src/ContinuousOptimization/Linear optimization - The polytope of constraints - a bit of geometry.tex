@@ -55,51 +55,53 @@ We give another interesting point of view for this definition. Recall first that
 \begin{example}
     In the following figure, $ MAB $ and $ DEF $ form ears, while $ GHI $, $ JKL $ and $ KLM $ do not.
 
-    \begin{tikzpicture}[line cap=round,line join=round,x=1.0cm,y=1.0cm]
-        \begin{axis}[
-            x=1.0cm,y=1.0cm,
-            axis lines=middle,
-            ymajorgrids=true,
-            xmajorgrids=true,
-            xmin=-1.0,
-            xmax=10.0,
-            ymin=-1.0,
-            ymax=10.0,
-            xtick={-1.0,0.0,...,10.0},
-            ytick={-1.0,0.0,...,10.0},
-        ]
-            \clip(-1.,-1.) rectangle (10.,8.);
-            \fill[line width=2.pt,color=green,fill=green,fill opacity=0.1] (2.,1.) -- (6.,2.) -- (8.,4.) -- (7.,5.) -- (8.,7.) -- (5.,6.) -- (4.,4.) -- (2.,6.) -- (1.2759760937888327,2.6186724615855757) -- (2.,3.) -- (2.2,3.8) -- (3.,4.) -- (4.,3.) -- cycle;
-            \draw [line width=2.pt,color=green] (2.,1.)-- (6.,2.);
-            \draw [line width=2.pt,color=green] (6.,2.)-- (8.,4.);
-            \draw [line width=2.pt,color=green] (8.,4.)-- (7.,5.);
-            \draw [line width=2.pt,color=green] (7.,5.)-- (8.,7.);
-            \draw [line width=2.pt,color=green] (8.,7.)-- (5.,6.);
-            \draw [line width=2.pt,color=green] (5.,6.)-- (4.,4.);
-            \draw [line width=2.pt,color=green] (4.,4.)-- (2.,6.);
-            \draw [line width=2.pt,color=green] (2.,6.)-- (1.2759760937888327,2.6186724615855757);
-            \draw [line width=2.pt,color=green] (1.2759760937888327,2.6186724615855757)-- (2.,3.);
-            \draw [line width=2.pt,color=green] (2.,3.)-- (2.2,3.8);
-            \draw [line width=2.pt,color=green] (2.2,3.8)-- (3.,4.);
-            \draw [line width=2.pt,color=green] (3.,4.)-- (4.,3.);
-            \draw [line width=2.pt,color=green] (4.,3.)-- (2.,1.);
-            \begin{scriptsize}
-                \draw [fill=black] (2.,1.) circle (2.5pt) node[left] {$A$};
-                \draw [fill=black] (6.,2.) circle (2.5pt) node[below] {$B$};
-                \draw [fill=black] (8.,4.) circle (2.5pt);
-                \draw [fill=black] (7.,5.) circle (2.5pt) node[right] {$D$};
-                \draw [fill=black] (8.,7.) circle (2.5pt) node[above right] {$E$};
-                \draw [fill=black] (5.,6.) circle (2.5pt) node[above left] {$F$};
-                \draw [fill=black] (4.,4.) circle (2.5pt) node[above] {$G$};
-                \draw [fill=black] (2.,6.) circle (2.5pt) node[above] {$H$};
-                \draw [fill=black] (1.2,2.6) circle (2.5pt) node[left] {$I$};
-                \draw [fill=black] (2.,3.) circle (2.5pt) node[right] {$J$};
-                \draw [fill=black] (2.2,3.8) circle (2.5pt) node[above left] {$K$};
-                \draw [fill=black] (3.,4.) circle (2.5pt) node[above] {$A$};
-                \draw [fill=black] (4.,3.) circle (2.5pt) node[right] {$M$};
-            \end{scriptsize}
-        \end{axis}
-    \end{tikzpicture}
+    \begin{center}
+        \begin{tikzpicture}[line cap=round,line join=round,x=1.0cm,y=1.0cm]
+            \begin{axis}[
+                x=1.0cm,y=1.0cm,
+                axis lines=middle,
+                ymajorgrids=true,
+                xmajorgrids=true,
+                xmin=-1.0,
+                xmax=10.0,
+                ymin=-1.0,
+                ymax=10.0,
+                xtick={-1.0,0.0,...,10.0},
+                ytick={-1.0,0.0,...,10.0},
+            ]
+                \clip(-1.,-1.) rectangle (10.,8.);
+                \fill[line width=2.pt,color=green,fill=green,fill opacity=0.1] (2.,1.) -- (6.,2.) -- (8.,4.) -- (7.,5.) -- (8.,7.) -- (5.,6.) -- (4.,4.) -- (2.,6.) -- (1.2759760937888327,2.6186724615855757) -- (2.,3.) -- (2.2,3.8) -- (3.,4.) -- (4.,3.) -- cycle;
+                \draw [line width=2.pt,color=green] (2.,1.)-- (6.,2.);
+                \draw [line width=2.pt,color=green] (6.,2.)-- (8.,4.);
+                \draw [line width=2.pt,color=green] (8.,4.)-- (7.,5.);
+                \draw [line width=2.pt,color=green] (7.,5.)-- (8.,7.);
+                \draw [line width=2.pt,color=green] (8.,7.)-- (5.,6.);
+                \draw [line width=2.pt,color=green] (5.,6.)-- (4.,4.);
+                \draw [line width=2.pt,color=green] (4.,4.)-- (2.,6.);
+                \draw [line width=2.pt,color=green] (2.,6.)-- (1.2759760937888327,2.6186724615855757);
+                \draw [line width=2.pt,color=green] (1.2759760937888327,2.6186724615855757)-- (2.,3.);
+                \draw [line width=2.pt,color=green] (2.,3.)-- (2.2,3.8);
+                \draw [line width=2.pt,color=green] (2.2,3.8)-- (3.,4.);
+                \draw [line width=2.pt,color=green] (3.,4.)-- (4.,3.);
+                \draw [line width=2.pt,color=green] (4.,3.)-- (2.,1.);
+                \begin{scriptsize}
+                    \draw [fill=black] (2.,1.) circle (2.5pt) node[left] {$A$};
+                    \draw [fill=black] (6.,2.) circle (2.5pt) node[below] {$B$};
+                    \draw [fill=black] (8.,4.) circle (2.5pt);
+                    \draw [fill=black] (7.,5.) circle (2.5pt) node[right] {$D$};
+                    \draw [fill=black] (8.,7.) circle (2.5pt) node[above right] {$E$};
+                    \draw [fill=black] (5.,6.) circle (2.5pt) node[above left] {$F$};
+                    \draw [fill=black] (4.,4.) circle (2.5pt) node[above] {$G$};
+                    \draw [fill=black] (2.,6.) circle (2.5pt) node[above] {$H$};
+                    \draw [fill=black] (1.2,2.6) circle (2.5pt) node[left] {$I$};
+                    \draw [fill=black] (2.,3.) circle (2.5pt) node[right] {$J$};
+                    \draw [fill=black] (2.2,3.8) circle (2.5pt) node[above left] {$K$};
+                    \draw [fill=black] (3.,4.) circle (2.5pt) node[above] {$A$};
+                    \draw [fill=black] (4.,3.) circle (2.5pt) node[right] {$M$};
+                \end{scriptsize}
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
 \end{example}
 
 The following theorem is due to Meisters~\cite{meisters1975}.
@@ -157,7 +159,7 @@ Let's get back to the link with linear optimization.
 \begin{proposition}
     The constraints region of a linear optimization problem, namely,
     \[
-        \{ x \in \mathbf R^n, Ax \leqslant b \quad \textrm{and} \quad x \geqslant 0 \}
+        \{ x \in \mathbf R^n, Ax \leqslant b \quad \textrm{and} \quad x \geqslant 0 \},
     \]
     is a convex polytope.
 \end{proposition}
@@ -177,7 +179,7 @@ Let's get back to the link with linear optimization.
 \end{proof}
 
 \begin{example}
-    Consider a linear optimization problem, the constraints region of which is given by :
+    Consider a linear optimization problem, the constraints region of which is given by
 
     \[
         \left\{

@@ -8,8 +8,8 @@ bibtool -s -i bib/misc.bib -o bib/misc.bib
 bibtex Optimization\ and\ beyond
 pdflatex Optimization\ and\ beyond.tex
 pdflatex Optimization\ and\ beyond.tex
-explorer.exe Optimization\ and\ beyond.pdf
+explorer.exe Optimization\ and\ beyond.pdf || true
 
 if [[ "$1" != "--no-clean" ]]; then
     rm *.aux *.toc *.log *.out *.blg *.bbl
-fi
+fi 

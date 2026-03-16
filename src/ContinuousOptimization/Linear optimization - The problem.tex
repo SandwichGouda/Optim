@@ -55,7 +55,7 @@ Here, we have used the notation $ x \leqslant y $ to denote the condition $ x_i 
 \begin{example}
     For instance, assume we want to maximize the linear form
     \[
-        z = 400x + 200y
+        z = 400x + 200y,
     \]
     under the constraints
     \[
@@ -65,7 +65,7 @@ Here, we have used the notation $ x \leqslant y $ to denote the condition $ x_i 
             40x + 10y \leqslant 4000 
             x,y \geqslant 0
         \end{array}
-        \right.
+        \right. ,
     \]
     Then, the problem can be represented as in the following drawing :
 
@@ -102,7 +102,7 @@ Here, we have used the notation $ x \leqslant y $ to denote the condition $ x_i 
 
     The family of lines
     \[
-        D_\lambda = \{ (x,y) \in \mathbf R^2, 400x + 200y = \lambda \}
+        D_\lambda = \{ (x,y) \in \mathbf R^2, 400x + 200y = \lambda \},
     \]
     is a family of parallel lines. The problem is to find the maximum value of $ \lambda $ such that $ D_\lambda $ meets the regions of constraints.
 \end{example}
@@ -134,7 +134,7 @@ On a side note, recall that :
 
     But, we have
     \[
-        \frac 1 2 (b + 2\lambda a + (1-2\lambda)b) = \frac 1 2 (2b + 2\lambda a - 2\lambda b) = b + \lambda (a - b) = x
+        \frac 1 2 (b + 2\lambda a + (1-2\lambda)b) = \frac 1 2 (2b + 2\lambda a - 2\lambda b) = b + \lambda (a - b) = x,
     \]
     so, $ x $ is the middlepoint of $ b $ and $ \frac 1 2 (b + 2\lambda a + (1-2\lambda)b) $. As a result, we have either $ x = b $ or $ b = \frac 1 2 (b + 2\lambda a + (1-2\lambda)b )$, which is equal to $ x $ : we have shown that $ b = x $, we hence have the result.
 
@@ -152,7 +152,7 @@ On a side note, recall that :
 \end{definition}
 
 \begin{remark}
-    Note that the constraints are nonstrict inequalities. Allowing strict inequalities would yield the constraints polyhedron to be non-closed, hence non-compact, and as such, there could be no solution. At any rate, we believe that it is of no use to optimize on non-closed domains---in most cases, taking the closure doesn't change much and yields the same result with the benefit of having the theoretical guarantee that an optimizer exists (if the region is bounded, i.e., compact).
+    Note that the constraints are nonstrict inequalities. Allowing strict inequalities would yield the constraints polyhedron to be non-closed, hence non-compact, and as such, there could be no solution. One can have a small think and observe that it is less interesting to optimize on non-closed domains, to prevent the case where no optimizer exists.
 \end{remark}
 
 \begin{remark}
