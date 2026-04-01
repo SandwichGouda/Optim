@@ -1,5 +1,18 @@
 In this chapter, we develop some lemmas and tools that revolve around differential calculus, that are aimed specificially at being used in optimization theory.
 
+\section{General definitions and results}
+
+\begin{proposition}[First order characterization of Gradient Lipschitz Continuity]
+    A differentiable function $ f : \Omega \to \mathbf R^n $ has $ L $-Lipschitz continuous gradient if and only if
+    \[
+        \forall x,y \in \Omega, \left| f(y) - f(x) - \langle \Delta f(x), y-x \rangle \right| \leqslant \frac L 2 \| x - y \|^2
+    \]
+\end{propostion}
+
+\begin{proof}
+    
+\end{proof}
+
 \section{The Fenchel-Legendre conjugate function}
 
 The Fenchel-Legendre conjugate function is a tool that is often used in optimization, especially in duality theory.

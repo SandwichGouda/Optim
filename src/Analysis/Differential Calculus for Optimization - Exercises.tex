@@ -1,1 +1,40 @@
 \section{Exercises}
+
+\begin{exercise}
+    Let $ f : \Omega \subset \mathbf R^n \to \mathbf R $ be a convex function and $ K \subset \mathbf \Omega $ be a compact set. 
+    
+    Prove that $ f $ is Lipschitz continuous on $ K $.
+\end{exercise}
+
+\begin{solution}
+    The definition of convexity requires that $ \mathrm{dom} f = \Omega \subset \mathbf R^n $ is convex.
+
+    Though few people have seem to take the responsability of writing a proof of this fact, it is known \cite{geschke2012} that convex open subsets of $ \mathbf R^n $ are homeomorphic to $ n $-dimensional open balls of that same space, hence also homeomorphic to $ \mathbf R^n $. The above cited proof is three pages long, hence neither trivial nor impossible.
+
+    (recall the argument for the latter conclusion : any open ball of $ \mathbf R^n $ is homeomorphic to another one by composition of a translation and homotethy, hence they all homeomorphic to the unit centered open ball. The unit centered open ball of $ \mathbf R^n $ is homeomorphic to itself by considering the map $ x \mapsto f(x) \frac{x}{\|x\|}) $ where $ f $ is any stictly monotonic surjective (hence bijective) function from $ \mathbf R $ to $ ]-1,1[ $, such as the hyperbolic tangent function for instance.)
+
+    It is thus enough to consider that $ \Omega = \mathbf R^n $ and to show that $ f $ is Lipschitz continuous on all the closed balls $ B(0,M) $.
+
+    For all $ r > 0 $, the set $ C(r) = \{ x \in \mathbf R^n, \|x\| = r \} $ is compact. Hence, $ C(M+1) \times C(M+2) $ is compact.
+
+    The function
+    \[
+        F : (x,y) \in C(M+1) \times C(M+2) \mapsto \frac{|f(y)-f(x)|}{\|y-x\|},
+    \]
+    is well-defined and continuous on its compact domain : it reaches a maximum, let us denote it by $ K $.
+
+    Let $ a,b \in B(0,M) $ be two distinct points, let $ \lambda \in [0,1] $. 
+    
+    Of course, $ (1-t) a + t b \in B(0,M) $ for all $ t \in [0,1] $. Easily, by the Intermediate Value Theorem, there exists $ p>q>1 $ such that $ x_q := a + q(b-a)\|b-a\| \in C(M+1) $ and $ x_p := a + p(b-a)/\|b-a\| \in C(M+2) $.
+    
+    Since $ f $ is convex, $ \phi : t \mapsto f(a+ t(b-a)/\|b-a\|) $ is convex. By applying the {Three-Slopes Inequality} (Theorem~\ref{thm:slopes-inequality}) to the one-dimensional convex function $ \phi $, we obtain
+    \[
+       \frac{|f(b)-f(a)|}{\|b-a\|} = \frac{|\phi(p) - \phi(q)|}{\|x_p-x_q\|} \leqslant K.
+    \]
+
+    Hence $ f $ is $ K $-Lipschitz on the closed ball $ B(0,M) $, hence on every compact (and henceforth on the neighborhood of any point).
+\end{solution}
+
+\begin{remark}
+    The reference \cite{nguyen2019} invesigates the topic much more deeply, providing generalizations, sufficient and necessary conditions.
+\end{remark}
