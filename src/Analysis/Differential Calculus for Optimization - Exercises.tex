@@ -1,6 +1,52 @@
 \section{Exercises}
 
 \begin{exercise}
+    Let $ q : x \mapsto \frac 1 2 x^\top A x - b^\top x $ be a real quadratic function, where $ A $ is a symmetric matrix.
+
+    Show that the following statements are equivalent :
+
+    (i) $ q $ is bounded from below,
+    
+    (ii) $ A \succeq 0 $ and $ b \in \mathrm{range}(A) $,
+    
+    (iii) $ q $ has a local minimum,
+    
+    (iv)  $ q $ has a global minimum.
+\end{exercise}
+
+\begin{remark}
+    Note that the fact that $ A $ is symmetric, the presence of the $ 1/2 $ factor and the minus sign in front of $ b $ affects the formulation of the second statement.
+\end{remark}
+
+\begin{solution}
+    $ (i) \implies (ii) $
+
+    Let $ \lambda $ be an eigenvalue of $ A $, and $ e $ be an associated unit norm eigenvector. We have for all real $ t $, 
+    \[
+        q(te) = \frac{\lambda t^2}{2} - t b^\top e
+    \]
+    Since $ q $ is bounded from below, clearly $ \lambda \geqslant 0 $.
+
+    Now, recall that $ \mathrm{range}(A) = \mathrm{Ker}(A^\top)^\top = \mathrm{Ker}(A)^\top $ since $ A $ is symmetric. Let us show that $ b \in \mathrm{Ker}(A)^\top $.
+
+    Let $ x \in \mathrm{Ker}(A) $. Then, $ t \mapsto q(tx) = t b^\top x $ is bounded from below : hence, $ b^\top x = 0 $.
+
+    $ (ii) \implies (iii) $
+    
+    We have $ \nabla^2 q(x) = A $ for all $ x \in \mathbf R^n $. Hence $ q $ is convex. Since $ b \in \mathrm{range}(A) $, we have $ \nabla q(x^*) = Ax^* - b = 0 $ for some $ x^* \in \mathbf R^n $. By an elementary property of convex functions, this $ x^* $ will be a global minimum, hence in particular a local minimum.
+
+    $ (iii) \implies (iv) $
+
+    Let $ x^* $ be a local minimum. Then, we have $ \nabla q (x^*) = Ax^* - b = 0 $, hence $ b \in \mathrm{range}(A) $. Moreover, $ \nabla q(x^*) = A \succeq 0 $.
+    
+    Therefore, $ A $ is convex : any local minimum becomes a global minimum.
+
+    $ (iv) \implies (i) $
+
+    Obvious.
+\end{solution}
+
+\begin{exercise}
     Let $ f : \Omega \subset \mathbf R^n \to \mathbf R $ be a convex function and $ K \subset \mathbf \Omega $ be a compact set. 
     
     Prove that $ f $ is Lipschitz continuous on $ K $.
@@ -9,9 +55,9 @@
 \begin{solution}
     The definition of convexity requires that $ \mathrm{dom} f = \Omega \subset \mathbf R^n $ is convex.
 
-    Though few people have seem to take the responsability of writing a proof of this fact, it is known \cite{geschke2012} that convex open subsets of $ \mathbf R^n $ are homeomorphic to $ n $-dimensional open balls of that same space, hence also homeomorphic to $ \mathbf R^n $. The above cited proof is three pages long, hence neither trivial nor impossible.
+    Though few people have seem to take the responsability of writing a proof of this fact, it is known \cite{geschke2012} that convex open subsets of $ \mathbf R^n $ are homeomorphic to $ n $-dimensional open balls of that same space. This cited proof is three pages long, hence neither trivial nor impossible.
 
-    (recall the argument for the latter conclusion : any open ball of $ \mathbf R^n $ is homeomorphic to another one by composition of a translation and homotethy, hence they all homeomorphic to the unit centered open ball. The unit centered open ball of $ \mathbf R^n $ is homeomorphic to itself by considering the map $ x \mapsto f(x) \frac{x}{\|x\|}) $ where $ f $ is any stictly monotonic surjective (hence bijective) function from $ \mathbf R $ to $ ]-1,1[ $, such as the hyperbolic tangent function for instance.)
+    Hence, convex open subsets of $ \mathbf R^n$ are also homeomorphic to $ \mathbf R^n $. Recall the argument for the this : any open ball of $ \mathbf R^n $ is homeomorphic to another one by composition of a translation and homotethy, hence they all homeomorphic to the unit centered open ball. The unit centered open ball of $ \mathbf R^n $ is homeomorphic to itself by considering the map $ x \mapsto f(x) \frac{x}{\|x\|}) $ where $ f $ is any stictly monotonic surjective (hence bijective) function from $ \mathbf R $ to $ ]-1,1[ $, such as the hyperbolic tangent function for instance.
 
     It is thus enough to consider that $ \Omega = \mathbf R^n $ and to show that $ f $ is Lipschitz continuous on all the closed balls $ B(0,M) $.
 
@@ -29,7 +75,7 @@
     
     Since $ f $ is convex, $ \phi : t \mapsto f(a+ t(b-a)/\|b-a\|) $ is convex. By applying the {Three-Slopes Inequality} (Theorem~\ref{thm:slopes-inequality}) to the one-dimensional convex function $ \phi $, we obtain
     \[
-       \frac{|f(b)-f(a)|}{\|b-a\|} = \frac{|\phi(p) - \phi(q)|}{\|x_p-x_q\|} \leqslant K.
+       \frac{|f(b)-f(a)|}{\|b-a\|} \leqslant \frac{|\phi(p) - \phi(q)|}{\|x_p-x_q\|} \leqslant K.
     \]
 
     Hence $ f $ is $ K $-Lipschitz on the closed ball $ B(0,M) $, hence on every compact (and henceforth on the neighborhood of any point).
