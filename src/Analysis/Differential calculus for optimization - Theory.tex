@@ -7,10 +7,16 @@ In this chapter, we develop some lemmas and tools that revolve around differenti
     \[
         \forall x,y \in \Omega, \left| f(y) - f(x) - \langle \Delta f(x), y-x \rangle \right| \leqslant \frac L 2 \| x - y \|^2
     \]
-\end{propostion}
+\end{proposition}
 
 \begin{proof}
-    
+    We have
+    \begin{align*}
+        \left| f(y) - f(x) - \langle \nabla(f(x)), y-x \rangle \right| &\leqslant \int_0^1 \left| \langle \nabla f(x + t(y-x)) - \nabla f(x), y-x \rangle \right| \mathrm dt \\
+        &\leqslant \int_0^1 \| \nabla f(x + t(y-x)) - \nabla f(x) \| \| y-x \| \mathrm dt \\
+        &\leqslant \| y-x \| \int_0^1 L \| t(y-x) \| \\
+        &= \frac L 2 \| y-x \|^2
+    \end{align*}
 \end{proof}
 
 \section{The Fenchel-Legendre conjugate function}
