@@ -1,0 +1,89 @@
+We start by introducing the problem and its notations.
+
+\begin{problem}[Nonlinear constrained optimization problem]
+    \textbf{Given} the objective function $ f : \mathbf R^n \to \mathbf R $, and the constraint functions $ g : \mathbf R^n \to \mathbf R^m $ and $ h : \mathbf h \mathbf R^n \to R^p $,
+
+    \textbf{Minimize} the function $ f $
+
+    \textbf{Under the constraints}
+    \[
+        g(x) \succeq 0
+    \]
+    \[
+        h(x) = 0
+    \]
+\end{problem}
+
+In other words,
+
+\begin{problem}[Nonlinear constrained optimization problem]
+    \textbf{Given} the objective function $ f : \mathbf R^n \to \mathbf R $, and the constraint functions $ g : \mathbf R^n \to \mathbf R^m $ and $ h : \mathbf h \mathbf R^n \to R^p $,
+
+    \textbf{Minimize} the function $ f $
+
+    \textbf{Under the constraints}
+    \[
+        \forall i \in \{ 1, ..., m \}, g_i(x) \leqslant  0
+    \]
+    \[
+        \forall j \in \{ j, ..., p \}, h_j(x) = 0
+    \]
+\end{problem}
+
+\begin{definition}
+    The domain of the problem is
+    \[
+        \mathcal D = \mathrm{dom} f \cap \bigcap_{i=1}^m \mathrm{dom} g_i \cap \bigcap_{j=1}^p \mathrm{dom} h_j
+    \]
+
+    The constraints set, or \textit{feasible set}, is
+    \[
+        X = \{ x \in \mathcal D, g(x) \preceq 0, h(x) = 0 \}
+    \]
+
+    The elements of $ X $ are called the the \textit{feasible points}, or \textit{primal feasible points}.
+\end{definition}
+
+\subsection{The Lagrangian function}
+
+\begin{definition}[Lagrangian function]
+    We define the \textit{Lagrangian dual function} associated to our constrained problem is
+    \[
+        \begin{aligned}
+            L : \mathcal D \times \mathbf R^m \times \mathbf R^p & \longrightarrow \mathbf R \\
+            (x,\lambda,\nu) & \longmapsto f(x) + \lambda^\top g(x) + \nu^\top h(x)
+        \end{aligned}    
+    \]
+
+    The vectors $ \lambda $ and $ \nu $ are called the dual variables or Lagrange nultiplier vectors associated with the problem. We can refer to $ \lambda_i $ as the \textit{Lagrange nultiplier associated with the $i$-th inequality constraint $ g_i(x) \leqslant 0 $}, and similarly refer to $ \nu_j $ as the \textit{Lagrange nultiplier associated with the $j$-th equality constraint $ h_j(x) = 0 $}.
+\end{definition}
+
+\subsection{The Lagrange dual function}
+
+\begin{definition}[Dual function]
+    The \textit{dual function} associated to our constrained problem is
+    \[
+        \begin{aligned}
+            d : \mathbf R^m \times \mathbf R^p & \longrightarrow \mathbf R \\
+            (\lambda, \nu) & \longmapsto \inf_{x \in \mathcal D} L(x,\lambda,\nu)
+        \end{aligned}
+    \]
+\end{definition}
+
+\begin{problem}[Dual problem]
+    \textbf{Maximize} the dual function associated to the primal problem
+    \[ 
+        d : \mathbf R^m \times \mathbf R^p \to \mathbf R
+    \]
+
+    \textbf{Under the constraint}
+    \[
+        \lambda \succeq 0
+    \]
+\end{problem}
+
+In other words : the dual problem asks to compute
+\[
+    \sup_{\substack{ \lambda \succeq 0 \\ \nu \in \mathbf R^p }} d(\lambda, \nu)
+\]
+

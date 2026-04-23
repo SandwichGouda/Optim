@@ -84,3 +84,22 @@
 \begin{remark}
     The reference \cite{nguyen2019} invesigates the topic much more deeply, providing generalizations, sufficient and necessary conditions.
 \end{remark}
+
+\begin{exercise}
+    A function $ f : \mathbf R^n \to \mathbf R $ is said to be \textit{positive homogenous} \cite{boydvandenberghe2004}[Section 5.8.1] itself
+    \[
+        \forall x \in \mathbf R^n, \forall \lambda > 0, f(\lambda x) = \lambda f(x).
+    \]
+
+    What can we way about the minimization of positive homogenous functions ?
+\end{exercise}
+
+\begin{solution}
+    Note that $ f(0) = 2 f(0) $, hence $ f(0) = 0 $.
+    
+    As a result, these functions are characterized by their value on the unit sphere.
+
+    Note that having understood this, it is not difficult to construct a non-continuous examples of positive homogenous functions.
+
+    Having said this, if $ f $ has a negative value somewhere (which is equivalent to having one on the unit sphere), then $ f $ is unbounded below. If not, then $ f $ is non-negative everywhere : its minimum is zero, attained at $ 0 $ and all semi-lines where $ f $ is zero.
+\end{solution}
